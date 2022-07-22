@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { each } from "svelte/internal";
+    import { each, onMount } from "svelte/internal";
 
     interface Split {
         action: string
@@ -61,6 +61,12 @@
         });
         alert(`You are in the universe in which you should ${selected?.action}!`)
     }
+
+    let contentDiv
+
+    onMount(() => {
+        contentDiv.querySelector('input[type="text"]').focus()
+    })
 </script>
 
 <style>
@@ -82,7 +88,7 @@
 </svelte:head>
 
 <h1>Let the Multiverse Decide!</h1>
-<div class="content">
+<div class="content" bind:this={contentDiv}>
     <div>
     </div>
     <div>Weight</div>
