@@ -62,10 +62,11 @@
         alert(`You are in the universe in which you should ${selected?.action}!`)
     }
 
-    let contentDiv
+    let contentDiv: Element
 
     onMount(() => {
-        contentDiv.querySelector('input[type="text"]').focus()
+        let text = contentDiv?.querySelector('input[type="text"]') as HTMLInputElement
+        text?.focus()
     })
 </script>
 
@@ -95,7 +96,7 @@
     <div>Probability</div>
     <div></div>
     {#each splits as split, i}
-        <input type=text placeholder="In this universe I will..." bind:value={split.action} />
+        <input type=text enterkeyhint=next placeholder="In this universe I will..." bind:value={split.action} />
         <input type=number  min=1 bind:value={split.weight} />
         <div>
             {percentage(probability(split.weight))}
