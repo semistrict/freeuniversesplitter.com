@@ -44,7 +44,7 @@
     }
 
     async function splitUniverse(splits: Split[]) {
-        let resp = await fetch("split")
+        let resp = await fetch("https://api.freeuniversesplitter.com/split")
         let body = await resp.json()
         if (!body.success) {
             throw `request failed! ${resp.status}`
