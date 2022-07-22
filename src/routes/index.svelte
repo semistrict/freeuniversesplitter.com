@@ -1,7 +1,12 @@
 <script lang="ts">
     import { each } from "svelte/internal";
 
-    let splits = [
+    interface Split {
+        action: string
+        weight: number
+    }
+
+    let splits: Split[] = [
         {
             action: '',
             weight: 1,
@@ -38,8 +43,20 @@
         splits = splits
     }
 
-    function splitUniverse() {
-        alert('Coming soon!')
+    async function splitUniverse(splits: Split[]) {
+        let resp = await fetch("https://api.freeuniversesplitter.com/split")
+        let body = await resp.json()
+        if (!body.success) {
+            throw `request failed! ${resp.status}`
+        }
+        let randomNum = body.data[0]
+        let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
+        let randomWeight = randomNum % totalWeight
+        let selected = splits.find(split => {
+            randomWeight -= split.weight
+            return randomWeight <= 0
+        });
+        alert(`You are in the universe in which you should ${selected?.action}!`)
     }
 </script>
 
@@ -80,5 +97,5 @@
 </div>
 
 <div>
-    <button on:click={splitUniverse}>Split Universe</button>
+    <button on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
