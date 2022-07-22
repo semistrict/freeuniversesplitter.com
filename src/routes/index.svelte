@@ -1,4 +1,4 @@
-<script lang="typescript">
+<script lang="ts">
     import { each } from "svelte/internal";
 
     let splits = [
@@ -30,18 +30,36 @@
         }).format(val);
     }
 
+    function removeSplit(i: number) {
+        if (splits.length <= 2) {
+            return
+        }
+        splits.splice(i, 1)
+        splits = splits
+    }
+
     function splitUniverse() {
         alert('Coming soon!')
     }
 </script>
 
 <style>
-.content {
-    display: grid;
-    grid-template-columns: 80% 10% 10%;
-    grid-column-gap: 10px;
-}
+    * {
+        font-family: monospace;
+    }
+    .content {
+        display: grid;
+        grid-template-columns: 70% 10% 10% 10%;
+        grid-column-gap: 10px;
+    }
 </style>
+
+<svelte:head>
+    <meta
+        name="viewport"
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+</svelte:head>
 
 <h1>Let the Multiverse Decide!</h1>
 <div class="content">
@@ -49,12 +67,14 @@
     </div>
     <div>Weight</div>
     <div>Probability</div>
-    {#each splits as split}
+    <div></div>
+    {#each splits as split, i}
         <input type=text placeholder="In this universe I will..." bind:value={split.action} />
         <input type=number  min=1 bind:value={split.weight} />
         <div>
             {percentage(probability(split.weight))}
         </div>
+        <button on:click={() => removeSplit(i)}>-</button>
     {/each}
     <button on:click={addSplit}>Add</button>
 </div>
