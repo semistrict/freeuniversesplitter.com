@@ -44,14 +44,14 @@
     }
 
     async function splitUniverse(splits: Split[]) {
-        let resp = await fetch("https://api.freeuniversesplitter.com/split")
+        let resp = await fetch("split")
         let body = await resp.json()
         if (!body.success) {
             throw `request failed! ${resp.status}`
         }
         let randomNum = body.data[0]
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
-        let randomWeight = randomNum % totalWeight
+        let randomWeight = randomNum % totalWeight + 1
         let selected = splits.find(split => {
             randomWeight -= split.weight
             return randomWeight <= 0
