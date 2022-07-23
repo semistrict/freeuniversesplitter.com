@@ -1,6 +1,8 @@
 <script lang="ts">
     import { each, onMount } from "svelte/internal";
 
+    const DEFAULT_ACTION = "do it!"
+
     interface Split {
         action: string
         weight: number
@@ -44,6 +46,13 @@
     }
 
     async function splitUniverse(splits: Split[]) {
+        if (splits[0].action.length == 0) {
+            splits[0].action = DEFAULT_ACTION
+        }
+        if (splits[1].action.length == 0) {
+            splits[1].action = `not ${splits[0].action}`
+        }
+
         let resp = await fetch("https://api.freeuniversesplitter.com/split", {
             method: 'POST',
             cache: 'no-cache',
@@ -68,6 +77,18 @@
         let text = contentDiv?.querySelector('input[type="text"]') as HTMLInputElement
         text?.focus()
     })
+
+    function placeholderText(splits: Split[], index: number) {
+        let action = splits[0].action
+        if (action.length == 0) {
+            action = DEFAULT_ACTION
+        }
+        if (index == 1) {
+            return `not ${action}`
+        } else {
+            return DEFAULT_ACTION
+        }
+    }
 </script>
 
 <style>
@@ -82,10 +103,13 @@
 </style>
 
 <svelte:head>
+    <title>Free Universe Splitter</title>
     <meta
         name="viewport"
-        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Univese Splitter">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </svelte:head>
 
 <h1>Let the Multiverse Decide!</h1>
@@ -96,8 +120,8 @@
     <div>Probability</div>
     <div></div>
     {#each splits as split, i}
-        <input type=text enterkeyhint=next placeholder="In this universe I will..." bind:value={split.action} />
-        <input type=number  min=1 bind:value={split.weight} />
+        <input type=text autocapitalize=none enterkeyhint=next placeholder={placeholderText(splits, i)} bind:value={split.action} />
+        <input type=number min=1 bind:value={split.weight} />
         <div>
             {percentage(probability(split.weight))}
         </div>
