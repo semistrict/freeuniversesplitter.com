@@ -21,7 +21,10 @@ to the level of something meaninful to you so you can decide to do different thi
 
 <h2>How does it work?</h2>
 
-<p>Full details TBD</p>
+<p>
+    Full details but basically it just invokes a quantum random number generator.
+    My understanding is that this number will be different in every universe.
+</p>
 
 <p><a href="https://github.com/semistrict/freeuniversesplitter.com">UI is here on GitHub</a>
     I plan to also make the server-side code available but for now it's just in a CloudFlare worker.
@@ -33,3 +36,37 @@ an API from the Australian National University.</p>
 <p>
 <a href="https://qrng.anu.edu.au/">ANU QRNG API</a>
 </p>
+
+<h2>
+    None of this is realy how it works
+</h2>
+
+<p>
+    When I use words like "unverse", "split" etc. this is all an approximation for what's really going on 
+    which doesn't really have an analogue in everyday language. 
+</p>
+<p>
+    But to a first approximation, it is kind of like there are multiple classical universes 
+    that split and from your perspective (pre-split)
+    you can think of the probabilities as the chance of you ending up in each branch.
+</p>
+<p>
+    Of course there are no universes, there is no "you", there's just wave function.
+</p>
+
+<h2>
+    Is the Evertt Interpratation correct?
+</h2>
+
+<p>
+    I think it is and I think a majority of physicists who work in relevant fields now agree on this (citation needed).
+</p>
+
+<p>
+    For many years we suffered under the Copenhagen Interpretation. That's probably the one you've heard of.
+    It makes quantum mechanics harder to understand because its basically incoherent.
+</p>
+
+<h2>Media</h2>
+
+<a href="https://www.youtube.com/watch?v=qGLzM0i7a_A">Sean Carrol on Closer to Truth</a>
