@@ -127,9 +127,6 @@
 <p>
     Everything you enter here stays in your browser! The only API call this website does it to fetch a quantum random number.
 </p>
-<p>
-    Please use responsibly! I am not responsible for any outcome of this obviously!!!
-</p>
 
 <div class="content" bind:this={contentDiv}>
     <div>
