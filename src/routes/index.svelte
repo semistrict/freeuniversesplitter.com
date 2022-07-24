@@ -120,7 +120,7 @@
     <li>Enter one or more alternatives in the form below</li>
     <li>(optional) adjust the weights as you see fit, the probability of you ending up in the universe with that outcome will be displayed</li>
     <li>Press "Split Universe"</li>
-    <li>marvel at the wisdom of the Multiverse and act accordingly!</li>
+    <li>marvel at the wisdom of the Multiverse!</li>
 </ol>
 
 <h3>Disclaimer: </h3>
