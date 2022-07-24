@@ -114,6 +114,23 @@
 
 <h1>FreeUniverseSplitter.com</h1>
 <h2>let the multiverse decide</h2>
+
+<p>Instructions:</p>
+<ol>
+    <li>Enter one or more alternatives in the form below</li>
+    <li>(optional) adjust the weights as you see fit, the probability of you ending up in the universe with that outcome will be displayed</li>
+    <li>Press "Split Universe"</li>
+    <li>marvel at the wisdom of the Multiverse and act accordingly!</li>
+</ol>
+
+<h3>Disclaimer: </h3>
+<p>
+    Everything you enter here stays in your browser! The only API call this website does it to fetch a quantum random number.
+</p>
+<p>
+    Please use responsibly! I am not responsible for any outcome of this obviously!!!
+</p>
+
 <div class="content" bind:this={contentDiv}>
     <div>
     </div>
