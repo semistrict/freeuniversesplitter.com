@@ -12,7 +12,7 @@
 
 <p>For an introduction, I recommend David Deutsch's the Fabric of Reality.</p>
 
-<p>I am not a physicist! This is all my interpretation. I love talking about this shit so please tell me if I got it wrong!</p>
+<p><b>I am not a physicist!</b> This is all my interpretation. I love talking about this shit so please tell me if I got it wrong!</p>
 
 <p>That said: technically the universe is already split into the relevant parts when the number is generated. This website just elevates that
 to the level of something meaninful to you so you can decide to do different things in different universes.</p>
@@ -67,6 +67,19 @@ an API from the Australian National University.</p>
     It makes quantum mechanics harder to understand because its basically incoherent.
 </p>
 
-<h2>Media</h2>
+<h2>How is this different from a coin toss?</h2>
+
+<p>
+    When you toss a coin the outcome is actually pretty easy to deterimine if you know the exact position and
+    forces involved. Another way to say this is that the coin always lands in the same position in all 
+    universes (that branched off the start of the coin flip).
+</p>
+
+<p>
+    Quantum randmess is truly random: unpredictable in principle. But this "randomness" is really just 
+    an instance of self-locating uncertainty. QM under Everett is totally deterministic. These statements can all be true, apparently.
+</p>
+
+<h2>Media (will expand)</h2>
 
 <a href="https://www.youtube.com/watch?v=qGLzM0i7a_A">Sean Carrol on Closer to Truth</a>
