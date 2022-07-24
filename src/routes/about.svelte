@@ -12,7 +12,10 @@
 
 <p>For an introduction, I recommend David Deutsch's the Fabric of Reality.</p>
 
-<p><b>I am not a physicist!</b> This is all my interpretation. I love talking about this shit so please tell me if I got it wrong!</p>
+<p><b>I am not a physicist!</b> This is all my interpretation. I love talking about this shit so please tell me if I got it wrong!
+
+    (<a href="https://github.com/semistrict/freeuniversesplitter.com">fork on GitHub</a>).
+</p>
 
 <p>That said: technically the universe is already split into the relevant parts when the number is generated. This website just elevates that
 to the level of something meaninful to you so you can decide to do different things in different universes.</p>
