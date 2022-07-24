@@ -112,7 +112,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </svelte:head>
 
-<h1>Let the Multiverse Decide!</h1>
+<h1>FreeUniverseSplitter.com</h1>
+<h2>let the multiverse decide</h2>
 <div class="content" bind:this={contentDiv}>
     <div>
     </div>
@@ -133,3 +134,6 @@
 <div>
     <button on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
+
+
+<a href="about">About</a>
