@@ -132,6 +132,9 @@
     input {
         font-size: 16pt;
     }
+    h2 {
+        font-style: italic;
+    }
 </style>
 
 <svelte:head>
