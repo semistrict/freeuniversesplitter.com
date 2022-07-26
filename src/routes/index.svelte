@@ -127,6 +127,8 @@
     NB: everything you enter here stays in your browser! The only API call this website does it to fetch a quantum random number.
 </p>
 
+<p><a href="about">More info</a></p>
+
 <div class="content" bind:this={contentDiv}>
     <div>
     </div>
@@ -145,5 +147,3 @@
     <button on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
 
-
-<a href="about">About</a>
