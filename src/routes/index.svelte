@@ -76,7 +76,11 @@
             return randomWeight <= 0
         })!;
         
-        window.alert(`You are in one of the ${selected.weight} universes in which you should:\n==> ${selected.action} <==\n\n(In the other ${totalWeight - selected.weight} universes, you experienced a different outcome)`)
+        let thisUniverse = selected.weight == 1 ? "the universe" : `1 of the ${selected.weight} universes`
+        let nOther = totalWeight - selected.weight
+        let otherUniverses = nOther == 1 ? "universe" : `${nOther} universes`
+
+        window.alert(`You are in ${thisUniverse} in which you should:\n==> ${selected.action} <==\n\n(In the other ${otherUniverses}, you experienced a different outcome)`)
     }
 
     let contentDiv: Element
