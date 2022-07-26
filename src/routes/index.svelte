@@ -145,7 +145,7 @@
 </ol>
 
 <p>
-    NB: everything you enter here stays in your browser! The only API call this website does it to fetch a quantum random number.
+    NB: everything you enter here stays on your device. The only API call this website does it to fetch a quantum random number.
 </p>
 
 <p><a href="about">More info</a></p>
