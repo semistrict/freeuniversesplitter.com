@@ -50,7 +50,9 @@
             splits[1].action = `not ${splits[0].action}`
         }
 
-        if (!window.confirm(summary(splits) + "\nAre you sure you want to continue?\nRemember: you could end up in any of the universes!")
+        let splitSummary = summary(splits)
+
+        if (!window.confirm(splitSummary + "\nAre you sure you want to continue?\nRemember: you could end up in any of the universes!")
          || !window.confirm("Are you really, really sure?")) {
             window.alert("Universe split canceled.")
             return;
@@ -76,11 +78,18 @@
             return randomWeight <= 0
         })!;
         
-        let thisUniverse = selected.weight == 1 ? "the universe" : `1 of the ${selected.weight} universes`
-        let nOther = totalWeight - selected.weight
-        let otherUniverses = nOther == 1 ? "universe" : `${nOther} universes`
+        let thisUniverse
+        if (selected.weight == 1) {
+            if (totalWeight == 2) {
+                thisUniverse = "the universe"
+            } else {
+                thisUniverse = `the one universe`
+            }
+        } else {
+            thisUniverse = `one of the ${selected.weight} universes`
+        }
 
-        window.alert(`You are in ${thisUniverse} in which you should:\n==> ${selected.action} <==\n\n(In the other ${otherUniverses}, you experienced a different outcome)`)
+        window.alert(`Universe was split into ${totalWeight} branch universes.\nYou are in ${thisUniverse} in which you should:\n==> ${selected.action} <==\n\n(In other universes, you experienced a different outcome)`)
     }
 
     let contentDiv: Element
