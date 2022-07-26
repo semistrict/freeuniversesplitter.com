@@ -117,15 +117,14 @@
 
 <p>Instructions:</p>
 <ol>
-    <li>Enter one or more alternatives in the form below</li>
-    <li>(optional) adjust the weights as you see fit, the probability of you ending up in the universe with that outcome will be displayed</li>
-    <li>Press "Split Universe"</li>
-    <li>marvel at the wisdom of the Multiverse!</li>
+    <li>describe the outcomes in each split</li>
+    <li>(optional) adjust the number universes where each outcome is selected</li>
+    <li>click "Split Universe"</li>
+    <li>marvel at the wisdom of the multiverse!</li>
 </ol>
 
-<h3>Disclaimer: </h3>
 <p>
-    Everything you enter here stays in your browser! The only API call this website does it to fetch a quantum random number.
+    NB: everything you enter here stays in your browser! The only API call this website does it to fetch a quantum random number.
 </p>
 
 <div class="content" bind:this={contentDiv}>
