@@ -39,6 +39,10 @@
     }
 
     async function splitUniverse(splits: Split[]) {
+        if (splits.length != 2) {
+            throw "we only support two splits now";
+        }
+
         if (splits[0].action.length == 0) {
             splits[0].action = DEFAULT_ACTION
         }
@@ -61,14 +65,18 @@
             window.alert(`Oh no! Something went wrong... (${resp.status})`)
             throw `request failed! ${resp.status}`
         }
+        
         let randomNum = body.data[0]
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
+
         let randomWeight = randomNum % totalWeight + 1
+        
         let selected = splits.find(split => {
             randomWeight -= split.weight
             return randomWeight <= 0
-        });
-        window.alert(`You are in the universe in which you should:\n${selected?.action}`)
+        })!;
+        
+        window.alert(`You are in one of the ${selected.weight} universes in which you should:\n==> ${selected.action} <==\n\n(In the other ${totalWeight - selected.weight} universes, you experienced a different outcome)`)
     }
 
     let contentDiv: Element
