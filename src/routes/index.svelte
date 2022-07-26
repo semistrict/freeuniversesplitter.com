@@ -19,11 +19,6 @@
         }
     ];
 
-    function addSplit() {
-        splits.push({action: '', weight: 1})
-        splits = splits // update UI
-    }
-
     function probability(splits: Split[], weight: number) {
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
         return percentage(weight / totalWeight)
@@ -35,14 +30,6 @@
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         }).format(val);
-    }
-
-    function removeSplit(i: number) {
-        if (splits.length <= 2) {
-            return
-        }
-        splits.splice(i, 1)
-        splits = splits
     }
 
     function summary(splits: Split[]) {
