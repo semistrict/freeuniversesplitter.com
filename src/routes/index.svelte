@@ -1,7 +1,7 @@
 <script lang="ts">
     import { each, onMount } from "svelte/internal";
 
-    const DEFAULT_ACTION = "do it!"
+    const DEFAULT_ACTION = "take a chance"
 
     interface Split {
         action: string
@@ -24,9 +24,9 @@
         splits = splits // update UI
     }
 
-    function probability(weight: number) {
+    function probability(splits: Split[], weight: number) {
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
-        return weight / totalWeight
+        return percentage(weight / totalWeight)
     }
 
     function percentage(val: number): string {
@@ -45,6 +45,12 @@
         splits = splits
     }
 
+    function summary(splits: Split[]) {
+        return `Selected splits:\n` + 
+            `- ${splits[0].action} (${probability(splits, splits[0].weight)} of universes)\n` +
+            `- ${splits[1].action} (${probability(splits, splits[1].weight)} of universes)`
+    }
+
     async function splitUniverse(splits: Split[]) {
         if (splits[0].action.length == 0) {
             splits[0].action = DEFAULT_ACTION
@@ -53,12 +59,19 @@
             splits[1].action = `not ${splits[0].action}`
         }
 
+        if (!window.confirm(summary(splits) + "\nAre you sure you want to continue?\nRemember: you could end up in any of the universes!")
+         || !window.confirm("Are you really, really sure?")) {
+            window.alert("Universe split canceled.")
+            return;
+        }
+
         let resp = await fetch("https://api.freeuniversesplitter.com/split", {
             method: 'POST',
             cache: 'no-cache',
         })
         let body = await resp.json()
         if (!body.success) {
+            window.alert(`Oh no! Something went wrong... (${resp.status})`)
             throw `request failed! ${resp.status}`
         }
         let randomNum = body.data[0]
@@ -68,7 +81,7 @@
             randomWeight -= split.weight
             return randomWeight <= 0
         });
-        alert(`You are in the universe in which you should ${selected?.action}!`)
+        window.alert(`You are in the universe in which you should:\n${selected?.action}`)
     }
 
     let contentDiv: Element
@@ -97,7 +110,7 @@
     }
     .content {
         display: grid;
-        grid-template-columns: 70% 10% 10% 10%;
+        grid-template-columns: 80% 20%;
         grid-column-gap: 10px;
     }
 </style>
@@ -131,18 +144,15 @@
 <div class="content" bind:this={contentDiv}>
     <div>
     </div>
-    <div>Weight</div>
-    <div>Probability</div>
-    <div></div>
+    <div>N</div>
     {#each splits as split, i}
         <input type=text autocapitalize=none enterkeyhint=next placeholder={placeholderText(splits, i)} bind:value={split.action} />
         <input type=number min=1 bind:value={split.weight} />
-        <div>
-            {percentage(probability(split.weight))}
-        </div>
-        <button on:click={() => removeSplit(i)}>-</button>
     {/each}
-    <button on:click={addSplit}>Add</button>
+</div>
+
+<div>
+    <p>N = number of universes in this split</p>
 </div>
 
 <div>
