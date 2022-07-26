@@ -2,6 +2,7 @@
     import { each, onMount } from "svelte/internal";
 
     const DEFAULT_ACTION = "take a chance"
+    let nextNumber = 0
 
     interface Split {
         action: string
@@ -57,18 +58,24 @@
             window.alert("Universe split canceled.")
             return;
         }
-
-        let resp = await fetch("https://api.freeuniversesplitter.com/split", {
-            method: 'POST',
-            cache: 'no-cache',
-        })
-        let body = await resp.json()
-        if (!body.success) {
-            window.alert(`Oh no! Something went wrong... (${resp.status})`)
-            throw `request failed! ${resp.status}`
-        }
         
-        let randomNum = body.data[0]
+        let randomNum
+
+        if (location.hostname == "localhost") {
+            randomNum = nextNumber++
+        } else {
+            let resp = await fetch("https://api.freeuniversesplitter.com/split", {
+                method: 'POST',
+                cache: 'no-cache',
+            })
+            let body = await resp.json()
+            if (!body.success) {
+                window.alert(`Oh no! Something went wrong... (${resp.status})`)
+                throw `request failed! ${resp.status}`
+            }
+            randomNum = body.data[0]
+        }
+
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
         let randomWeight = randomNum % totalWeight + 1
@@ -120,6 +127,10 @@
         display: grid;
         grid-template-columns: 80% 20%;
         grid-column-gap: 10px;
+        grid-row-gap: 10px;
+    }
+    input {
+        font-size: 16pt;
     }
 </style>
 
