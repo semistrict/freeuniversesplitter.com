@@ -44,8 +44,13 @@
     
 <h2>Which universe do you end up in?</h2>
 
-<p>You can't know ahead of time. This is called "self-locating uncertainty".</p>    
-
+<p>You will end up in all of them! According to the Everett interpretation, you are a quantum system because you're made up 
+of quantum systems and so you (your body, your brain, your consciousness) will split into many copies along with the rest of the universe. 
+</p>
+<p>
+    Subjectively it will seem like one of the outcomes happened at random but this is just because your memory and experience was split.
+    This is related to "self-locating uncertainty".
+</p>    
 <h2>
     Is the Many Worlds / Evertt Interpretation correct?
 </h2>
