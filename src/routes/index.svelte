@@ -34,7 +34,7 @@
     }
 
     function summary(splits: Split[]) {
-        return `Selected splits:\n` + 
+        return `Selected splits:\n` +
             `- ${splits[0].action} (${probability(splits, splits[0].weight)} of universes)\n` +
             `- ${splits[1].action} (${probability(splits, splits[1].weight)} of universes)`
     }
@@ -53,13 +53,13 @@
 
         let splitSummary = summary(splits)
 
-        if (!window.confirm(splitSummary + "\nAre you sure you want to continue?\nRemember: you could end up in any of the universes!")
-         || !window.confirm("Are you really, really sure?")) {
+        if (!window.confirm(splitSummary + "\nContinue?")) {
             window.alert("Universe split canceled.")
             return;
         }
-        
+
         let randomNum
+        let fake = true
 
         if (location.hostname == "localhost") {
             randomNum = nextNumber++
@@ -74,17 +74,18 @@
                 throw `request failed! ${resp.status}`
             }
             randomNum = body.data[0]
+            fake = false
         }
 
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
         let randomWeight = randomNum % totalWeight + 1
-        
+
         let selected = splits.find(split => {
             randomWeight -= split.weight
             return randomWeight <= 0
         })!;
-        
+
         let thisUniverse
         if (selected.weight == 1) {
             if (totalWeight == 2) {
@@ -96,7 +97,12 @@
             thisUniverse = `one of the ${selected.weight} universes`
         }
 
-        window.alert(`Universe was split into ${totalWeight} branch universes.\nYou are in ${thisUniverse} in which you should:\n==> ${selected.action} <==\n\n(In other universes, you experienced a different outcome)`)
+        let universeWasSplit = "Universe was split"
+        if (fake) {
+            universeWasSplit = "Universe was split (NOT REALLY)"
+        }
+
+        window.alert(`${universeWasSplit} into ${totalWeight} branch universes.\nYou are in ${thisUniverse} in which you should:\n==> ${selected.action} <==\n\n(In other universes, you experienced a different outcome)`)
     }
 
     let contentDiv: Element
@@ -134,6 +140,12 @@
     }
     h2 {
         font-style: italic;
+    }
+    .bottom {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        padding-bottom: 1em;
     }
 </style>
 
@@ -182,3 +194,6 @@
     <button on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
 
+<div class="bottom">
+    <a href="https://www.instagram.com/freeuniversesplitter">@freeuniversesplitter</a> made with &lt;3 by @semistrict
+</div>
