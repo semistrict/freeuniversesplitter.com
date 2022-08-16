@@ -137,6 +137,22 @@
 	I edited on their site.
 </p>
 
+<h2>Do you store the outcomes of the split?</h2>
+<p>
+	Nothing you enter into this site is sent to the server at all so no, there is no way for me to
+	even know what you entered.
+</p>
+<p>The only only server call this app does is to fetch a quantum random number.</p>
+<p>This app does not use cookies or local storage.</p>
+
+<h2>Is this a quantum computer?</h2>
+<p>
+	No. Quantum random numbers are pretty easy to generate with the right hardware because the world
+	around us is quantum at a very low level so you just need to be able to measure these very small
+	fluctuations. Most computers do not have a way to do this, so we rely on an API provided by the
+	Australian National University. I might add more sources of randomness in future.
+</p>
+
 <style>
 	* {
 		font-family: monospace;
