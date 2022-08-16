@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package com.freeuniversesplitter;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package = "freeuniversesplitter.com/server/api";
+
+service UniverseSplitter {
+  rpc ExecuteSplit(ExecuteSplitRequest) returns (ExecuteSplitResponse);
+  rpc RetrieveStats(RetrieveStatsRequest) returns (RetrieveStatsResponse);
+  rpc ReportClientError(ReportClientErrorRequest) returns (ReportClientErrorResponse);
+}
+
+message ExecuteSplitRequest {
+  string idempotency_id = 1;
+  int32 retry_count = 2;
+}
+
+message ExecuteSplitResponse {
+  string idempotency_id = 1;
+  int64 random_bytes = 2;
+  google.protobuf.Timestamp before_split = 3;
+  google.protobuf.Timestamp after_split = 4;
+  repeated string sources = 5;
+}
+
+message RetrieveStatsRequest {
+  google.protobuf.Timestamp client_time = 1;
+}
+
+message RetrieveStatsResponse {
+  google.protobuf.Timestamp server_time = 1;
+  message Stats {
+    google.protobuf.Timestamp start_time = 1;
+    google.protobuf.Timestamp end_time = 2;
+    uint64 split_operations = 3;
+    uint64 universes_differentiated = 4;
+  }
+  repeated Stats stats = 2;
+}
+
+message ReportClientErrorRequest {
+  google.protobuf.Timestamp timestamp = 1;
+  string user_agent = 2;
+  string error = 3;
+  repeated string stack_trace = 4;
+}
+
+message ReportClientErrorResponse {
+
+}
