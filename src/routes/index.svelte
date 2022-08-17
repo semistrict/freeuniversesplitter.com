@@ -1,6 +1,13 @@
 <script lang="ts">
     import { each, onMount } from "svelte/internal";
 
+    let isInstagramBrowser = false
+
+    onMount(() => {
+        const ua = (window.navigator.userAgent || window.navigator.vendor).toLowerCase()
+        isInstagramBrowser = ua.indexOf("instagram") > 0 || ua.indexOf("facebook") > 0
+    })
+
     const DEFAULT_ACTION = "take a chance"
     let nextNumber = 0
 
@@ -159,6 +166,13 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
 </svelte:head>
 
+{#if isInstagramBrowser}
+
+<h1>This site doesn't work on Instagram or Facebook, please open in your system browser.</h1>
+
+{:else}
+
+
 <h1>FreeUniverseSplitter.com</h1>
 <h2>let the multiverse decide</h2>
 
@@ -197,3 +211,5 @@
 <div class="bottom">
     <a href="https://www.instagram.com/freeuniversesplitter">@freeuniversesplitter</a> made with &lt;3 by @semistrict
 </div>
+
+{/if}
