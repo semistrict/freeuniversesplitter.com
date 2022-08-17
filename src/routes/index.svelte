@@ -209,7 +209,7 @@
 </div>
 
 <div class="bottom">
-    <a href="https://www.instagram.com/freeuniversesplitter">@freeuniversesplitter</a> made with &lt;3 by @semistrict
+    made with &lt;3 by @semistrict
 </div>
 
 {/if}
