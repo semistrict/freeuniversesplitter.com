@@ -1,3 +1,10 @@
+<script lang="ts">
+	function showDebugInfo() {
+		var ua = navigator.userAgent || navigator.vendor
+		window.alert(`UserAgent: ${ua}`)
+	}
+</script>
+
 <h1>Disclaimer</h1>
 
 <p>
@@ -152,6 +159,10 @@
 	fluctuations. Most computers do not have a way to do this, so we rely on an API provided by the
 	Australian National University. I might add more sources of randomness in future.
 </p>
+
+<div>
+	<button on:click={showDebugInfo}>Debug Info</button>
+</div>
 
 <style>
 	* {
