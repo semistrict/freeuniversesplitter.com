@@ -1,5 +1,7 @@
 <script lang="ts">
     import { each, onMount } from "svelte/internal";
+    //import EightBall from "../components/EightBall.svelte";
+    import {getRandom} from "../random"
 
     let isInstagramBrowser = false
 
@@ -65,26 +67,9 @@
             return;
         }
 
-        let randomNum
-        let fake = true
-
-        if (location.hostname == "localhost") {
-            randomNum = nextNumber++
-        } else {
-            let resp = await fetch("https://api.freeuniversesplitter.com/split", {
-                method: 'POST',
-                cache: 'no-cache',
-            })
-            let body = await resp.json()
-            if (!body.success) {
-                window.alert(`Oh no! Something went wrong... (${resp.status})`)
-                throw `request failed! ${resp.status}`
-            }
-            randomNum = body.data[0]
-            fake = false
-        }
-
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
+
+        let {randomNum, fake} = await getRandom()
 
         let randomWeight = randomNum % totalWeight + 1
 
@@ -153,6 +138,7 @@
         bottom: 0;
         width: 100%;
         padding-bottom: 1em;
+        background-color: white;
     }
 </style>
 
