@@ -1,0 +1,1163 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F68A76F528B3030500CD0F14 /* FreeUniverseSplitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A76F428B3030500CD0F14 /* FreeUniverseSplitterApp.swift */; };
+		F68A76F728B3030500CD0F14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A76F628B3030500CD0F14 /* ContentView.swift */; };
+		F68A76F928B3030800CD0F14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68A76F828B3030800CD0F14 /* Assets.xcassets */; };
+		F68A76FC28B3030800CD0F14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68A76FB28B3030800CD0F14 /* Preview Assets.xcassets */; };
+		F68A770628B3030800CD0F14 /* FreeUniverseSplitterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A770528B3030800CD0F14 /* FreeUniverseSplitterTests.swift */; };
+		F68A771028B3030800CD0F14 /* FreeUniverseSplitterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A770F28B3030800CD0F14 /* FreeUniverseSplitterUITests.swift */; };
+		F68A771228B3030800CD0F14 /* FreeUniverseSplitterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A771128B3030800CD0F14 /* FreeUniverseSplitterUITestsLaunchTests.swift */; };
+		F68A771628B3030800CD0F14 /* FreeUniverseSplitter WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F68A771528B3030800CD0F14 /* FreeUniverseSplitter WatchKit App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F68A771B28B3030900CD0F14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68A771A28B3030900CD0F14 /* Assets.xcassets */; };
+		F68A772128B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = F68A772028B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		F68A772628B3030900CD0F14 /* FreeUniverseSplitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A772528B3030900CD0F14 /* FreeUniverseSplitterApp.swift */; };
+		F68A772828B3030900CD0F14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A772728B3030900CD0F14 /* ContentView.swift */; };
+		F68A772A28B3030900CD0F14 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A772928B3030900CD0F14 /* NotificationController.swift */; };
+		F68A772C28B3030900CD0F14 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A772B28B3030900CD0F14 /* NotificationView.swift */; };
+		F68A772E28B3030900CD0F14 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A772D28B3030900CD0F14 /* ComplicationController.swift */; };
+		F68A773028B3030900CD0F14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68A772F28B3030900CD0F14 /* Assets.xcassets */; };
+		F68A773328B3030900CD0F14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68A773228B3030900CD0F14 /* Preview Assets.xcassets */; };
+		F68A773F28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A773E28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppTests.swift */; };
+		F68A774928B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A774828B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITests.swift */; };
+		F68A774B28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A774A28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F68A770228B3030800CD0F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F68A76E928B3030500CD0F14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F68A76F028B3030500CD0F14;
+			remoteInfo = FreeUniverseSplitter;
+		};
+		F68A770C28B3030800CD0F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F68A76E928B3030500CD0F14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F68A76F028B3030500CD0F14;
+			remoteInfo = FreeUniverseSplitter;
+		};
+		F68A771728B3030800CD0F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F68A76E928B3030500CD0F14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F68A771428B3030800CD0F14;
+			remoteInfo = "FreeUniverseSplitter WatchKit App";
+		};
+		F68A772228B3030900CD0F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F68A76E928B3030500CD0F14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F68A771F28B3030900CD0F14;
+			remoteInfo = "FreeUniverseSplitter WatchKit Extension";
+		};
+		F68A773B28B3030900CD0F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F68A76E928B3030500CD0F14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F68A771F28B3030900CD0F14;
+			remoteInfo = "FreeUniverseSplitter WatchKit Extension";
+		};
+		F68A774528B3030900CD0F14 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F68A76E928B3030500CD0F14 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F68A771428B3030800CD0F14;
+			remoteInfo = "FreeUniverseSplitter WatchKit App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F68A775128B3030900CD0F14 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F68A772128B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A775528B3030900CD0F14 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				F68A771628B3030800CD0F14 /* FreeUniverseSplitter WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		F68A76F128B3030500CD0F14 /* FreeUniverseSplitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeUniverseSplitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A76F428B3030500CD0F14 /* FreeUniverseSplitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitterApp.swift; sourceTree = "<group>"; };
+		F68A76F628B3030500CD0F14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F68A76F828B3030800CD0F14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F68A76FB28B3030800CD0F14 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F68A770128B3030800CD0F14 /* FreeUniverseSplitterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeUniverseSplitterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A770528B3030800CD0F14 /* FreeUniverseSplitterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitterTests.swift; sourceTree = "<group>"; };
+		F68A770B28B3030800CD0F14 /* FreeUniverseSplitterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeUniverseSplitterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A770F28B3030800CD0F14 /* FreeUniverseSplitterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitterUITests.swift; sourceTree = "<group>"; };
+		F68A771128B3030800CD0F14 /* FreeUniverseSplitterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F68A771528B3030800CD0F14 /* FreeUniverseSplitter WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FreeUniverseSplitter WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A771A28B3030900CD0F14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F68A772028B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "FreeUniverseSplitter WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A772528B3030900CD0F14 /* FreeUniverseSplitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitterApp.swift; sourceTree = "<group>"; };
+		F68A772728B3030900CD0F14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F68A772928B3030900CD0F14 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		F68A772B28B3030900CD0F14 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		F68A772D28B3030900CD0F14 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
+		F68A772F28B3030900CD0F14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F68A773228B3030900CD0F14 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F68A773428B3030900CD0F14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F68A773528B3030900CD0F14 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		F68A773A28B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FreeUniverseSplitter WatchKit AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A773E28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitter_WatchKit_AppTests.swift; sourceTree = "<group>"; };
+		F68A774428B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "FreeUniverseSplitter WatchKit AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F68A774828B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitter_WatchKit_AppUITests.swift; sourceTree = "<group>"; };
+		F68A774A28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitter_WatchKit_AppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F68A76EE28B3030500CD0F14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A76FE28B3030800CD0F14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A770828B3030800CD0F14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A771D28B3030900CD0F14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A773728B3030900CD0F14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A774128B3030900CD0F14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F68A76E828B3030500CD0F14 = {
+			isa = PBXGroup;
+			children = (
+				F68A76F328B3030500CD0F14 /* FreeUniverseSplitter */,
+				F68A770428B3030800CD0F14 /* FreeUniverseSplitterTests */,
+				F68A770E28B3030800CD0F14 /* FreeUniverseSplitterUITests */,
+				F68A771928B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */,
+				F68A772428B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension */,
+				F68A773D28B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests */,
+				F68A774728B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests */,
+				F68A76F228B3030500CD0F14 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F68A76F228B3030500CD0F14 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F68A76F128B3030500CD0F14 /* FreeUniverseSplitter.app */,
+				F68A770128B3030800CD0F14 /* FreeUniverseSplitterTests.xctest */,
+				F68A770B28B3030800CD0F14 /* FreeUniverseSplitterUITests.xctest */,
+				F68A771528B3030800CD0F14 /* FreeUniverseSplitter WatchKit App.app */,
+				F68A772028B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension.appex */,
+				F68A773A28B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests.xctest */,
+				F68A774428B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F68A76F328B3030500CD0F14 /* FreeUniverseSplitter */ = {
+			isa = PBXGroup;
+			children = (
+				F68A76F428B3030500CD0F14 /* FreeUniverseSplitterApp.swift */,
+				F68A76F628B3030500CD0F14 /* ContentView.swift */,
+				F68A76F828B3030800CD0F14 /* Assets.xcassets */,
+				F68A76FA28B3030800CD0F14 /* Preview Content */,
+			);
+			path = FreeUniverseSplitter;
+			sourceTree = "<group>";
+		};
+		F68A76FA28B3030800CD0F14 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F68A76FB28B3030800CD0F14 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F68A770428B3030800CD0F14 /* FreeUniverseSplitterTests */ = {
+			isa = PBXGroup;
+			children = (
+				F68A770528B3030800CD0F14 /* FreeUniverseSplitterTests.swift */,
+			);
+			path = FreeUniverseSplitterTests;
+			sourceTree = "<group>";
+		};
+		F68A770E28B3030800CD0F14 /* FreeUniverseSplitterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F68A770F28B3030800CD0F14 /* FreeUniverseSplitterUITests.swift */,
+				F68A771128B3030800CD0F14 /* FreeUniverseSplitterUITestsLaunchTests.swift */,
+			);
+			path = FreeUniverseSplitterUITests;
+			sourceTree = "<group>";
+		};
+		F68A771928B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				F68A771A28B3030900CD0F14 /* Assets.xcassets */,
+			);
+			path = "FreeUniverseSplitter WatchKit App";
+			sourceTree = "<group>";
+		};
+		F68A772428B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F68A772528B3030900CD0F14 /* FreeUniverseSplitterApp.swift */,
+				F68A772728B3030900CD0F14 /* ContentView.swift */,
+				F68A772928B3030900CD0F14 /* NotificationController.swift */,
+				F68A772B28B3030900CD0F14 /* NotificationView.swift */,
+				F68A772D28B3030900CD0F14 /* ComplicationController.swift */,
+				F68A772F28B3030900CD0F14 /* Assets.xcassets */,
+				F68A773428B3030900CD0F14 /* Info.plist */,
+				F68A773528B3030900CD0F14 /* PushNotificationPayload.apns */,
+				F68A773128B3030900CD0F14 /* Preview Content */,
+			);
+			path = "FreeUniverseSplitter WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		F68A773128B3030900CD0F14 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F68A773228B3030900CD0F14 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F68A773D28B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests */ = {
+			isa = PBXGroup;
+			children = (
+				F68A773E28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppTests.swift */,
+			);
+			path = "FreeUniverseSplitter WatchKit AppTests";
+			sourceTree = "<group>";
+		};
+		F68A774728B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F68A774828B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITests.swift */,
+				F68A774A28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITestsLaunchTests.swift */,
+			);
+			path = "FreeUniverseSplitter WatchKit AppUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F68A76F028B3030500CD0F14 /* FreeUniverseSplitter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A775628B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter" */;
+			buildPhases = (
+				F68A76ED28B3030500CD0F14 /* Sources */,
+				F68A76EE28B3030500CD0F14 /* Frameworks */,
+				F68A76EF28B3030500CD0F14 /* Resources */,
+				F68A775528B3030900CD0F14 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F68A771828B3030800CD0F14 /* PBXTargetDependency */,
+			);
+			name = FreeUniverseSplitter;
+			productName = FreeUniverseSplitter;
+			productReference = F68A76F128B3030500CD0F14 /* FreeUniverseSplitter.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F68A770028B3030800CD0F14 /* FreeUniverseSplitterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A775928B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitterTests" */;
+			buildPhases = (
+				F68A76FD28B3030800CD0F14 /* Sources */,
+				F68A76FE28B3030800CD0F14 /* Frameworks */,
+				F68A76FF28B3030800CD0F14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F68A770328B3030800CD0F14 /* PBXTargetDependency */,
+			);
+			name = FreeUniverseSplitterTests;
+			productName = FreeUniverseSplitterTests;
+			productReference = F68A770128B3030800CD0F14 /* FreeUniverseSplitterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F68A770A28B3030800CD0F14 /* FreeUniverseSplitterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A775C28B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitterUITests" */;
+			buildPhases = (
+				F68A770728B3030800CD0F14 /* Sources */,
+				F68A770828B3030800CD0F14 /* Frameworks */,
+				F68A770928B3030800CD0F14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F68A770D28B3030800CD0F14 /* PBXTargetDependency */,
+			);
+			name = FreeUniverseSplitterUITests;
+			productName = FreeUniverseSplitterUITests;
+			productReference = F68A770B28B3030800CD0F14 /* FreeUniverseSplitterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		F68A771428B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A775228B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit App" */;
+			buildPhases = (
+				F68A771328B3030800CD0F14 /* Resources */,
+				F68A775128B3030900CD0F14 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F68A772328B3030900CD0F14 /* PBXTargetDependency */,
+			);
+			name = "FreeUniverseSplitter WatchKit App";
+			productName = "FreeUniverseSplitter WatchKit App";
+			productReference = F68A771528B3030800CD0F14 /* FreeUniverseSplitter WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		F68A771F28B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A774E28B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit Extension" */;
+			buildPhases = (
+				F68A771C28B3030900CD0F14 /* Sources */,
+				F68A771D28B3030900CD0F14 /* Frameworks */,
+				F68A771E28B3030900CD0F14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FreeUniverseSplitter WatchKit Extension";
+			productName = "FreeUniverseSplitter WatchKit Extension";
+			productReference = F68A772028B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
+		F68A773928B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A775F28B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit AppTests" */;
+			buildPhases = (
+				F68A773628B3030900CD0F14 /* Sources */,
+				F68A773728B3030900CD0F14 /* Frameworks */,
+				F68A773828B3030900CD0F14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F68A773C28B3030900CD0F14 /* PBXTargetDependency */,
+			);
+			name = "FreeUniverseSplitter WatchKit AppTests";
+			productName = "FreeUniverseSplitter WatchKit AppTests";
+			productReference = F68A773A28B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F68A774328B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F68A776228B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit AppUITests" */;
+			buildPhases = (
+				F68A774028B3030900CD0F14 /* Sources */,
+				F68A774128B3030900CD0F14 /* Frameworks */,
+				F68A774228B3030900CD0F14 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F68A774628B3030900CD0F14 /* PBXTargetDependency */,
+			);
+			name = "FreeUniverseSplitter WatchKit AppUITests";
+			productName = "FreeUniverseSplitter WatchKit AppUITests";
+			productReference = F68A774428B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F68A76E928B3030500CD0F14 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					F68A76F028B3030500CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					F68A770028B3030800CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = F68A76F028B3030500CD0F14;
+					};
+					F68A770A28B3030800CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = F68A76F028B3030500CD0F14;
+					};
+					F68A771428B3030800CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					F68A771F28B3030900CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					F68A773928B3030900CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = F68A771F28B3030900CD0F14;
+					};
+					F68A774328B3030900CD0F14 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = F68A771428B3030800CD0F14;
+					};
+				};
+			};
+			buildConfigurationList = F68A76EC28B3030500CD0F14 /* Build configuration list for PBXProject "FreeUniverseSplitter" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F68A76E828B3030500CD0F14;
+			productRefGroup = F68A76F228B3030500CD0F14 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F68A76F028B3030500CD0F14 /* FreeUniverseSplitter */,
+				F68A770028B3030800CD0F14 /* FreeUniverseSplitterTests */,
+				F68A770A28B3030800CD0F14 /* FreeUniverseSplitterUITests */,
+				F68A771428B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */,
+				F68A771F28B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension */,
+				F68A773928B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppTests */,
+				F68A774328B3030900CD0F14 /* FreeUniverseSplitter WatchKit AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F68A76EF28B3030500CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A76FC28B3030800CD0F14 /* Preview Assets.xcassets in Resources */,
+				F68A76F928B3030800CD0F14 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A76FF28B3030800CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A770928B3030800CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A771328B3030800CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A771B28B3030900CD0F14 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A771E28B3030900CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A773328B3030900CD0F14 /* Preview Assets.xcassets in Resources */,
+				F68A773028B3030900CD0F14 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A773828B3030900CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A774228B3030900CD0F14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F68A76ED28B3030500CD0F14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A76F728B3030500CD0F14 /* ContentView.swift in Sources */,
+				F68A76F528B3030500CD0F14 /* FreeUniverseSplitterApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A76FD28B3030800CD0F14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A770628B3030800CD0F14 /* FreeUniverseSplitterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A770728B3030800CD0F14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A771228B3030800CD0F14 /* FreeUniverseSplitterUITestsLaunchTests.swift in Sources */,
+				F68A771028B3030800CD0F14 /* FreeUniverseSplitterUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A771C28B3030900CD0F14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A772A28B3030900CD0F14 /* NotificationController.swift in Sources */,
+				F68A772828B3030900CD0F14 /* ContentView.swift in Sources */,
+				F68A772E28B3030900CD0F14 /* ComplicationController.swift in Sources */,
+				F68A772628B3030900CD0F14 /* FreeUniverseSplitterApp.swift in Sources */,
+				F68A772C28B3030900CD0F14 /* NotificationView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A773628B3030900CD0F14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A773F28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F68A774028B3030900CD0F14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F68A774928B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITests.swift in Sources */,
+				F68A774B28B3030900CD0F14 /* FreeUniverseSplitter_WatchKit_AppUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F68A770328B3030800CD0F14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F68A76F028B3030500CD0F14 /* FreeUniverseSplitter */;
+			targetProxy = F68A770228B3030800CD0F14 /* PBXContainerItemProxy */;
+		};
+		F68A770D28B3030800CD0F14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F68A76F028B3030500CD0F14 /* FreeUniverseSplitter */;
+			targetProxy = F68A770C28B3030800CD0F14 /* PBXContainerItemProxy */;
+		};
+		F68A771828B3030800CD0F14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F68A771428B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */;
+			targetProxy = F68A771728B3030800CD0F14 /* PBXContainerItemProxy */;
+		};
+		F68A772328B3030900CD0F14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F68A771F28B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension */;
+			targetProxy = F68A772228B3030900CD0F14 /* PBXContainerItemProxy */;
+		};
+		F68A773C28B3030900CD0F14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F68A771F28B3030900CD0F14 /* FreeUniverseSplitter WatchKit Extension */;
+			targetProxy = F68A773B28B3030900CD0F14 /* PBXContainerItemProxy */;
+		};
+		F68A774628B3030900CD0F14 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F68A771428B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */;
+			targetProxy = F68A774528B3030900CD0F14 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F68A774C28B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F68A774D28B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F68A774F28B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FreeUniverseSplitter WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FreeUniverseSplitter WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "FreeUniverseSplitter WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitter.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		F68A775028B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FreeUniverseSplitter WatchKit Extension/Preview Content\"";
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "FreeUniverseSplitter WatchKit Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "FreeUniverseSplitter WatchKit Extension";
+				INFOPLIST_KEY_CLKComplicationPrincipalClass = "$(PRODUCT_MODULE_NAME).ComplicationController";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitter.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		F68A775328B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = FreeUniverseSplitter_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = "FreeUniverseSplitter WatchKit App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.freeuniversesplitter.FreeUniverseSplitter;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitter.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		F68A775428B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IBSC_MODULE = FreeUniverseSplitter_WatchKit_Extension;
+				INFOPLIST_KEY_CFBundleDisplayName = "FreeUniverseSplitter WatchKit App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = com.freeuniversesplitter.FreeUniverseSplitter;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitter.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		F68A775728B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FreeUniverseSplitter/Preview Content\"";
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F68A775828B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FreeUniverseSplitter/Preview Content\"";
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F68A775A28B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeUniverseSplitter.app/FreeUniverseSplitter";
+			};
+			name = Debug;
+		};
+		F68A775B28B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeUniverseSplitter.app/FreeUniverseSplitter";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F68A775D28B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FreeUniverseSplitter;
+			};
+			name = Debug;
+		};
+		F68A775E28B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.freeuniversesplitter.FreeUniverseSplitterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = FreeUniverseSplitter;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F68A776028B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.freeuniversesplitter.FreeUniverseSplitter-WatchKit-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeUniverseSplitter WatchKit Extension.appex/FreeUniverseSplitter WatchKit Extension";
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		F68A776128B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.freeuniversesplitter.FreeUniverseSplitter-WatchKit-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FreeUniverseSplitter WatchKit Extension.appex/FreeUniverseSplitter WatchKit Extension";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+		F68A776328B3030900CD0F14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.freeuniversesplitter.FreeUniverseSplitter-WatchKit-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "FreeUniverseSplitter WatchKit App";
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Debug;
+		};
+		F68A776428B3030900CD0F14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = D9G32AG3E5;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.freeuniversesplitter.FreeUniverseSplitter-WatchKit-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "FreeUniverseSplitter WatchKit App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 8.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F68A76EC28B3030500CD0F14 /* Build configuration list for PBXProject "FreeUniverseSplitter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A774C28B3030900CD0F14 /* Debug */,
+				F68A774D28B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A774E28B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A774F28B3030900CD0F14 /* Debug */,
+				F68A775028B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A775228B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A775328B3030900CD0F14 /* Debug */,
+				F68A775428B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A775628B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A775728B3030900CD0F14 /* Debug */,
+				F68A775828B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A775928B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A775A28B3030900CD0F14 /* Debug */,
+				F68A775B28B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A775C28B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A775D28B3030900CD0F14 /* Debug */,
+				F68A775E28B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A775F28B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A776028B3030900CD0F14 /* Debug */,
+				F68A776128B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F68A776228B3030900CD0F14 /* Build configuration list for PBXNativeTarget "FreeUniverseSplitter WatchKit AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F68A776328B3030900CD0F14 /* Debug */,
+				F68A776428B3030900CD0F14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F68A76E928B3030500CD0F14 /* Project object */;
+}
