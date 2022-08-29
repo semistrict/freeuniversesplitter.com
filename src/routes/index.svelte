@@ -20,11 +20,11 @@
 
     let splits: Split[] = [
         {
-            action: '',
+            action: 'Take a chance',
             weight: 1,
         },
         {
-            action: '',
+            action: 'Play it safe',
             weight: 1,
         }
     ];
