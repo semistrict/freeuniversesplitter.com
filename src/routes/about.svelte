@@ -164,8 +164,19 @@
 	<button on:click={showDebugInfo}>Debug Info</button>
 </div>
 
+<h2>Credits</h2>
+<ul>
+	<li><a href="https://laemeur.sdf.org/fonts/">Less Perfect DOS VGA font</a></li>
+</ul>
+
 <style>
-	* {
-		font-family: monospace;
-	}
+	@font-face {
+        font-family: 'LessPerfectDOSVGA';
+        src: url('/LessPerfectDOSVGA.ttf');
+    }
+    :global(*) {
+        font-family: 'LessPerfectDOSVGA', monospace;
+        color: #41FF00;
+        background-color: black;
+    }
 </style>

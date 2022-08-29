@@ -118,8 +118,12 @@
 </script>
 
 <style>
+    @font-face {
+        font-family: 'LessPerfectDOSVGA';
+        src: url('/LessPerfectDOSVGA.ttf');
+    }
     :global(*) {
-        font-family: monospace;
+        font-family: 'LessPerfectDOSVGA', monospace;
         color: #41FF00;
         background-color: black;
     }
