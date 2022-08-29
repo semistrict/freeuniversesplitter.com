@@ -131,6 +131,7 @@
         color: black;
         background-color: #41FF00;
         text-align: center;
+        font-size: 20pt;
     }
     .content {
         display: grid;
