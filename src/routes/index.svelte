@@ -196,8 +196,6 @@
 </div>
 </div>
 
-<MeditationTimer />
-
 <p><a href="about">More info</a></p>
 
 <div class="bottom">
