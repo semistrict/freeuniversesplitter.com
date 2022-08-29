@@ -126,6 +126,7 @@
     h1 {
         color: black;
         background-color: #41FF00;
+        text-align: center;
     }
     .content {
         display: grid;
@@ -135,6 +136,8 @@
     }
     input {
         font-size: 16pt;
+        color: #41FF00;
+        background-color: black;
     }
     h2 {
         font-style: italic;
@@ -163,9 +166,7 @@
 
 {:else}
 
-
 <h1>FreeUniverseSplitter.com</h1>
-<h2>let the multiverse decide</h2>
 
 <div>
 <p>
