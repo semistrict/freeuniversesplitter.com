@@ -1,6 +1,6 @@
 <script lang="ts">
+    import MeditationTimer from "../components/MeditationTimer.svelte";
     import { each, onMount } from "svelte/internal";
-    //import EightBall from "../components/EightBall.svelte";
     import {getRandom} from "../random"
 
     let isInstagramBrowser = false
@@ -118,7 +118,7 @@
 </script>
 
 <style>
-    * {
+    :global(*) {
         font-family: monospace;
     }
     .content {
@@ -162,19 +162,10 @@
 <h1>FreeUniverseSplitter.com</h1>
 <h2>let the multiverse decide</h2>
 
-<p>Instructions:</p>
-<ol>
-    <li>describe the outcomes in each split</li>
-    <li>(optional) adjust the number universes where each outcome is selected</li>
-    <li>click "Split Universe"</li>
-    <li>marvel at the wisdom of the multiverse!</li>
-</ol>
-
+<div>
 <p>
     NB: everything you enter here stays on your device. The only API call this website does it to fetch a quantum random number.
 </p>
-
-<p><a href="about">More info</a></p>
 
 <div class="content" bind:this={contentDiv}>
     <div>
@@ -193,6 +184,11 @@
 <div>
     <button on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
+</div>
+
+<MeditationTimer />
+
+<p><a href="about">More info</a></p>
 
 <div class="bottom">
     made with &lt;3 by @semistrict
