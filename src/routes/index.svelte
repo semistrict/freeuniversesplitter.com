@@ -143,6 +143,12 @@
         color: #41FF00;
         background-color: black;
     }
+    .splitButton {
+        font-size: 16pt;
+        color: #41FF00;
+        background-color: black;
+        border-color: #41FF00;
+    }
     h2 {
         font-style: italic;
     }
@@ -191,8 +197,8 @@
     <p>N = number of universes in this split</p>
 </div>
 
-<div>
-    <button on:click={() => splitUniverse(splits)}>Split Universe!</button>
+<div style="text-align: center">
+    <button class="splitButton" on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
 </div>
 
