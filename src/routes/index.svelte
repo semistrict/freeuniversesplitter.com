@@ -120,6 +120,12 @@
 <style>
     :global(*) {
         font-family: monospace;
+        color: #41FF00;
+        background-color: black;
+    }
+    h1 {
+        color: black;
+        background-color: #41FF00;
     }
     .content {
         display: grid;
@@ -138,7 +144,6 @@
         bottom: 0;
         width: 100%;
         padding-bottom: 1em;
-        background-color: white;
     }
 </style>
 
