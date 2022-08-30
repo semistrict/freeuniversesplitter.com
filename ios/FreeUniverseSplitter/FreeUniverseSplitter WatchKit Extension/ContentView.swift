@@ -27,7 +27,7 @@ struct ContentView: View {
 
     var body: some View {
         Text(result)
-            .font(.largeTitle)
+            .font(Font.custom("LessPerfectDOSVGA", size: 48))
             .foregroundColor(Color.green)
             .padding()
             .onTapGesture {

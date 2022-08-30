@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F685E5B328BE49690001C6D0 /* LessPerfectDOSVGA.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F685E5B228BE49690001C6D0 /* LessPerfectDOSVGA.ttf */; };
+		F685E5B428BE49690001C6D0 /* LessPerfectDOSVGA.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F685E5B228BE49690001C6D0 /* LessPerfectDOSVGA.ttf */; };
 		F68A76F528B3030500CD0F14 /* FreeUniverseSplitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A76F428B3030500CD0F14 /* FreeUniverseSplitterApp.swift */; };
 		F68A76F728B3030500CD0F14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68A76F628B3030500CD0F14 /* ContentView.swift */; };
 		F68A76F928B3030800CD0F14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F68A76F828B3030800CD0F14 /* Assets.xcassets */; };
@@ -100,6 +102,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F685E5B228BE49690001C6D0 /* LessPerfectDOSVGA.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LessPerfectDOSVGA.ttf; path = ../../../static/LessPerfectDOSVGA.ttf; sourceTree = "<group>"; };
 		F68A76F128B3030500CD0F14 /* FreeUniverseSplitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeUniverseSplitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F68A76F428B3030500CD0F14 /* FreeUniverseSplitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeUniverseSplitterApp.swift; sourceTree = "<group>"; };
 		F68A76F628B3030500CD0F14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -242,6 +245,7 @@
 		F68A771928B3030800CD0F14 /* FreeUniverseSplitter WatchKit App */ = {
 			isa = PBXGroup;
 			children = (
+				F685E5B228BE49690001C6D0 /* LessPerfectDOSVGA.ttf */,
 				F68A771A28B3030900CD0F14 /* Assets.xcassets */,
 			);
 			path = "FreeUniverseSplitter WatchKit App";
@@ -506,6 +510,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F68A771B28B3030900CD0F14 /* Assets.xcassets in Resources */,
+				F685E5B328BE49690001C6D0 /* LessPerfectDOSVGA.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +518,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F685E5B428BE49690001C6D0 /* LessPerfectDOSVGA.ttf in Resources */,
 				F68A773328B3030900CD0F14 /* Preview Assets.xcassets in Resources */,
 				F68A773028B3030900CD0F14 /* Assets.xcassets in Resources */,
 			);
