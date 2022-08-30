@@ -99,11 +99,6 @@
 
     let contentDiv: Element
 
-    onMount(() => {
-        let text = contentDiv?.querySelector('input[type="text"]') as HTMLInputElement
-        text?.focus()
-    })
-
     function placeholderText(splits: Split[], index: number) {
         let action = splits[0].action
         if (action.length == 0) {
@@ -181,7 +176,7 @@
 
 <div>
 <p>
-    NB: everything you enter here stays on your device. The only API call this website does it to fetch a quantum random number.
+    Everything you enter here stays on your device. The only API call this website does it to fetch a quantum random number.
 </p>
 
 <div class="content" bind:this={contentDiv}>
