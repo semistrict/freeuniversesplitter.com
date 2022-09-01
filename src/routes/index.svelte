@@ -120,9 +120,9 @@
             promises.push(getRandom())
         }
         for (let i = 0; i < 5; i++) {
-            lotteryNumbers += " " + (await promises[i]).randomNum % 70
+            lotteryNumbers += " " + ((await promises[i]).randomNum % 70 + 1)
         }
-        lotteryNumbers += " " + (await promises[5]).randomNum % 25
+        lotteryNumbers += " " + ((await promises[5]).randomNum % 25 + 1)
     }
 </script>
 
