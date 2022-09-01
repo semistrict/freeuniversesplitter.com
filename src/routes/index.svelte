@@ -1,7 +1,7 @@
 <script lang="ts">
     import MeditationTimer from "../components/MeditationTimer.svelte";
     import { each, onMount } from "svelte/internal";
-    import {getRandom} from "../random"
+    import {getRandom, type RandomResult} from "../random"
 
     let isInstagramBrowser = false
 
@@ -110,6 +110,20 @@
             return DEFAULT_ACTION
         }
     }
+
+    let lotteryNumbers = ''
+
+    async function genLotteryNums() {
+        let promises: Array<Promise<RandomResult>> = []
+        lotteryNumbers = ''
+        for (let i = 0; i < 6; i++) {
+            promises.push(getRandom())
+        }
+        for (let i = 0; i < 5; i++) {
+            lotteryNumbers += " " + (await promises[i]).randomNum % 70
+        }
+        lotteryNumbers += " " + (await promises[5]).randomNum % 25
+    }
 </script>
 
 <style>
@@ -196,6 +210,11 @@
 <div style="text-align: center">
     <button class="splitButton" on:click={() => splitUniverse(splits)}>Split Universe!</button>
 </div>
+</div>
+
+<div>
+    <button on:click={genLotteryNums}>Lottery Numbers</button>
+    {lotteryNumbers}
 </div>
 
 <p><a href="about">More info</a></p>
