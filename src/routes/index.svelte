@@ -212,7 +212,7 @@
 </div>
 </div>
 
-<div>
+<div style="display: none;">
     <button on:click={genLotteryNums}>Lottery Numbers</button>
     {lotteryNumbers}
 </div>
