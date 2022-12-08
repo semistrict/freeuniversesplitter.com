@@ -192,6 +192,7 @@
 <p>
     Everything you enter here stays on your device. The only API call this website does it to fetch a quantum random number.
 </p>
+<p><a href="about">More info</a></p>
 
 <div class="content" bind:this={contentDiv}>
     <div>
@@ -216,8 +217,6 @@
     <button on:click={genLotteryNums}>Lottery Numbers</button>
     {lotteryNumbers}
 </div>
-
-<p><a href="about">More info</a></p>
 
 <div class="bottom">
     made with &lt;3 by @semistrict

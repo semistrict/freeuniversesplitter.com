@@ -1,7 +1,7 @@
 <script lang="ts">
 	function showDebugInfo() {
-		var ua = navigator.userAgent || navigator.vendor
-		window.alert(`UserAgent: ${ua}`)
+		var ua = navigator.userAgent || navigator.vendor;
+		window.alert(`UserAgent: ${ua}`);
 	}
 </script>
 
@@ -10,14 +10,14 @@
 <p>
 	<b>I am not a physicist!</b>
 
-	This is all my best guess at what's going on as I understand it. I do love thinking and talking
-	about this stuff. I will add a contact sheet soon, for now you can
-	<a href="https://github.com/semistrict/freeuniversesplitter.com">open an issue on GitHub</a>.
+	This is all my best guess at what's going on. I do love thinking and talking about this stuff,
+	feel free to reach out to me on Instagram or Telegram (username @semistrict).
 </p>
 
 <p>
-	Please use this responsibly: what you enter into this site is not sent to the server at all so I
-	have no way of knowing what you are using this for.
+	Please use this responsibly: what you enter into this site is not sent to the server at all so <em
+		>I have no way of knowing what you are using this for.</em
+	>
 </p>
 
 <h1>FAQ</h1>
@@ -25,20 +25,20 @@
 <h2>How does it work?</h2>
 
 <p>
-	It depends on the Everett (or Many Worlds) intepretation of Quantum Mechanics. Many physicists
+	It assumes the Everett (aka "Many Worlds") intepretation of Quantum Mechanics. Many physicists
 	subscribe to this interpretation but it's not universally accepted.
 </p>
 
 <p>
 	Basically I just call a <a href="https://qrng.anu.edu.au/"
-		>quantum random number generator API provided by ANU</a
+		>quantum random number generator API provided by Australian National University</a
 	>
 	and use that to select one of the outcomes in proportion to the number of universes you chose for that
 	outcome.
 </p>
 <p>
-	My understanding is that the quantum randomness will effectively be different in each universe and
-	so each universe will see a different outcome.
+	My understanding is that the quantum randomness will effectively be different in different
+	branches of the universe and so each branch will see a different outcome.
 </p>
 
 <p>
@@ -47,7 +47,7 @@
 	you can decide to do different things in different universes.
 </p>
 
-<h2>Which universe do you end up in?</h2>
+<h2>Which branch of the universe do you end up in?</h2>
 
 <p>
 	You will end up in all of them! According to the Everett interpretation, you are a quantum system
@@ -55,7 +55,7 @@
 	will split into many copies along with the rest of the universe.
 </p>
 <p>
-	Subjectively it will seem like one of the outcomes happened at random but this is just because
+	Subjectively, it will seem like one of the outcomes happened at random but this is just because
 	your memory and experience was split. This is related to "self-locating uncertainty".
 </p>
 
@@ -74,54 +74,65 @@
 
 <p>
 	For many years we suffered under the Copenhagen Interpretation. That's probably the one you've
-	heard of about the "wave function collapse". This concept is intellectually bankrupt (IMO).
-	Everett basically gets rid of the concept of wave function collapse.
+	heard of about the "wave function collapse". Everett gets rid of the concept of wave function
+	collapse (for which there is no evidence).
 </p>
 
 <h2>How is this different from a coin toss?</h2>
 
 <p>
-	When you toss a coin the outcome is actually pretty easy to deterimine if you know the exact
-	position and forces involved. Another way to say this is that the coin always lands in the same
-	position in all universes (that branched off the start of the coin flip).
+	When you toss a coin the outcome is pretty easy to deterimine if you know the exact position and
+	forces involved. So doing this does not cause the universe to branch: only one outcome ever
+	happens.
 </p>
 
 <p>
 	Quantum randmess is truly random: unpredictable in principle. But this "randomness" is really just
-	an instance of self-locating uncertainty. QM under Everett is deterministic.
+	an instance of self-locating uncertainty from your perspective. There is nothing non-deterministic
+	going on (unlike in the Copenhagen Interpretation).
 </p>
 
-<h2>How do I know that the other universes are real?</h2>
+<h2>How do I know that the other branches are real?</h2>
 
 <p>
-	They are predicted by our best theory of how the world works at a fundamental level (Quantum
-	Mechanics). You cannot accept the theory without accepting ALL its consequences.
+	They are predicted by Quantum Mechanics, our best theory of how the world works at a fundamental
+	level and the basis for most 20th century technology. You cannot accept a scientific theory
+	without accepting all its consequences!
+</p>
+
+<p>
+	It is important to note that Quanum Mechanics does not <em>assume</em> the existence of the other branches.
+	They "fall out" as a natural consequence of the math. Pretending that they don't really exist is just
+	a kind of existential chauvinism, in my opinion.
 </p>
 
 <h2>Can I send a message to myself in the other universe?</h2>
 <p>
 	No. The splitting process (called decoherence) is one-way. There is no way to interact with the
-	other branches.
+	other branches or for them to influence one another that we know of.
 </p>
 
 <h2>Why did you make this?</h2>
 <p>
-	A few reasons really. I struggle with indecisiveness and I've been using the original
+	A few reasons really: I struggle with indecisiveness and I've been using the original paid
 	<a href="https://apps.apple.com/us/app/universe-splitter/id329233299">Universe Splitter app</a>
 	for a while to help me make some decisions with less anxiety. I wanted a version that allows me to
-	change the number of univeses with each outcome. I also wanted to make something that anyone could
-	use for free.
+	change the probabilities of each outcome. I also wanted to make something that anyone could use for
+	free because the universe belongs to us all.
 </p>
 <p>
-	At a deeper level though, it's difficult to put into words how profoundly the many worlds idea has
-	affected my outlook on life. I will write more about this some day perhaps.
+	At a deeper level, it's difficult to put into words how profoundly the many worlds idea has
+	affected my outlook on life. Perhaps I will write more about this some day.
 </p>
 
 <h2>But what is really going on?</h2>
 
-<p>When we use words like "universe", "split" etc. these are all approximations.</p>
 <p>
-	It is kind of like there are multiple classical universes that split and from your perspective
+	When we use words like "universe", "split" etc. these are all approximations to the underlying
+	mathematic model.
+</p>
+<p>
+	It is "kind of like" there are multiple classical universes that split and from your perspective
 	(pre-split) you can think of the probabilities as the chance of you ending up in each branch.
 </p>
 <p>
@@ -129,7 +140,7 @@
 	function.
 </p>
 
-<h2>Media (will add more, PRs welcome)</h2>
+<h2>Media</h2>
 
 <p>
 	My introduction to this idea was David Deutsch's the Fabric of Reality and I highly recommend this
@@ -143,21 +154,53 @@
 	I plan to also make the server-side code available but for now it's just in a CloudFlare worker which
 	I edited on their site.
 </p>
+<p>
+	TODO: add more sources, <a
+		href="https://github.com/semistrict/freeuniversesplitter.com/edit/main/src/routes/about.svelte"
+		>pull requests</a
+	> welcome!
+</p>
 
 <h2>Do you store the outcomes of the split?</h2>
 <p>
-	Nothing you enter into this site is sent to the server at all so no, there is no way for me to
-	even know what you entered.
+	Nothing you enter into this site is sent to the server at all. So no, there is no way for me to
+	even know what you entered let alone store it.
 </p>
-<p>The only only server call this app does is to fetch a quantum random number.</p>
+<p>The only server call this app does is to fetch a quantum random number.</p>
 <p>This app does not use cookies or local storage.</p>
 
 <h2>Is this a quantum computer?</h2>
 <p>
 	No. Quantum random numbers are pretty easy to generate with the right hardware because the world
-	around us is quantum at a very low level so you just need to be able to measure these very small
-	fluctuations. Most computers do not have a way to do this, so we rely on an API provided by the
-	Australian National University. I might add more sources of randomness in future.
+	around us is quantum at a fundamental level so you just need to be able to measure these miniscule
+	fluctuations. Most computers do not have a way to do this, so we rely on an API attached to
+	equipment that does. <a href="https://github.com/semistrict/freeuniversesplitter.com/issues/1"
+		>I might add more sources of randomness in future.</a
+	>
+</p>
+
+<h2>Is there a native iPhone/Android app?</h2>
+<p>
+	Not right now. On iPhones, you can install this to your home screen by clicking the "Share" button in
+	Safari and selecting "Add to Home Screen",
+	<a href="https://www.youtube.com/watch?v=I4e1aoi0P-o">like this.</a>
+	There is probably something analogous in
+	Android/Chrome but I don't know how to do it there.
+</p>
+
+<p>
+	I do have a native Apple Watch app that is in private beta. See contact details below if you would
+	like to try it out.
+</p>
+
+<h2>How do I get in touch?</h2>
+<p>You can reach out on Telegram or Instagram. My username on both is: @semistrict</p>
+
+<p>
+	Also feel free to <a href="https://github.com/semistrict/freeuniversesplitter.com/issues/new"
+		>file issues on GitHub</a
+	>
+	for feature requests or bugs.
 </p>
 
 <div>
@@ -171,12 +214,12 @@
 
 <style>
 	@font-face {
-        font-family: 'LessPerfectDOSVGA';
-        src: url('/LessPerfectDOSVGA.ttf');
-    }
-    :global(*) {
-        font-family: 'LessPerfectDOSVGA', monospace;
-        color: #41FF00;
-        background-color: black;
-    }
+		font-family: 'LessPerfectDOSVGA';
+		src: url('/LessPerfectDOSVGA.ttf');
+	}
+	:global(*) {
+		font-family: 'LessPerfectDOSVGA', monospace;
+		color: #41ff00;
+		background-color: black;
+	}
 </style>
