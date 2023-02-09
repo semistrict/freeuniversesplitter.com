@@ -1,5 +1,4 @@
 <script lang="ts">
-    import MeditationTimer from "../components/MeditationTimer.svelte";
     import { each, onMount } from "svelte/internal";
     import {getRandom, type RandomResult} from "../random"
 
