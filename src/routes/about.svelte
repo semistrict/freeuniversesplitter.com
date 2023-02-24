@@ -30,11 +30,11 @@
 </p>
 
 <p>
-	Basically I just call a <a href="https://qrng.anu.edu.au/"
-		>quantum random number generator API provided by Australian National University</a
+	Basically I just retrieved a bunch of randomness from the <a href="https://qrng.anu.edu.au/"
+		>quantum random number generator provided by Australian National University</a
 	>
-	and use that to select one of the outcomes in proportion to the number of universes you chose for that
-	outcome.
+	and then use that to select one of the outcomes in proportion to the number of universes you chose
+	for that outcome.
 </p>
 <p>
 	My understanding is that the quantum randomness will effectively be different in different
@@ -181,11 +181,10 @@
 
 <h2>Is there a native iPhone/Android app?</h2>
 <p>
-	Not right now. On iPhones, you can install this to your home screen by clicking the "Share" button in
-	Safari and selecting "Add to Home Screen",
+	Not right now. On iPhones, you can install this to your home screen by clicking the "Share" button
+	in Safari and selecting "Add to Home Screen",
 	<a href="https://www.youtube.com/watch?v=I4e1aoi0P-o">like this.</a>
-	There is probably something analogous in
-	Android/Chrome but I don't know how to do it there.
+	There is probably something analogous in Android/Chrome but I don't know how to do it there.
 </p>
 
 <p>
