@@ -5,6 +5,8 @@
 	}
 </script>
 
+<a href="/">&lt; Back</a>
+
 <h1>Disclaimer</h1>
 
 <p>
@@ -210,3 +212,5 @@
 <ul>
 	<li><a href="https://laemeur.sdf.org/fonts/">Less Perfect DOS VGA font</a></li>
 </ul>
+
+<a href="/">&lt; Back</a>
