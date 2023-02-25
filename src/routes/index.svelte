@@ -189,7 +189,7 @@
 
 <div>
 <p>
-    Everything you enter here stays on your device. The only API call this website does it to fetch a quantum random number.
+    Everything you enter here stays on your device.
 </p>
 <p><a href="about">More info</a></p>
 
