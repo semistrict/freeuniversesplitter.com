@@ -10,6 +10,22 @@
     }
 </style>
 
+<svelte:head>
+    <meta name="theme-color" content="#41FF00">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="shortcut icon" type="image/png" href="/apple-touch-icon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="application-name" content="Universe Splitter">
+<meta name="mobile-web-app-capable" content="yes">
+
+<meta
+        name="viewport"
+        content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Univese Splitter">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+</svelte:head>
+
 <main>
     <slot/>
 </main>
