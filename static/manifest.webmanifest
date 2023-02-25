@@ -1,7 +1,7 @@
 {
     "short_name": "Universe Splitter",
     "name": "Free Universe Splitter",
-    "start_url": "index.html",
+    "start_url": "/",
     "display": "fullscreen",
     "theme_color": "#41FF00",
     "background_color": "#000",

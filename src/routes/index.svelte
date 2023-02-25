@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { each, onMount } from "svelte/internal";
+    import { onMount } from "svelte/internal";
     import {getRandom, type RandomResult} from "../random"
 
     let isInstagramBrowser = false
@@ -148,9 +148,6 @@
         color: #41FF00;
         background-color: black;
         border-color: #41FF00;
-    }
-    h2 {
-        font-style: italic;
     }
     .bottom {
         position: fixed;
