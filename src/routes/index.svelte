@@ -1,13 +1,9 @@
 <script lang="ts">
-    import { onMount } from "svelte/internal";
     import {getRandom, type RandomResult} from "../random"
 
-    let isInstagramBrowser = false
-
-    onMount(() => {
-        const ua = (window.navigator.userAgent || window.navigator.vendor).toLowerCase()
-        isInstagramBrowser = ua.indexOf("instagram") > 0 || ua.indexOf("facebook") > 0
-    })
+    let currentResult: SplitResult | undefined
+    let universeWasSplitDialog: HTMLDialogElement
+    let confirmDialog: HTMLDialogElement
 
     const DEFAULT_ACTION = "take a chance"
     let nextNumber = 0
@@ -15,6 +11,11 @@
     interface Split {
         action: string
         weight: number
+    }
+
+    interface SplitResult {
+        branches: number
+        selected: Split
     }
 
     let splits: Split[] = [
@@ -41,12 +42,6 @@
         }).format(val);
     }
 
-    function summary(splits: Split[]) {
-        return `Selected splits:\n` +
-            `- ${splits[0].action} (${probability(splits, splits[0].weight)} of universes)\n` +
-            `- ${splits[1].action} (${probability(splits, splits[1].weight)} of universes)`
-    }
-
     async function splitUniverse(splits: Split[]) {
         if (splits.length != 2) {
             throw "we only support two splits now";
@@ -59,16 +54,9 @@
             splits[1].action = `not ${splits[0].action}`
         }
 
-        let splitSummary = summary(splits)
-
-        if (!window.confirm(splitSummary + "\nContinue?")) {
-            window.alert("Universe split canceled.")
-            return;
-        }
-
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
-        let {randomNum, fake} = await getRandom()
+        let {randomNum} = await getRandom()
 
         let randomWeight = randomNum % totalWeight + 1
 
@@ -77,23 +65,11 @@
             return randomWeight <= 0
         })!;
 
-        let thisUniverse
-        if (selected.weight == 1) {
-            if (totalWeight == 2) {
-                thisUniverse = "the universe"
-            } else {
-                thisUniverse = `the one universe`
-            }
-        } else {
-            thisUniverse = `one of the ${selected.weight} universes`
+        currentResult = {
+            selected: selected,
+            branches: totalWeight
         }
-
-        let universeWasSplit = "Universe was split"
-        if (fake) {
-            universeWasSplit = "Universe was split (NOT REALLY)"
-        }
-
-        window.alert(`${universeWasSplit} into ${totalWeight} branch universes.\nYou are in ${thisUniverse} in which you should:\n==> ${selected.action} <==\n\n(In other universes, you experienced a different outcome)`)
+        universeWasSplitDialog.showModal()
     }
 
     let contentDiv: Element
@@ -155,17 +131,15 @@
         width: 100%;
         padding-bottom: 1em;
     }
+    dialog::backdrop {
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(4px);
+    }
 </style>
 
 <svelte:head>
     <title>Free Universe Splitter</title>
 </svelte:head>
-
-{#if isInstagramBrowser}
-
-<h1>This site doesn't work on Instagram or Facebook, please open in your system browser.</h1>
-
-{:else}
 
 <h1>FreeUniverseSplitter.com</h1>
 
@@ -174,6 +148,34 @@
     Everything you enter here stays on your device.
 </p>
 <p><a href="about">More info</a></p>
+
+<dialog bind:this={universeWasSplitDialog}>
+    <div>
+        Universe was split into {currentResult?.branches} branch universes.
+    </div>
+    <div>
+        You are in
+        {#if currentResult?.selected.weight == 1}
+        the universe
+        {:else}
+        one of the {currentResult?.selected.weight} universes
+        {/if}
+        in which you should:
+    </div>
+    <div style="font-size: 36pt; text-align: center">{currentResult?.selected.action}</div>
+    <div style="text-align: right; width: 100%"><button on:click={() => universeWasSplitDialog.close()}>OK</button></div>
+</dialog>
+
+<dialog bind:this={confirmDialog}>
+    <div>Selected splits:</div>
+    {#each splits as split}
+        <div>{split.action} (${probability(splits, splits[0].weight)} of universes)</div>
+    {/each}
+    <div style="text-align: right; width: 100%">
+        <button on:click={() => {confirmDialog.close(); splitUniverse(splits)}}>Proceed</button>
+        <button on:click={() => confirmDialog.close()}>Cancel</button>
+    </div>
+</dialog>
 
 <div class="content" bind:this={contentDiv}>
     <div>
@@ -190,17 +192,10 @@
 </div>
 
 <div style="text-align: center">
-    <button class="splitButton" on:click={() => splitUniverse(splits)}>Split Universe!</button>
+    <button class="splitButton" on:click={() => confirmDialog.showModal()}>Split Universe!</button>
 </div>
-</div>
-
-<div style="display: none;">
-    <button on:click={genLotteryNums}>Lottery Numbers</button>
-    {lotteryNumbers}
 </div>
 
 <div class="bottom">
     made with &lt;3 by @semistrict
 </div>
-
-{/if}
