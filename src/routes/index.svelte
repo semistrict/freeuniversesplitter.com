@@ -132,8 +132,9 @@
         padding-bottom: 1em;
     }
     dialog::backdrop {
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px) contrast(0.6);
+        -webkit-backdrop-filter: blur(4px) contrast(0.6);
     }
 </style>
 
@@ -162,15 +163,19 @@
         {/if}
         in which you should:
     </div>
-    <div style="font-size: 36pt; text-align: center">{currentResult?.selected.action}</div>
+    <div style="font-size: 36pt; text-align: center; text-decoration:underline; padding-top:20px; padding-bottom:20px">
+        {currentResult?.selected.action}
+    </div>
     <div style="text-align: right; width: 100%"><button on:click={() => universeWasSplitDialog.close()}>OK</button></div>
 </dialog>
 
 <dialog bind:this={confirmDialog}>
     <div>Selected splits:</div>
+    <ul style="padding-top:20px; padding-bottom:20px">
     {#each splits as split}
-        <div>{split.action} (${probability(splits, splits[0].weight)} of universes)</div>
+        <li><span style="text-decoration: underline">{split.action}</span> - {probability(splits, splits[0].weight)} of universes</li>
     {/each}
+    </ul>
     <div style="text-align: right; width: 100%">
         <button on:click={() => {confirmDialog.close(); splitUniverse(splits)}}>Proceed</button>
         <button on:click={() => confirmDialog.close()}>Cancel</button>
