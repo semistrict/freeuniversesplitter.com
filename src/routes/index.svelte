@@ -126,15 +126,6 @@
 </script>
 
 <style>
-    @font-face {
-        font-family: 'LessPerfectDOSVGA';
-        src: url('/LessPerfectDOSVGA.ttf');
-    }
-    :global(*) {
-        font-family: 'LessPerfectDOSVGA', monospace;
-        color: #41FF00;
-        background-color: black;
-    }
     h1 {
         color: black;
         background-color: #41FF00;

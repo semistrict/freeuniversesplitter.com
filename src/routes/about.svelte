@@ -210,15 +210,3 @@
 <ul>
 	<li><a href="https://laemeur.sdf.org/fonts/">Less Perfect DOS VGA font</a></li>
 </ul>
-
-<style>
-	@font-face {
-		font-family: 'LessPerfectDOSVGA';
-		src: url('/LessPerfectDOSVGA.ttf');
-	}
-	:global(*) {
-		font-family: 'LessPerfectDOSVGA', monospace;
-		color: #41ff00;
-		background-color: black;
-	}
-</style>
