@@ -119,7 +119,7 @@
         color: #41FF00;
         background-color: black;
     }
-    .splitButton {
+    button {
         font-size: 16pt;
         color: #41FF00;
         background-color: black;
