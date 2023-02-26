@@ -8,11 +8,13 @@ const RANDOMNESS = `ra8Ql9IJ_QVXaqnbR23s1sFpSOdYgiNNslVotoJuJvhBOSbnrDkKQj129U55
 
 let nextNumber = 1
 
-export async function getRandom(): Promise<RandomResult> {
-    return {
-        randomNum: cyrb53(RANDOMNESS, Math.random() * 2_147_483_647), 
-        fake: false
-    }
+export function getRandom(): number {
+    return cyrb53(RANDOMNESS, Math.random() * 2_147_483_647)
+}
+
+export function getRandomRange(minInclusive: number, maxExclusive: number): number {
+    let r = getRandom()
+    return minInclusive + (r % (maxExclusive - minInclusive))
 }
 
 // adapted from: https://github.com/bryc/code/blob/master/jshash/experimental/cyrb53.js

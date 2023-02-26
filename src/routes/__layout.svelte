@@ -8,6 +8,12 @@
         color: #41FF00;
         background-color: black;
     }
+
+    :global(dialog::backdrop) {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px) contrast(0.6);
+        -webkit-backdrop-filter: blur(4px) contrast(0.6);
+    }
 </style>
 
 <svelte:head>

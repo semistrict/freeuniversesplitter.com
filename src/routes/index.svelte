@@ -42,7 +42,7 @@
         }).format(val);
     }
 
-    async function splitUniverse(splits: Split[]) {
+    function splitUniverse(splits: Split[]) {
         if (splits.length != 2) {
             throw "we only support two splits now";
         }
@@ -56,7 +56,7 @@
 
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
-        let {randomNum} = await getRandom()
+        let randomNum = getRandom()
 
         let randomWeight = randomNum % totalWeight + 1
 
@@ -84,20 +84,6 @@
         } else {
             return DEFAULT_ACTION
         }
-    }
-
-    let lotteryNumbers = ''
-
-    async function genLotteryNums() {
-        let promises: Array<Promise<RandomResult>> = []
-        lotteryNumbers = ''
-        for (let i = 0; i < 6; i++) {
-            promises.push(getRandom())
-        }
-        for (let i = 0; i < 5; i++) {
-            lotteryNumbers += " " + ((await promises[i]).randomNum % 70 + 1)
-        }
-        lotteryNumbers += " " + ((await promises[5]).randomNum % 25 + 1)
     }
 </script>
 
@@ -130,11 +116,6 @@
         bottom: 0;
         width: 100%;
         padding-bottom: 1em;
-    }
-    dialog::backdrop {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(4px) contrast(0.6);
-        -webkit-backdrop-filter: blur(4px) contrast(0.6);
     }
 </style>
 
