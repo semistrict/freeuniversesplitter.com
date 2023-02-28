@@ -41,13 +41,24 @@ self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const url = new URL(event.request.url);
-  if (!ASSETS.includes(url.pathname)) {
-    return;
-  }
- 
+
   async function respond(): Promise<Response> {
     const cache = await caches.open(CACHE);
-    return (await cache.match(event.request))!;
+    if (ASSETS.includes(url.pathname)) {
+      return (await cache.match(event.request))!;
+    }
+
+    try {
+      const response = await fetch(event.request);
+ 
+      if (response.status === 200) {
+        cache.put(event.request, response.clone());
+      }
+ 
+      return response;
+    } catch {
+      return (await cache.match(event.request))!;
+    }
   }
  
   event.respondWith(respond());
