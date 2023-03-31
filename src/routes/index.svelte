@@ -122,7 +122,7 @@
 <svelte:head>
     <title>Free Universe Splitter</title>
     <meta property="og:description" content="Quantum Decision Maker: Let the Multiverse Decide!" />
-    <meta property="og:image" content="https://freeuniversesplitter.com/apple-touch-icon.png" />
+    <meta property="og:image" content="https://freeuniversesplitter.com/icon_og.png" />
 </svelte:head>
 
 <h1>FreeUniverseSplitter.com</h1>
