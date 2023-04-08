@@ -156,7 +156,7 @@
     <div>Selected splits:</div>
     <ul style="padding-top:20px; padding-bottom:20px">
     {#each splits as split}
-        <li><span style="text-decoration: underline">{split.action}</span> - {probability(splits, splits[0].weight)} of universes</li>
+        <li><span style="text-decoration: underline">{split.action}</span> - {probability(splits, split.weight)} of universes</li>
     {/each}
     </ul>
     <div style="text-align: right; width: 100%">
