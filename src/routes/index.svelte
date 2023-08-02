@@ -131,6 +131,12 @@
 <p>
     Everything you enter here stays on your device.
 </p>
+<h2>Instructions</h2>
+<ol>
+    <li>enter two alternatives in the text boxes below</li>
+    <li>(optional) adjust the weights of the alternatives as desired</li>
+    <li>press "Split Universe"</li>
+</ol>
 <p><a href="about">More info</a></p>
 
 <dialog bind:this={universeWasSplitDialog}>
