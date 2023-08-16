@@ -1,8 +1,8 @@
 import { Router, IRequest } from 'itty-router';
+import { ANUGenerator } from './qrng';
 
 export interface Env {
 	QUANTUM_NUMBERS_API_KEY: string;
-	QUANTUM_NUMBERS_URL: string;
 }
 
 const allowedOrigin = '*';
@@ -41,15 +41,15 @@ Very doubtful.
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+    const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
     const router = Router()
     router.options("*", handleOptions);
-    router.post("*", (request) => handleRequest(env, request));
-    router.get("*", (request) => handleGetRequest(env, request));
+    router.get("*", (request) => handleGetRequest(qrng, request));
 		return router.handle(request);
   },
 };
 
-async function handleGetRequest(env: Env, request: Request): Promise<Response> {
+async function handleGetRequest(qrng: ANUGenerator, request: Request): Promise<Response> {
   const {searchParams} = new URL(request.url);
   let outcomes = searchParams.getAll('outcome');
   const max = Number(searchParams.get('max'));
@@ -61,49 +61,17 @@ async function handleGetRequest(env: Env, request: Request): Promise<Response> {
   if (outcomes.length === 0) {
     outcomes = defaultOutcomes;
   }
-  const qrngResult = await fetch(env.QUANTUM_NUMBERS_URL + "?length=1&type=uint16", {
-    headers: {
-      'x-api-key': env.QUANTUM_NUMBERS_API_KEY
-    }
+  const randNum = await qrng.generate();
+  const selectedOutcome = outcomes[randNum % outcomes.length];
+  const p = 1.0/outcomes.length;
+  const responseHeaders = new Headers();
+  responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+  responseHeaders.set('Content-Type', 'text/plain')
+  return new Response(`${selectedOutcome}`, {
+      headers: responseHeaders,
+      status: 200,
+      statusText: selectedOutcome
   });
-  if (qrngResult.status != 200) {
-    const responseHeaders = new Headers(qrngResult.headers);
-    responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
-    return new Response(qrngResult.body, {
-        headers: responseHeaders,
-        status: qrngResult.status,
-        statusText: qrngResult.statusText
-    });
-  } else {
-		//TODO: Properly type json
-    const json: any = await qrngResult.json();
-    const randNum = json.data[0];
-    const selectedOutcome = outcomes[randNum % outcomes.length];
-    const p = 1.0/outcomes.length;
-    const responseHeaders = new Headers();
-    responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
-    responseHeaders.set('Content-Type', 'text/plain')
-    return new Response(`${selectedOutcome}`, {
-        headers: responseHeaders,
-        status: 200,
-        statusText: selectedOutcome
-    });
-  }
-}
-
-async function handleRequest(env: Env, request: Request): Promise<Response> {
-  const qrngResult = await fetch(env.QUANTUM_NUMBERS_URL + "?length=1&type=uint16", {
-    headers: {
-      'x-api-key': env.QUANTUM_NUMBERS_API_KEY
-    }
-  });
-  const responseHeaders = new Headers(qrngResult.headers)
-    responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin)
-    return new Response(qrngResult.body, {
-        headers: responseHeaders,
-        status: qrngResult.status,
-        statusText: qrngResult.statusText
-    })
 }
 
 function handleOptions(request: IRequest): Response {
