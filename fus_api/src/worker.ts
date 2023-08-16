@@ -1,34 +1,11 @@
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
+import { Router, IRequest } from 'itty-router';
 
 export interface Env {
 	QUANTUM_NUMBERS_API_KEY: string;
 	QUANTUM_NUMBERS_URL: string;
-	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
-	// MY_KV_NAMESPACE: KVNamespace;
-	//
-	// Example binding to Durable Object. Learn more at https://developers.cloudflare.com/workers/runtime-apis/durable-objects/
-	// MY_DURABLE_OBJECT: DurableObjectNamespace;
-	//
-	// Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
-	// MY_BUCKET: R2Bucket;
-	//
-	// Example binding to a Service. Learn more at https://developers.cloudflare.com/workers/runtime-apis/service-bindings/
-	// MY_SERVICE: Fetcher;
-	//
-	// Example binding to a Queue. Learn more at https://developers.cloudflare.com/queues/javascript-apis/
-	// MY_QUEUE: Queue;
 }
 
-
-const allowedOrigin = '*'
+const allowedOrigin = '*';
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': allowedOrigin,
@@ -64,17 +41,12 @@ Very doubtful.
 
 export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		if (request.method === 'OPTIONS') {
-				return handleOptions(request);
-		} else if (request.method === 'POST') {
-				return handleRequest(env, request);
-		} else if (request.method === 'GET') {
-			return handleGetRequest(env, request);
-		}
-		return new Response(
-			'not found', {status: 404}
-		)
-		},
+    const router = Router()
+    router.options("*", handleOptions);
+    router.post("*", (request) => handleRequest(env, request));
+    router.get("*", (request) => handleGetRequest(env, request));
+		return router.handle(request);
+  },
 };
 
 async function handleGetRequest(env: Env, request: Request): Promise<Response> {
@@ -134,7 +106,7 @@ async function handleRequest(env: Env, request: Request): Promise<Response> {
     })
 }
 
-function handleOptions(request: Request): Response {
+function handleOptions(request: IRequest): Response {
     const respHeaders = {
       ...corsHeaders,
       // Allow all future content Request headers to go back to browser
