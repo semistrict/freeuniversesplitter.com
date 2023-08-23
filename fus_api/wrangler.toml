@@ -1,6 +1,9 @@
 name = "fus_api"
 main = "src/worker.ts"
 compatibility_date = "2023-08-07"
+routes = [
+	{ pattern = "api.freeuniversesplitter.com", custom_domain = true }
+]
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
@@ -13,6 +16,8 @@ compatibility_date = "2023-08-07"
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+kv_namespaces = [ { binding = "batchQRandmoness", id = "ed2ae70e50734bd7ac66923357758671", preview_id = "2ab1b4269bac4e7381df3724dd4c01d6" } ]
+
 
 # Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
 # Docs: https://developers.cloudflare.com/r2/api/workers/workers-api-usage/
@@ -49,3 +54,9 @@ compatibility_date = "2023-08-07"
 # [[migrations]]
 # tag = "v1"
 # new_classes = ["MyDurableObject"]
+
+# Cron Triggers
+# Docs:
+# Sets Cron Triggers based on setting array, this specifies on 0 minute of every hour.
+[triggers]
+crons = ["0 * * * *"]
