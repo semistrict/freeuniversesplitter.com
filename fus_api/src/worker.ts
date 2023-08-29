@@ -1,9 +1,7 @@
-import { Router, IRequest } from 'itty-router';
+import { Router, IRequest, json } from 'itty-router';
 import { ANUGenerator } from './qrng';
-
-export interface Env {
-	QUANTUM_NUMBERS_API_KEY: string;
-}
+import { SharedSplit } from './shared_split';
+import { Env } from "./env";
 
 const allowedOrigin = '*';
 
@@ -40,14 +38,31 @@ Very doubtful.
 `.split("\n").map(s => s.trim()).filter(s => s.length > 0)
 
 export default {
+
+  SharedSplit,
+
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
     const router = Router()
     router.options("*", handleOptions);
     router.get("*", (request) => handleGetRequest(qrng, request));
+    router.post("/new-share", (request) => handleNewShare(env.SHARED_SPLIT, request));
+    router.get("/s/:id", ({ id }) => )
 		return router.handle(request);
   },
 };
+
+async function handleGetSplit(id: string, sharedSplitDO: DurableObjectNamespace): Promise<Response> {
+  const idFromStr = sharedSplitDO.idFromString(id);
+  const stub = sharedSplitDO.get(idFromStr);
+  return await stub.fetch(new Request("/share"));
+}
+
+async function handleNewShare(sharedSplitDO: DurableObjectNamespace, request: IRequest): Promise<Response> {
+  const newID = sharedSplitDO.newUniqueId().toString();
+  let url = request.url.replace(request.route, "/s") + "/" + newID
+  return json({url})
+}
 
 async function handleGetRequest(qrng: ANUGenerator, request: Request): Promise<Response> {
   const {searchParams} = new URL(request.url);
