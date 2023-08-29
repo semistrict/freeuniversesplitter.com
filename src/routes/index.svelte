@@ -183,7 +183,7 @@
     {/each}
 </div>
 
-<div style="text-align: center">
+<div style="text-align: center; padding-top: 10px">
     <button class="splitButton" on:click={() => confirmDialog.showModal()}>Split Universe!</button>
 </div>
 </div>
