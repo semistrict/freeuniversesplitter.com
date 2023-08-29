@@ -128,9 +128,6 @@
 <h1>FreeUniverseSplitter.com</h1>
 
 <div>
-<p>
-    Everything you enter here stays on your device.
-</p>
 <h2>Instructions</h2>
 <ol>
     <li>enter two alternatives in the text boxes below</li>
@@ -152,9 +149,10 @@
         {/if}
         in which you should:
     </div>
-    <div style="font-size: 36pt; text-align: center; text-decoration:underline; padding-top:20px; padding-bottom:20px">
+    <div style="font-size: 36pt; text-align: center; padding-top:20px; padding-bottom:20px">
         {currentResult?.selected.action}
     </div>
+    <div style="text-align: center; width: 100%; text-decoration: underline">FreeUniverseSplitter.com</div>
     <div style="text-align: right; width: 100%"><button on:click={() => universeWasSplitDialog.close()}>OK</button></div>
 </dialog>
 
@@ -174,15 +172,15 @@
 <div class="content" bind:this={contentDiv}>
     <div>
     </div>
-    <div>N</div>
+    <div>Weight</div>
     {#each splits as split, i}
-        <input type=text autocapitalize=none enterkeyhint=next placeholder={placeholderText(splits, i)} bind:value={split.action} />
-        <input type=number min=1 bind:value={split.weight} />
+        <input type=text autocapitalize=none enterkeyhint=next
+            placeholder={placeholderText(splits, i)}
+            bind:value={split.action}
+            on:click={(e) => e.target?.select() }
+        />
+        <input type=number min=1 bind:value={split.weight} on:click={(e) => e.target?.select() } />
     {/each}
-</div>
-
-<div>
-    <p>N = number of universes in this split</p>
 </div>
 
 <div style="text-align: center">
