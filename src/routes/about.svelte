@@ -17,9 +17,7 @@
 </p>
 
 <p>
-	Please use this responsibly: what you enter into this site is not sent to the server at all so <em
-		>I have no way of knowing what you are using this for.</em
-	>
+	Remember: the outcomes this app selects are as random as random gets! Use with caution.
 </p>
 
 <h1>FAQ</h1>
@@ -32,7 +30,7 @@
 </p>
 
 <p>
-	Basically I just retrieved a bunch of randomness from the <a href="https://qrng.anu.edu.au/"
+	Basically I just periodically retrieve a chunk of randomness from the <a href="https://qrng.anu.edu.au/"
 		>quantum random number generator provided by Australian National University</a
 	>
 	and then use that to select one of the outcomes in proportion to the number of universes you chose
@@ -97,13 +95,13 @@
 <h2>How do I know that the other branches are real?</h2>
 
 <p>
-	They are predicted by Quantum Mechanics, our best theory of how the world works at a fundamental
-	level and the basis for most 20th century technology. You cannot accept a scientific theory
+	They are predicted by our best theory of how the world works at a fundamental
+	level, the basis for most 20th century technology. You cannot accept a scientific theory
 	without accepting all its consequences!
 </p>
 
 <p>
-	It is important to note that Quanum Mechanics does not <em>assume</em> the existence of the other branches.
+	It is important to note that the Everett interpretation does not start off <em>assuming</em> the existence of the other branches.
 	They "fall out" as a natural consequence of the math. Pretending that they don't really exist is just
 	a kind of existential chauvinism, in my opinion.
 </p>
@@ -120,7 +118,7 @@
 	<a href="https://apps.apple.com/us/app/universe-splitter/id329233299">Universe Splitter app</a>
 	for a while to help me make some decisions with less anxiety. I wanted a version that allows me to
 	change the probabilities of each outcome. I also wanted to make something that anyone could use for
-	free because the universe belongs to us all.
+	free because the multiverse belongs to us all.
 </p>
 <p>
 	At a deeper level, it's difficult to put into words how profoundly the many worlds idea has
@@ -138,7 +136,7 @@
 	(pre-split) you can think of the probabilities as the chance of you ending up in each branch.
 </p>
 <p>
-	But, really,<br />there are no separate universes,<br />there is no "you",<br />there's just wave
+	But, really<br />there are no separate universes<br />there is no "you"<br />there's just wave
 	function.
 </p>
 
@@ -152,15 +150,7 @@
 	<a href="https://www.youtube.com/watch?v=qGLzM0i7a_A">Sean Carrol on Closer to Truth</a>
 </p>
 <p>
-	<a href="https://github.com/semistrict/freeuniversesplitter.com">UI is here on GitHub</a>
-	I plan to also make the server-side code available but for now it's just in a CloudFlare worker which
-	I edited on their site.
-</p>
-<p>
-	TODO: add more sources, <a
-		href="https://github.com/semistrict/freeuniversesplitter.com/edit/main/src/routes/about.svelte"
-		>pull requests</a
-	> welcome!
+	<a href="https://github.com/semistrict/freeuniversesplitter.com">This website is open source on GitHub</a>
 </p>
 
 <h2>Do you store the outcomes of the split?</h2>
@@ -168,17 +158,15 @@
 	Nothing you enter into this site is sent to the server at all. So no, there is no way for me to
 	even know what you entered let alone store it.
 </p>
-<p>The only server call this app does is to fetch a quantum random number.</p>
+
 <p>This app does not use cookies or local storage.</p>
 
 <h2>Is this a quantum computer?</h2>
 <p>
 	No. Quantum random numbers are pretty easy to generate with the right hardware because the world
 	around us is quantum at a fundamental level so you just need to be able to measure these miniscule
-	fluctuations. Most computers do not have a way to do this, so we rely on an API attached to
-	equipment that does. <a href="https://github.com/semistrict/freeuniversesplitter.com/issues/1"
-		>I might add more sources of randomness in future.</a
-	>
+	fluctuations. Most computers do not have hardware to do this, so we rely on an randomness provided
+	by ANU here: https://qrng.anu.edu.au/
 </p>
 
 <h2>Is there a native iPhone/Android app?</h2>
