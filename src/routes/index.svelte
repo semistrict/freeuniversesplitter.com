@@ -20,11 +20,11 @@
 
     let splits: Split[] = [
         {
-            action: 'Take a chance',
+            action: 'take a chance',
             weight: 1,
         },
         {
-            action: 'Play it safe',
+            action: 'not take a chance',
             weight: 1,
         }
     ];
@@ -128,12 +128,8 @@
 <h1>FreeUniverseSplitter.com</h1>
 
 <div>
-<h2>Instructions</h2>
-<ol>
-    <li>enter two alternatives in the text boxes below</li>
-    <li>(optional) adjust the weights of the alternatives as desired</li>
-    <li>press "Split Universe"</li>
-</ol>
+<p>Enter two alternatives below. Universe will be split.</p>
+<p>Which universe you find yourself in is random, depending on the weights you enter.</p>
 <p><a href="about">More info</a></p>
 
 <dialog bind:this={universeWasSplitDialog}>
