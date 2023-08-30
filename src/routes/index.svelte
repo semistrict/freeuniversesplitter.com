@@ -29,9 +29,13 @@
         }
     ];
 
-    function probability(splits: Split[], weight: number) {
+    function pValue(splits: Split[], weight: number) {
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
-        return percentage(weight / totalWeight)
+        return weight / totalWeight;
+    }
+
+    function probability(splits: Split[], weight: number) {
+        return percentage(pValue(splits, weight));
     }
 
     function percentage(val: number): string {
@@ -145,8 +149,13 @@
         {/if}
         in which you should:
     </div>
-    <div style="font-size: 36pt; text-align: center; padding-top:20px; padding-bottom:20px">
+    <div style="font-size: 36pt; text-align: center; padding-top:20px;">
         {currentResult?.selected.action}
+    </div>
+    <div style="text-align: center; padding-bottom:20px; font-style:italic">
+        {#if currentResult}
+        p={pValue(splits, currentResult.selected.weight)}
+        {/if}
     </div>
     <div style="text-align: center; width: 100%; text-decoration: underline">FreeUniverseSplitter.com</div>
     <div style="text-align: right; width: 100%"><button on:click={() => universeWasSplitDialog.close()}>OK</button></div>
@@ -154,11 +163,11 @@
 
 <dialog bind:this={confirmDialog}>
     <div>Selected splits:</div>
-    <ul style="padding-top:20px; padding-bottom:20px">
+    <div style="padding-top:20px; padding-bottom:20px">
     {#each splits as split}
-        <li><span style="text-decoration: underline">{split.action}</span> - {probability(splits, split.weight)} of universes</li>
+        <div><span style="text-decoration: underline">{split.action}</span> - {probability(splits, split.weight)} of universes</div>
     {/each}
-    </ul>
+    </div>
     <div style="text-align: right; width: 100%">
         <button on:click={() => {confirmDialog.close(); splitUniverse(splits)}}>Split Universe!</button>
         <button on:click={() => confirmDialog.close()}>Cancel</button>
