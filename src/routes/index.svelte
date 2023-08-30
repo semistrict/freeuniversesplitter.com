@@ -164,7 +164,7 @@
     {/each}
     </ul>
     <div style="text-align: right; width: 100%">
-        <button on:click={() => {confirmDialog.close(); splitUniverse(splits)}}>Proceed</button>
+        <button on:click={() => {confirmDialog.close(); splitUniverse(splits)}}>Split Universe!</button>
         <button on:click={() => confirmDialog.close()}>Cancel</button>
     </div>
 </dialog>
@@ -184,7 +184,7 @@
 </div>
 
 <div style="text-align: center; padding-top: 10px">
-    <button class="splitButton" on:click={() => confirmDialog.showModal()}>Split Universe!</button>
+    <button class="splitButton" on:click={() => confirmDialog.showModal()}>Next</button>
 </div>
 </div>
 
