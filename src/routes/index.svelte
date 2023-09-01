@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {getRandom, type RandomResult} from "../random"
+    import {getRand} from "../random"
 
     let currentResult: SplitResult | undefined
     let universeWasSplitDialog: HTMLDialogElement
@@ -46,7 +46,7 @@
         }).format(val);
     }
 
-    function splitUniverse(splits: Split[]) {
+    async function splitUniverse(splits: Split[]) {
         if (splits.length != 2) {
             throw "we only support two splits now";
         }
@@ -60,7 +60,8 @@
 
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
-        let randomNum = getRandom()
+        let randomNum = await getRand()
+
 
         let randomWeight = randomNum % totalWeight + 1
 

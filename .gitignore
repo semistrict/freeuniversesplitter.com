@@ -9,3 +9,6 @@ node_modules
 /server/.idea
 *.xcuserdata
 .dev.vars
+scratch.txt
+scratch_build.txt
+.wrangler

@@ -2,8 +2,8 @@ export class ANUGenerator {
     constructor(private apiKey: string) {
     }
 
-    async generate(): Promise<number> {
-        const qrngResult = await fetch("https://api.quantumnumbers.anu.edu.au/?length=1&type=uint16", {
+    async generate(): Promise<string> {
+        const qrngResult = await fetch("https://api.quantumnumbers.anu.edu.au/?length=1024&type=hex16&size=10", {
             headers: {
                 'x-api-key': this.apiKey
             }
@@ -12,6 +12,12 @@ export class ANUGenerator {
             throw new Error(`QRNG returned ${qrngResult.status}: ${qrngResult.statusText}`);
         }
         const json: any = await qrngResult.json();
-        return json.data[0];
+				let str = ''
+				json.data.forEach((element: string) => {
+					str += element
+				});
+
+				return str
+
     }
 }

@@ -47,11 +47,13 @@
 		let CountValue3: number;
 		let LineValue: number;
 
-		let DivideStalks = function (YarrowStalks: number) {
+		let DivideStalks = async function (YarrowStalks: number) {
 			// Divide 49 stalks into eastpile westpile
 			// Subtract one from westpile put in handpile
 
-			WestPile = Math.floor(getRandomRange(0, YarrowStalks+1));
+      let randomRange = await getRandomRange(0, YarrowStalks+1)
+
+			WestPile = Math.floor(randomRange);
 			EastPile = YarrowStalks - WestPile;
 			WestPile = WestPile - 1;
 			HandPile = 1;
@@ -148,7 +150,7 @@
         }
 	}
 
-	function consult() {
+	async function consult() {
         var newLines: Array<Line> = []
         for (let i = 0; i < 6; i++) {
             newLines.push(yarrow())
@@ -156,7 +158,7 @@
         lines = newLines
 	}
 
-    function runTrials(n: number) {
+    async function runTrials(n: number) {
         let counts: Array<number> = []
         for (let i = 0; i < 64; i++) {
             counts.push(0)
