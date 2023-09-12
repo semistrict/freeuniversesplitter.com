@@ -16,9 +16,7 @@
 	feel free to reach out to me on Instagram or Telegram (username @semistrict).
 </p>
 
-<p>
-	Remember: the outcomes this app selects are as random as random gets! Use with caution.
-</p>
+<p>Remember: the outcomes this app selects are as random as random gets! Use with caution.</p>
 
 <h1>FAQ</h1>
 
@@ -30,7 +28,8 @@
 </p>
 
 <p>
-	Basically I just periodically retrieve a chunk of randomness from the <a href="https://qrng.anu.edu.au/"
+	Basically I just periodically retrieve a chunk of randomness from the <a
+		href="https://qrng.anu.edu.au/"
 		>quantum random number generator provided by Australian National University</a
 	>
 	and then use that to select one of the outcomes in proportion to the number of universes you chose
@@ -95,15 +94,15 @@
 <h2>How do I know that the other branches are real?</h2>
 
 <p>
-	They are predicted by our best theory of how the world works at a fundamental
-	level, the basis for most 20th century technology. You cannot accept a scientific theory
-	without accepting all its consequences!
+	They are predicted by our best theory of how the world works at a fundamental level, the basis for
+	most 20th century technology. You cannot accept a scientific theory without accepting all its
+	consequences!
 </p>
 
 <p>
-	It is important to note that the Everett interpretation does not start off <em>assuming</em> the existence of the other branches.
-	They "fall out" as a natural consequence of the math. Pretending that they don't really exist is just
-	a kind of existential chauvinism, in my opinion.
+	It is important to note that the Everett interpretation does not start off <em>assuming</em> the existence
+	of the other branches. They "fall out" as a natural consequence of the math. Pretending that they don't
+	really exist is just a kind of existential chauvinism, in my opinion.
 </p>
 
 <h2>Can I send a message to myself in the other universe?</h2>
@@ -122,7 +121,8 @@
 </p>
 <p>
 	At a deeper level, it's difficult to put into words how profoundly the many worlds idea has
-	affected my outlook on life. Perhaps I will write more about this some day.
+	affected my outlook on life. <a href="eclipse">This is one example</a>. I hope to write more about
+	this in the future.
 </p>
 
 <h2>But what is really going on?</h2>
@@ -150,7 +150,9 @@
 	<a href="https://www.youtube.com/watch?v=qGLzM0i7a_A">Sean Carrol on Closer to Truth</a>
 </p>
 <p>
-	<a href="https://github.com/semistrict/freeuniversesplitter.com">This website is open source on GitHub</a>
+	<a href="https://github.com/semistrict/freeuniversesplitter.com"
+		>This website is open source on GitHub</a
+	>
 </p>
 
 <h2>Do you store the outcomes of the split?</h2>
