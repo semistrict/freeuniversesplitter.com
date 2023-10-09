@@ -153,11 +153,13 @@
     <div style="font-size: 36pt; text-align: center; padding-top:20px;">
         {currentResult?.selected.action}
     </div>
+    <!--
     <div style="text-align: center; padding-bottom:20px; font-style:italic">
         {#if currentResult}
         p={pValue(splits, currentResult.selected.weight)}
         {/if}
     </div>
+    -->
     <div style="text-align: center; width: 100%; text-decoration: underline">FreeUniverseSplitter.com</div>
     <div style="text-align: right; width: 100%"><button on:click={() => universeWasSplitDialog.close()}>OK</button></div>
 </dialog>
