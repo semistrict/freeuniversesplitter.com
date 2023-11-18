@@ -135,7 +135,6 @@
 <div>
 <p>Enter two alternatives below. Universe will be split.</p>
 <p>Which universe you find yourself in is random, depending on the weights you enter.</p>
-<p><a href="about">More info</a></p>
 
 <dialog bind:this={universeWasSplitDialog}>
     <div>
@@ -194,8 +193,4 @@
 <div style="text-align: center; padding-top: 10px">
     <button class="splitButton" on:click={() => confirmDialog.showModal()}>Next</button>
 </div>
-</div>
-
-<div class="bottom">
-    made with &lt;3 by @semistrict
 </div>
