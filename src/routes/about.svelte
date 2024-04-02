@@ -11,9 +11,6 @@
 
 <p>
 	<b>I am not a physicist!</b>
-
-	This is all my best guess at what's going on. I do love thinking and talking about this stuff,
-	feel free to reach out to me on Instagram or Telegram (username @semistrict).
 </p>
 
 <p>Remember: the outcomes this app selects are as random as random gets! Use with caution.</p>
@@ -185,10 +182,9 @@
 </p>
 
 <h2>How do I get in touch?</h2>
-<p>You can reach out on Telegram or Instagram. My username on both is: @semistrict</p>
 
 <p>
-	Also feel free to <a href="https://github.com/semistrict/freeuniversesplitter.com/issues/new"
+	Feel free to <a href="https://github.com/semistrict/freeuniversesplitter.com/issues/new"
 		>file issues on GitHub</a
 	>
 	for feature requests or bugs.
