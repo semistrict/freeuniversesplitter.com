@@ -271,7 +271,7 @@
 <div class="intro-section">
 <p>Enter two alternatives below. Universe will be split.</p>
 <p>Which universe you find yourself in is random, depending on the weights you enter.</p>
-<p><a href="about">More info</a></p>
+<p><a href="about">More info</a> | <a href="magic8ball">Magic 8 Ball</a> | <a href="ichingv2">I Ching</a></p>
 </div>
 
 <dialog bind:this={universeWasSplitDialog}>

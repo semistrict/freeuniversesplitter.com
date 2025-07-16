@@ -1,0 +1,390 @@
+{
+  "kingWenSequence": [
+    63,
+    0,
+    17,
+    34,
+    23,
+    58,
+    2,
+    16,
+    55,
+    59,
+    7,
+    56,
+    61,
+    47,
+    4,
+    8,
+    25,
+    38,
+    3,
+    48,
+    41,
+    37,
+    32,
+    1,
+    57,
+    39,
+    33,
+    30,
+    18,
+    45,
+    28,
+    14,
+    60,
+    15,
+    40,
+    5,
+    53,
+    43,
+    20,
+    10,
+    35,
+    49,
+    31,
+    62,
+    24,
+    6,
+    26,
+    22,
+    29,
+    46,
+    9,
+    36,
+    52,
+    11,
+    13,
+    44,
+    54,
+    27,
+    50,
+    19,
+    51,
+    12,
+    21,
+    42
+  ],
+  "hexagrams": {
+    "1": {
+      "name": "The Creative",
+      "reading": "Great progress and success through creative force",
+      "symbol": "䷀"
+    },
+    "2": {
+      "name": "The Receptive",
+      "reading": "Receptivity and yielding create favorable conditions",
+      "symbol": "䷁"
+    },
+    "3": {
+      "name": "Difficulty at the Beginning",
+      "reading": "Initial obstacles lead to eventual breakthrough",
+      "symbol": "䷂"
+    },
+    "4": {
+      "name": "Youthful Folly",
+      "reading": "Learning through experience brings wisdom",
+      "symbol": "䷃"
+    },
+    "5": {
+      "name": "Waiting",
+      "reading": "Patience and perseverance will be rewarded",
+      "symbol": "䷄"
+    },
+    "6": {
+      "name": "Conflict",
+      "reading": "Avoid confrontation; seek peaceful resolution",
+      "symbol": "䷅"
+    },
+    "7": {
+      "name": "The Army",
+      "reading": "Organized effort leads to victory",
+      "symbol": "䷆"
+    },
+    "8": {
+      "name": "Holding Together",
+      "reading": "Unity and cooperation bring strength",
+      "symbol": "䷇"
+    },
+    "9": {
+      "name": "The Taming Power of the Small",
+      "reading": "Gentle influence achieves great results",
+      "symbol": "䷈"
+    },
+    "10": {
+      "name": "Treading",
+      "reading": "Careful conduct in dangerous situations",
+      "symbol": "䷉"
+    },
+    "11": {
+      "name": "Peace",
+      "reading": "Harmony between heaven and earth brings peace",
+      "symbol": "䷊"
+    },
+    "12": {
+      "name": "Standstill",
+      "reading": "Temporary stagnation requires patience",
+      "symbol": "䷋"
+    },
+    "13": {
+      "name": "Fellowship",
+      "reading": "Unity with others creates strength",
+      "symbol": "䷌"
+    },
+    "14": {
+      "name": "Possession in Great Measure",
+      "reading": "Great possession brings great responsibility",
+      "symbol": "䷍"
+    },
+    "15": {
+      "name": "Modesty",
+      "reading": "Humble approach ensures lasting success",
+      "symbol": "䷎"
+    },
+    "16": {
+      "name": "Enthusiasm",
+      "reading": "Inspired action moves mountains",
+      "symbol": "䷏"
+    },
+    "17": {
+      "name": "Following",
+      "reading": "Adaptability leads to favorable outcomes",
+      "symbol": "䷐"
+    },
+    "18": {
+      "name": "Work on What Has Been Spoiled",
+      "reading": "Renewal requires addressing what is broken",
+      "symbol": "䷑"
+    },
+    "19": {
+      "name": "Approach",
+      "reading": "Favorable time for new beginnings",
+      "symbol": "䷒"
+    },
+    "20": {
+      "name": "Contemplation",
+      "reading": "Deep reflection reveals hidden truths",
+      "symbol": "䷓"
+    },
+    "21": {
+      "name": "Biting Through",
+      "reading": "Decisive action cuts through obstacles",
+      "symbol": "䷔"
+    },
+    "22": {
+      "name": "Grace",
+      "reading": "Beauty and refinement enhance all endeavors",
+      "symbol": "䷕"
+    },
+    "23": {
+      "name": "Splitting Apart",
+      "reading": "What falls apart makes way for renewal",
+      "symbol": "䷖"
+    },
+    "24": {
+      "name": "Return",
+      "reading": "Cycles complete; new beginnings emerge",
+      "symbol": "䷗"
+    },
+    "25": {
+      "name": "Innocence",
+      "reading": "Pure intentions bring unexpected success",
+      "symbol": "䷘"
+    },
+    "26": {
+      "name": "The Taming Power of the Great",
+      "reading": "Great strength held in check",
+      "symbol": "䷙"
+    },
+    "27": {
+      "name": "The Corners of the Mouth",
+      "reading": "Nourishment of body and spirit",
+      "symbol": "䷚"
+    },
+    "28": {
+      "name": "Preponderance of the Great",
+      "reading": "Great pressure requires careful balance",
+      "symbol": "䷛"
+    },
+    "29": {
+      "name": "The Abysmal",
+      "reading": "Navigate carefully through dangerous waters",
+      "symbol": "䷜"
+    },
+    "30": {
+      "name": "The Clinging",
+      "reading": "Clarity and enlightenment illuminate the path",
+      "symbol": "䷝"
+    },
+    "31": {
+      "name": "Influence",
+      "reading": "Mutual attraction brings positive change",
+      "symbol": "䷞"
+    },
+    "32": {
+      "name": "Duration",
+      "reading": "Consistency and endurance create lasting value",
+      "symbol": "䷟"
+    },
+    "33": {
+      "name": "Retreat",
+      "reading": "Strategic withdrawal preserves strength",
+      "symbol": "䷠"
+    },
+    "34": {
+      "name": "The Power of the Great",
+      "reading": "Great power requires great responsibility",
+      "symbol": "䷡"
+    },
+    "35": {
+      "name": "Progress",
+      "reading": "Steady advancement toward the goal",
+      "symbol": "䷢"
+    },
+    "36": {
+      "name": "Darkening of the Light",
+      "reading": "Maintain inner light through dark times",
+      "symbol": "䷣"
+    },
+    "37": {
+      "name": "The Family",
+      "reading": "Harmony begins within the family",
+      "symbol": "䷤"
+    },
+    "38": {
+      "name": "Opposition",
+      "reading": "Differences can lead to understanding",
+      "symbol": "䷥"
+    },
+    "39": {
+      "name": "Obstruction",
+      "reading": "Obstacles teach valuable lessons",
+      "symbol": "䷦"
+    },
+    "40": {
+      "name": "Deliverance",
+      "reading": "Liberation comes through right action",
+      "symbol": "䷧"
+    },
+    "41": {
+      "name": "Decrease",
+      "reading": "Voluntary sacrifice brings unexpected gain",
+      "symbol": "䷨"
+    },
+    "42": {
+      "name": "Increase",
+      "reading": "Generosity multiplies abundance",
+      "symbol": "䷩"
+    },
+    "43": {
+      "name": "Break-through",
+      "reading": "Decisive action breaks through resistance",
+      "symbol": "䷪"
+    },
+    "44": {
+      "name": "Coming to Meet",
+      "reading": "Unexpected encounters bring opportunity",
+      "symbol": "䷫"
+    },
+    "45": {
+      "name": "Gathering Together",
+      "reading": "Unity of purpose creates great strength",
+      "symbol": "䷬"
+    },
+    "46": {
+      "name": "Pushing Upward",
+      "reading": "Gradual ascent leads to success",
+      "symbol": "䷭"
+    },
+    "47": {
+      "name": "Oppression",
+      "reading": "Adversity reveals inner strength",
+      "symbol": "䷮"
+    },
+    "48": {
+      "name": "The Well",
+      "reading": "Depth of wisdom nourishes all",
+      "symbol": "䷯"
+    },
+    "49": {
+      "name": "Revolution",
+      "reading": "Necessary change brings renewal",
+      "symbol": "䷰"
+    },
+    "50": {
+      "name": "The Cauldron",
+      "reading": "Transformation through proper nourishment",
+      "symbol": "䷱"
+    },
+    "51": {
+      "name": "The Arousing",
+      "reading": "Sudden movement brings unexpected opportunities",
+      "symbol": "䷲"
+    },
+    "52": {
+      "name": "Keeping Still",
+      "reading": "Meditation and stillness bring inner wisdom",
+      "symbol": "䷳"
+    },
+    "53": {
+      "name": "Development",
+      "reading": "Gradual progress yields lasting results",
+      "symbol": "䷴"
+    },
+    "54": {
+      "name": "The Marrying Maiden",
+      "reading": "Proper relationships require patience",
+      "symbol": "䷵"
+    },
+    "55": {
+      "name": "Abundance",
+      "reading": "Peak achievement requires careful management",
+      "symbol": "䷶"
+    },
+    "56": {
+      "name": "The Wanderer",
+      "reading": "Journey brings wisdom and experience",
+      "symbol": "䷷"
+    },
+    "57": {
+      "name": "The Gentle",
+      "reading": "Gentle persistence leads to gradual success",
+      "symbol": "䷸"
+    },
+    "58": {
+      "name": "The Joyous",
+      "reading": "Joy and satisfaction through harmonious relationships",
+      "symbol": "䷹"
+    },
+    "59": {
+      "name": "Dispersion",
+      "reading": "Dissolution clears the way for new growth",
+      "symbol": "䷺"
+    },
+    "60": {
+      "name": "Limitation",
+      "reading": "Boundaries create focus and strength",
+      "symbol": "䷻"
+    },
+    "61": {
+      "name": "Inner Truth",
+      "reading": "Sincerity opens all doors",
+      "symbol": "䷼"
+    },
+    "62": {
+      "name": "Preponderance of the Small",
+      "reading": "Small steps lead to great achievements",
+      "symbol": "䷽"
+    },
+    "63": {
+      "name": "After Completion",
+      "reading": "Success achieved; maintain vigilance",
+      "symbol": "䷾"
+    },
+    "64": {
+      "name": "Before Completion",
+      "reading": "Goal within reach; final effort required",
+      "symbol": "䷿"
+    }
+  }
+}
