@@ -4,6 +4,7 @@
     let currentResult: SplitResult | undefined
     let universeWasSplitDialog: HTMLDialogElement
     let confirmDialog: HTMLDialogElement
+    let isSpinning = false
 
     const DEFAULT_ACTION = "take a chance"
     let nextNumber = 0
@@ -60,8 +61,9 @@
 
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
+        isSpinning = true;
         let randomNum = await getRand()
-
+        isSpinning = false;
 
         let randomWeight = randomNum % totalWeight + 1
 
@@ -74,6 +76,7 @@
             selected: selected,
             branches: totalWeight
         }
+        confirmDialog.close();
         universeWasSplitDialog.showModal()
     }
 
@@ -121,6 +124,27 @@
         bottom: 0;
         width: 100%;
         padding-bottom: 1em;
+    }
+    
+    .spinner {
+        display: inline-block;
+        margin-left: 10px;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(90deg); }
+        50% { transform: rotate(180deg); }
+        75% { transform: rotate(270deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    .split-button {
+        display: inline-flex;
+        align-items: center;
+        min-width: 200px;
+        justify-content: center;
     }
 </style>
 
@@ -171,10 +195,17 @@
         <div><span style="text-decoration: underline">{split.action}</span> - {probability(splits, split.weight)} of universes</div>
     {/each}
     </div>
-    <div style="text-align: right; width: 100%">
-        <button on:click={() => {confirmDialog.close(); splitUniverse(splits)}}>Split Universe!</button>
-        <button on:click={() => confirmDialog.close()}>Cancel</button>
-    </div>
+    {#if isSpinning}
+        <div style="text-align: center; padding: 20px; font-size: 18pt;">
+            Splitting...
+            <span class="spinner">╬</span>
+        </div>
+    {:else}
+        <div style="text-align: right; width: 100%">
+            <button class="split-button" on:click={() => splitUniverse(splits)}>Split Universe!</button>
+            <button on:click={() => confirmDialog.close()}>Cancel</button>
+        </div>
+    {/if}
 </dialog>
 
 <div class="content" bind:this={contentDiv}>
