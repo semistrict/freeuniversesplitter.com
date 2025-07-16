@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<meta name="theme-color" content="#41FF00" />
+	<meta name="theme-color" content="#000000" />
 	<link rel="manifest" href="/manifest.webmanifest" />
 	<link rel="shortcut icon" type="image/png" href="/apple-touch-icon.png" />
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
