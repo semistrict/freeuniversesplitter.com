@@ -2,10 +2,9 @@
 	import { onMount } from 'svelte';
 	import { getRand } from '../random';
 
-	// Single state for signal disruption effect
-	let signalDisruptionState: 'normal' | 'disrupted' | 'reconnecting' = 'normal';
-	let showSignalLostText = false; // Controls the flashing "SIGNAL LOST" text
-	let signalLostInterval: { clear: () => void } | null = null;
+	// Signal disruption effect state
+	let signalDisruptionState: 'normal' | 'disrupted' | 'signal-lost' | 'reconnecting' = 'normal';
+	let currentDisruption: Promise<void> | null = null;
 
 	// Listen for universe splitting events
 	onMount(() => {
@@ -16,7 +15,7 @@
 			if (isDev) {
 				// DEVELOPMENT: Always trigger signal disruption for testing
 				console.log('Signal disruption: ALWAYS triggering (dev mode)');
-				startSignalDisruption();
+				runSignalDisruption();
 			} else {
 				// PRODUCTION: Use quantum randomness to decide if signal disruption should happen (1/π probability)
 				const quantumRandom = await getRand();
@@ -35,13 +34,13 @@
 				});
 
 				if (shouldDisrupt) {
-					startSignalDisruption();
+					runSignalDisruption();
 				}
 			}
 		};
 
 		const handleSplitEnd = () => {
-			endSignalDisruption();
+			// Split end doesn't need to do anything - the async function will complete naturally
 		};
 
 		window.addEventListener('universe-split-start', handleSplitStart);
@@ -50,63 +49,48 @@
 		return () => {
 			window.removeEventListener('universe-split-start', handleSplitStart);
 			window.removeEventListener('universe-split-end', handleSplitEnd);
-			if (signalLostInterval) {
-				signalLostInterval.clear();
-				signalLostInterval = null;
-			}
 		};
 	});
 
-	function startSignalDisruption() {
-		// Enter disrupted state
-		signalDisruptionState = 'disrupted';
-		showSignalLostText = false; // Start with text hidden
-
-		// Deterministic pattern: show signal lost at specific intervals (reduced timing)
-		const pattern = [400, 600, 200, 800, 300]; // Reduced from longer intervals
-		let patternIndex = 0;
-		let nextTimeout: ReturnType<typeof setTimeout>;
-
-		function scheduleNext() {
-			nextTimeout = setTimeout(() => {
-				// Show "SIGNAL LOST" text
-				showSignalLostText = true;
-
-				// Hide it after 300ms and schedule next
-				setTimeout(() => {
-					showSignalLostText = false;
-					patternIndex = (patternIndex + 1) % pattern.length;
-					scheduleNext();
-				}, 300); // Show "SIGNAL LOST" for 300ms
-			}, pattern[patternIndex]);
+	async function runSignalDisruption() {
+		// Prevent multiple simultaneous disruptions
+		if (currentDisruption) {
+			return;
 		}
 
-		scheduleNext();
-
-		// Store timeout reference for cleanup
-		signalLostInterval = { clear: () => clearTimeout(nextTimeout) };
+		// Set the current disruption promise
+		currentDisruption = executeSignalDisruption();
+		return currentDisruption;
 	}
 
-	function endSignalDisruption() {
-		// Only proceed if we're actually in a disrupted state
-		if (signalDisruptionState === 'normal') {
-			return; // No disruption was active, nothing to end
-		}
+	async function executeSignalDisruption() {
+		try {
+			// Flash "SIGNAL LOST" pattern for about 3-4 seconds
+			const pattern = [400, 250, 700];
 
-		// Clear the signal lost interval
-		if (signalLostInterval) {
-			signalLostInterval.clear();
-			signalLostInterval = null;
-		}
+			for (let i = 0; i < pattern.length; i++) {
+				// Show static background only
+				signalDisruptionState = 'disrupted';
+				await new Promise((resolve) => setTimeout(resolve, pattern[i]));
 
-		// Hide the signal lost text and transition to reconnecting state
-		showSignalLostText = false;
-		signalDisruptionState = 'reconnecting';
+				// Show "SIGNAL LOST" text
+				signalDisruptionState = 'signal-lost';
+				await new Promise((resolve) => setTimeout(resolve, 300));
+			}
 
-		// After showing reconnected message, return to normal
-		setTimeout(() => {
+			// Transition to reconnecting
+			signalDisruptionState = 'reconnecting';
+
+			// Show "RECONNECTED" for 800ms
+			await new Promise((resolve) => setTimeout(resolve, 800));
+
+			// Return to normal
 			signalDisruptionState = 'normal';
-		}, 800);
+		} finally {
+			// Always clean up
+			currentDisruption = null;
+			signalDisruptionState = 'normal';
+		}
 	}
 </script>
 
@@ -123,9 +107,12 @@
 			{#if signalDisruptionState === 'disrupted'}
 				<div class="static-background">
 					<div class="signal-static" />
-					{#if showSignalLostText}
-						<div class="signal-lost-text">SIGNAL LOST</div>
-					{/if}
+				</div>
+			{/if}
+			{#if signalDisruptionState === 'signal-lost'}
+				<div class="static-background">
+					<div class="signal-static" />
+					<div class="signal-lost-text">SIGNAL LOST</div>
 				</div>
 			{/if}
 			{#if signalDisruptionState === 'reconnecting'}
@@ -278,21 +265,24 @@
 
 	.scanning-beam {
 		position: absolute;
-		top: -15px;
+		top: -60px;
 		left: 0;
 		right: 0;
-		height: 20px;
+		height: 80px;
 		background: linear-gradient(
 			to bottom,
 			transparent,
+			rgba(65, 255, 0, 0.02),
 			rgba(65, 255, 0, 0.05),
-			rgba(65, 255, 0, 0.1),
+			rgba(65, 255, 0, 0.08),
 			rgba(65, 255, 0, 0.15),
-			rgba(65, 255, 0, 0.1),
+			rgba(65, 255, 0, 0.15),
+			rgba(65, 255, 0, 0.08),
 			rgba(65, 255, 0, 0.05),
+			rgba(65, 255, 0, 0.02),
 			transparent
 		);
-		box-shadow: 0 0 8px rgba(65, 255, 0, 0.1);
+		box-shadow: 0 0 20px rgba(65, 255, 0, 0.15);
 		pointer-events: none;
 		z-index: 11;
 		animation: scan-down 4s infinite linear;
@@ -300,7 +290,7 @@
 
 	@keyframes scan-down {
 		0% {
-			top: -15px;
+			top: -60px;
 			opacity: 0;
 		}
 		5% {
@@ -310,7 +300,7 @@
 			opacity: 1;
 		}
 		100% {
-			top: calc(100% + 10px);
+			top: calc(100% + 20px);
 			opacity: 0;
 		}
 	}
@@ -322,14 +312,31 @@
 		right: 0;
 		bottom: 0;
 		background: radial-gradient(
-			circle at center,
-			transparent 0%,
-			transparent 50%,
-			rgba(0, 0, 0, 0.2) 80%,
-			rgba(0, 0, 0, 0.6) 100%
-		);
+				ellipse at center,
+				transparent 0%,
+				transparent 15%,
+				rgba(0, 0, 0, 0.2) 35%,
+				rgba(0, 0, 0, 0.5) 55%,
+				rgba(0, 0, 0, 0.8) 75%,
+				rgba(0, 0, 0, 0.95) 90%,
+				rgba(0, 0, 0, 1) 100%
+			),
+			linear-gradient(
+				to right,
+				rgba(0, 0, 0, 0.4) 0%,
+				transparent 15%,
+				transparent 85%,
+				rgba(0, 0, 0, 0.4) 100%
+			),
+			linear-gradient(
+				to bottom,
+				rgba(0, 0, 0, 0.4) 0%,
+				transparent 15%,
+				transparent 85%,
+				rgba(0, 0, 0, 0.4) 100%
+			);
 		pointer-events: none;
-		z-index: 4;
+		z-index: 12;
 	}
 
 	.flicker {
