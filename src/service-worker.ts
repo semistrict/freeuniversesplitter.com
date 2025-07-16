@@ -48,7 +48,8 @@ self.addEventListener('fetch', (event) => {
 	async function respond(): Promise<Response> {
 		const cache = await caches.open(CACHE);
 		if (ASSETS.includes(url.pathname)) {
-			return (await cache.match(event.request))!;
+			const cachedResponse = await cache.match(event.request);
+			return cachedResponse || new Response('Not Found', { status: 404 });
 		}
 
 		try {
@@ -60,7 +61,8 @@ self.addEventListener('fetch', (event) => {
 
 			return response;
 		} catch {
-			return (await cache.match(event.request))!;
+			const cachedResponse = await cache.match(event.request);
+			return cachedResponse || new Response('Service Unavailable', { status: 503 });
 		}
 	}
 

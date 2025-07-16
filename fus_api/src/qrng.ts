@@ -10,7 +10,7 @@ export class ANUGenerator {
 		if (qrngResult.status != 200) {
 			throw new Error(`QRNG returned ${qrngResult.status}: ${qrngResult.statusText}`);
 		}
-		const json: any = await qrngResult.json();
+		const json: { data: string[] } = await qrngResult.json();
 		let str = '';
 		json.data.forEach((element: string) => {
 			str += element;

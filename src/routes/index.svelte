@@ -109,7 +109,11 @@
 		let selected = splits.find((split) => {
 			randomWeight -= split.weight;
 			return randomWeight <= 0;
-		})!;
+		});
+
+		if (!selected) {
+			throw new Error('No split selected - this should never happen');
+		}
 
 		currentResult = {
 			selected: selected,

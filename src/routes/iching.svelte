@@ -140,15 +140,12 @@
 			if (LineValue == 8) return { type: 'weak', changing: false };
 			if (LineValue == 9) return { type: 'strong', changing: true };
 
-			return undefined;
+			// This should never happen with proper I Ching algorithm, but adding safety
+			console.warn('Unexpected LineValue in I Ching calculation:', LineValue);
+			return { type: 'strong', changing: false }; // Default fallback
 		}; // End LineCast Function
 
-		while (true) {
-			let line = LineCast();
-			if (line) {
-				return line;
-			}
-		}
+		return LineCast();
 	}
 
 	async function consult() {

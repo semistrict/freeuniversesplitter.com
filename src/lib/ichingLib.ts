@@ -89,8 +89,13 @@ export function yarrow(rng: SeededRNG): Line {
 		HandPile = HandPile + EastRemainder + WestRemainder;
 	};
 
-	const LineCast = function (): Line | undefined {
+	const LineCast = function (): Line {
 		Stalks = 49; //Remove one stalk and set it aside
+
+		// Initialize count values
+		CountValue1 = 0;
+		CountValue2 = 0;
+		CountValue3 = 0;
 
 		DivideStalks(Stalks);
 		DivideEastAndWest();
@@ -119,15 +124,12 @@ export function yarrow(rng: SeededRNG): Line {
 		if (LineValue == 8) return { type: 'weak', changing: false };
 		if (LineValue == 9) return { type: 'strong', changing: true };
 
-		return undefined;
+		// This should never happen with proper I Ching algorithm, but adding safety
+		console.warn('Unexpected LineValue in I Ching calculation:', LineValue);
+		return { type: 'strong', changing: false }; // Default fallback
 	};
 
-	while (true) {
-		const line = LineCast();
-		if (line) {
-			return line;
-		}
-	}
+	return LineCast();
 }
 
 export async function generateHexagram(): Promise<Hexagram> {

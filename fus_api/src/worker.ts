@@ -1,4 +1,4 @@
-import { Router, IRequest } from 'itty-router';
+import { Router } from 'itty-router';
 import { ANUGenerator } from './qrng';
 
 export interface Env {
@@ -44,13 +44,13 @@ Very doubtful.
 	.filter((s) => s.length > 0);
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request, env: Env): Promise<Response> {
 		const router = Router();
 		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
 		router.options('*', handleOptions);
 		router.get('/updateKV', (request) => handleRandRequest(qrng, request, env));
-		router.get('/', (request) => handleGetRequest(request, env));
-		router.get('/rndnum', (request) => handleGetRandNum(request, env));
+		router.get('/', (request) => handleGetRequest(request));
+		router.get('/rndnum', () => handleGetRandNum());
 		return router.handle(request);
 	},
 
@@ -104,7 +104,7 @@ const cyrb53 = function (str: string, seed = 0): number {
 	return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
-async function handleGetRandNum(request: Request, env: Env): Promise<Response> {
+async function handleGetRandNum(): Promise<Response> {
 	const R = await handleGetRandom();
 
 	const responseHeaders = new Headers();
@@ -117,8 +117,7 @@ async function handleGetRandNum(request: Request, env: Env): Promise<Response> {
 	});
 }
 
-//? source randomness from kv store and pass randomness for 8ball / outcomes response
-async function handleGetRequest(request: Request, env: Env): Promise<Response> {
+async function handleGetRequest(request: Request): Promise<Response> {
 	const { searchParams } = new URL(request.url);
 	let outcomes = searchParams.getAll('outcome');
 	const max = Number(searchParams.get('max'));
@@ -134,7 +133,6 @@ async function handleGetRequest(request: Request, env: Env): Promise<Response> {
 	const R = await handleGetRandom();
 
 	const selectedOutcome = outcomes[R % outcomes.length];
-	const p = 1.0 / outcomes.length;
 	const responseHeaders = new Headers();
 	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
 	responseHeaders.set('Content-Type', 'text/plain');
@@ -145,7 +143,7 @@ async function handleGetRequest(request: Request, env: Env): Promise<Response> {
 	});
 }
 
-function handleOptions(request: IRequest): Response {
+function handleOptions(): Response {
 	const respHeaders = {
 		...corsHeaders,
 	};

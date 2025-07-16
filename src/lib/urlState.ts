@@ -53,12 +53,12 @@ const REVERSE_KEY_MAP: Record<string, string> = Object.fromEntries(
 	Object.entries(KEY_MAP).map(([long, short]) => [short, long])
 );
 
-function compactifyState(state: any): any {
+function compactifyState(state: Record<string, unknown>): Record<string, unknown> {
 	if (!state || typeof state !== 'object') {
 		return state;
 	}
 
-	const compact: any = {};
+	const compact: Record<string, unknown> = {};
 
 	for (const [longKey, shortKey] of Object.entries(KEY_MAP)) {
 		if (state[longKey] !== undefined) {
@@ -69,12 +69,12 @@ function compactifyState(state: any): any {
 	return compact;
 }
 
-function expandState(compactState: any): any {
+function expandState(compactState: Record<string, unknown>): Record<string, unknown> {
 	if (!compactState || typeof compactState !== 'object') {
 		return compactState;
 	}
 
-	const expanded: any = {};
+	const expanded: Record<string, unknown> = {};
 
 	// Handle new short keys
 	for (const [shortKey, longKey] of Object.entries(REVERSE_KEY_MAP)) {
@@ -93,7 +93,7 @@ function expandState(compactState: any): any {
 	return expanded;
 }
 
-export function encodeState(state: any): string {
+export function encodeState(state: Record<string, unknown>): string {
 	try {
 		// Convert to compact format with single letter keys
 		const compactState = compactifyState(state);
@@ -118,7 +118,7 @@ export function decodeState<T>(encoded: string): T | null {
 	}
 }
 
-export function setUrlState(state: any) {
+export function setUrlState(state: Record<string, unknown>) {
 	if (typeof window !== 'undefined') {
 		const encoded = encodeState(state);
 		if (encoded) {
