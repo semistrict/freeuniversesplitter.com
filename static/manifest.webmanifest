@@ -1,22 +1,22 @@
 {
-    "short_name": "Universe Splitter",
-    "name": "Free Universe Splitter",
-    "start_url": "/",
-    "display": "fullscreen",
-    "theme_color": "#41FF00",
-    "background_color": "#000",
-    "icons": [
-       {
-          "src": "/apple-touch-icon.png",
-          "type": "image/png",
-          "sizes": "512x512",
-          "purpose": "any"
-       },
-       {
-          "src": "/apple-touch-icon.png",
-          "type": "image/png",
-          "sizes": "512x512",
-          "purpose": "maskable"
-       }
-    ]
- }
+	"short_name": "Universe Splitter",
+	"name": "Free Universe Splitter",
+	"start_url": "/",
+	"display": "fullscreen",
+	"theme_color": "#41FF00",
+	"background_color": "#000",
+	"icons": [
+		{
+			"src": "/apple-touch-icon.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "any"
+		},
+		{
+			"src": "/apple-touch-icon.png",
+			"type": "image/png",
+			"sizes": "512x512",
+			"purpose": "maskable"
+		}
+	]
+}

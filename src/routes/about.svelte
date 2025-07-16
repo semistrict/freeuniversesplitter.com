@@ -1,6 +1,6 @@
 <script lang="ts">
-	import BackButton from "$lib/BackButton.svelte";
-	
+	import BackButton from '$lib/BackButton.svelte';
+
 	function showDebugInfo() {
 		var ua = navigator.userAgent || navigator.vendor;
 		window.alert(`UserAgent: ${ua}`);

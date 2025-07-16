@@ -1,4 +1,3 @@
-
 # Free Universe Splitter
 
 This is the code for [freeuniversesplitter.com](https://freeuniversesplitter.com)

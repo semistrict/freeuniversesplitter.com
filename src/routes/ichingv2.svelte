@@ -1,5 +1,5 @@
 <script>
-    import IChing from '$lib/IChing.svelte';
+	import IChing from '$lib/IChing.svelte';
 </script>
 
 <IChing />

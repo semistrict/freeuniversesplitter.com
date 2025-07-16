@@ -1,38 +1,40 @@
 <script lang="ts">
 	import { getRandomRange } from '../random';
 
-    let lines: Array<Line> = []
+	let lines: Array<Line> = [];
 
-    const kingWenSequence: Array<number> = [
-        63, 0, 17, 34, 23, 58, 2, 16, 55, 59, 7, 56, 61, 47, 4, 8, 25, 38, 3, 48, 41, 37, 32, 1, 57, 39, 33, 30, 18, 45, 28, 14, 60, 15, 40, 5, 53, 43, 20, 10, 35, 49, 31, 62, 24, 6, 26, 22, 29, 46, 9, 36, 52, 11, 13, 44, 54, 27, 50, 19, 51, 12, 21, 42
-    ]
+	const kingWenSequence: Array<number> = [
+		63, 0, 17, 34, 23, 58, 2, 16, 55, 59, 7, 56, 61, 47, 4, 8, 25, 38, 3, 48, 41, 37, 32, 1, 57, 39,
+		33, 30, 18, 45, 28, 14, 60, 15, 40, 5, 53, 43, 20, 10, 35, 49, 31, 62, 24, 6, 26, 22, 29, 46, 9,
+		36, 52, 11, 13, 44, 54, 27, 50, 19, 51, 12, 21, 42
+	];
 
-    function kingWenNumber(lines: Line[]) : number {
-        if (lines.length != 6) {
-            return -1
-        }
-        let num = ''
-        for (let line of lines) {
-            if (line.type == 'strong') {
-                num += '1'
-            } else {
-                num += '0'
-            }
-        }
-        let bin = parseInt(num, 2)
-        for (let i = 0; i < kingWenSequence.length; i++) {
-            if (bin == kingWenSequence[i]) {
-                return i+1
-            }
-        }
+	function kingWenNumber(lines: Line[]): number {
+		if (lines.length != 6) {
+			return -1;
+		}
+		let num = '';
+		for (let line of lines) {
+			if (line.type == 'strong') {
+				num += '1';
+			} else {
+				num += '0';
+			}
+		}
+		let bin = parseInt(num, 2);
+		for (let i = 0; i < kingWenSequence.length; i++) {
+			if (bin == kingWenSequence[i]) {
+				return i + 1;
+			}
+		}
 
-        throw "no present in sequence: " + bin
-    }
+		throw 'no present in sequence: ' + bin;
+	}
 
-    interface Line {
-        type: 'strong' | 'weak'
-        changing: boolean
-    }
+	interface Line {
+		type: 'strong' | 'weak';
+		changing: boolean;
+	}
 
 	// adapted from: https://github.com/Brianfit/I-Ching
 	function yarrow(): Line {
@@ -51,7 +53,7 @@
 			// Divide 49 stalks into eastpile westpile
 			// Subtract one from westpile put in handpile
 
-      let randomRange = await getRandomRange(0, YarrowStalks+1)
+			let randomRange = await getRandomRange(0, YarrowStalks + 1);
 
 			WestPile = Math.floor(randomRange);
 			EastPile = YarrowStalks - WestPile;
@@ -133,77 +135,80 @@
 			// If 8 Line = yielding
 			// if 9 Line = strong but Changing
 			// if 6 Line = yielding but Changing
-			if (LineValue == 6) return {type: 'weak', changing: true};
-			if (LineValue == 7) return {type: 'strong', changing: false};
-			if (LineValue == 8) return {type: 'weak', changing: false};
-			if (LineValue == 9) return {type: 'strong', changing: true};
+			if (LineValue == 6) return { type: 'weak', changing: true };
+			if (LineValue == 7) return { type: 'strong', changing: false };
+			if (LineValue == 8) return { type: 'weak', changing: false };
+			if (LineValue == 9) return { type: 'strong', changing: true };
 
-            return undefined
+			return undefined;
 		}; // End LineCast Function
 
-
-        while (true) {
-            let line = LineCast()
-            if (line) {
-                return line
-            }
-        }
+		while (true) {
+			let line = LineCast();
+			if (line) {
+				return line;
+			}
+		}
 	}
 
 	async function consult() {
-        var newLines: Array<Line> = []
-        for (let i = 0; i < 6; i++) {
-            newLines.push(yarrow())
-        }
-        lines = newLines
+		var newLines: Array<Line> = [];
+		for (let i = 0; i < 6; i++) {
+			newLines.push(yarrow());
+		}
+		lines = newLines;
 	}
 
-    async function runTrials(n: number) {
-        let counts: Array<number> = []
-        for (let i = 0; i < 64; i++) {
-            counts.push(0)
-        }
-        for (let trial = 0; trial < n; trial++) {
-            let newLines: Array<Line> = []
-            for (let i = 0; i < 6; i++) {
-                newLines.push(yarrow())
-            }
-            counts[kingWenNumber(newLines)-1]++
-        }
-        trialResult = counts
-    }
+	async function runTrials(n: number) {
+		let counts: Array<number> = [];
+		for (let i = 0; i < 64; i++) {
+			counts.push(0);
+		}
+		for (let trial = 0; trial < n; trial++) {
+			let newLines: Array<Line> = [];
+			for (let i = 0; i < 6; i++) {
+				newLines.push(yarrow());
+			}
+			counts[kingWenNumber(newLines) - 1]++;
+		}
+		trialResult = counts;
+	}
 
+	let trialResult: Array<number> | undefined;
 
-    let trialResult: Array<number> | undefined
+	const N_TRIALS = 100_000;
 
-    const N_TRIALS = 100_000
-
-    $: number = kingWenNumber(lines)
+	$: number = kingWenNumber(lines);
 </script>
 
 <button on:click={() => consult()}>Consult</button>
 
 <div>
-{#if number >= 0}
-<a style="font-size: 24pt;" href="https://divination.com/iching/lookup/{number}-2/">Hexagram {number}</a>
-<ol reversed>
-{#each lines as line }
-    <li>{line.changing ? 'changing' : 'unchanging'} {line.type == "strong" ? "yin" : "yang"}</li>
-{/each }
-</ol>
-{/if}
+	{#if number >= 0}
+		<a style="font-size: 24pt;" href="https://divination.com/iching/lookup/{number}-2/"
+			>Hexagram {number}</a
+		>
+		<ol reversed>
+			{#each lines as line}
+				<li>
+					{line.changing ? 'changing' : 'unchanging'}
+					{line.type == 'strong' ? 'yin' : 'yang'}
+				</li>
+			{/each}
+		</ol>
+	{/if}
 </div>
 
 <div>
-<button on:click={() => runTrials(N_TRIALS)}>Run Trials</button>
-{#if trialResult}
-<table>
-    {#each trialResult as count, index}
-    <tr>
-        <td>{index+1}</td>
-        <td>{count / N_TRIALS}</td>
-    </tr>
-    {/each}
-</table>
-{/if}
+	<button on:click={() => runTrials(N_TRIALS)}>Run Trials</button>
+	{#if trialResult}
+		<table>
+			{#each trialResult as count, index}
+				<tr>
+					<td>{index + 1}</td>
+					<td>{count / N_TRIALS}</td>
+				</tr>
+			{/each}
+		</table>
+	{/if}
 </div>
