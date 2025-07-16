@@ -7,6 +7,8 @@
     let confirmDialog: HTMLDialogElement
     let isSpinning = false
     let teletypeRef: any
+    let spinnerChar = 'Ψ'
+    let processingMessage = ''
 
     const DEFAULT_ACTION = "take a chance"
     let nextNumber = 0
@@ -49,6 +51,31 @@
         }).format(val);
     }
 
+    // Spinner corruption characters
+    const corruptChars = ['Ω', 'Φ', 'Θ', 'Λ', 'Π', 'Σ', 'Δ', '█', '▓', '▒', '░', '╬', '※', '◊', '●', '◢', '◤'];
+    
+    function startSpinnerEffects() {
+        // Start with processing message
+        processingMessage = 'PROCESSING QUANTUM DATA...';
+        
+        // Start corruption effects - more frequent and longer lasting
+        const corruptionInterval = setInterval(() => {
+            if (Math.random() < 0.7) { // 70% chance to corrupt
+                spinnerChar = corruptChars[Math.floor(Math.random() * corruptChars.length)];
+                setTimeout(() => {
+                    spinnerChar = 'Ψ'; // Reset to normal after brief corruption
+                }, 200 + Math.random() * 400); // Longer corruption duration
+            }
+        }, 150); // More frequent corruption
+        
+        // Clean up after spinning stops
+        setTimeout(() => {
+            clearInterval(corruptionInterval);
+            spinnerChar = 'Ψ';
+            processingMessage = '';
+        }, 2100); // Slightly longer than minimum delay
+    }
+
     async function splitUniverse(splits: Split[]) {
         if (splits.length != 2) {
             throw "we only support two splits now";
@@ -64,8 +91,16 @@
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
 
         isSpinning = true;
+        startSpinnerEffects();
+        
+        // Dispatch event to start signal lost effects
+        window.dispatchEvent(new CustomEvent('universe-split-start'));
+        
         let randomNum = await getRand()
         isSpinning = false;
+        
+        // Dispatch event to stop signal lost effects
+        window.dispatchEvent(new CustomEvent('universe-split-end'));
 
         let randomWeight = randomNum % totalWeight + 1
 
@@ -108,6 +143,25 @@
         background-color: #41FF00;
         text-align: center;
         font-size: 20pt;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
+        max-width: 100%;
+        box-sizing: border-box;
+        text-shadow: 0 0 2px black;
+        box-shadow: 0 0 5px #41FF00;
+    }
+    
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 16pt;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        h1 {
+            font-size: 14pt;
+        }
     }
     .content {
         display: grid;
@@ -168,18 +222,33 @@
         padding-bottom: 1em;
     }
     
-    .spinner {
+    .spinner-container {
         display: inline-block;
+        width: 1.5em;
+        height: 1.5em;
+        position: relative;
         margin-left: 10px;
+        vertical-align: middle;
+    }
+    
+    .spinner {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         animation: spin 1s linear infinite;
+        display: block;
+        width: 1.5em;
+        height: 1.5em;
+        text-align: center;
+        line-height: 1.5em;
     }
     
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        25% { transform: rotate(90deg); }
-        50% { transform: rotate(180deg); }
-        75% { transform: rotate(270deg); }
-        100% { transform: rotate(360deg); }
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        25% { transform: translate(-50%, -50%) rotate(90deg); }
+        50% { transform: translate(-50%, -50%) rotate(180deg); }
+        75% { transform: translate(-50%, -50%) rotate(270deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
     .split-button {
@@ -243,8 +312,14 @@
     </div>
     {#if isSpinning}
         <div style="text-align: center; padding: 20px; font-size: 18pt;">
-            Splitting...
-            <span class="spinner">Ψ</span>
+            {#if processingMessage}
+                <div style="font-size: 14pt; margin-bottom: 10px; opacity: 0.8;">
+                    {processingMessage}
+                </div>
+            {/if}
+            <span class="spinner-container">
+                <span class="spinner">{spinnerChar}</span>
+            </span>
         </div>
     {:else}
         <div style="text-align: right; width: 100%">
