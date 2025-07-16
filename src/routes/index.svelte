@@ -10,11 +10,10 @@
 	let universeWasSplitDialog: HTMLDialogElement;
 	let confirmDialog: HTMLDialogElement;
 	let isSpinning = false;
-	let teletypeRef: any;
+	let teletypeRef: TeletypeText;
 	let processingMessage = '';
 
 	const DEFAULT_ACTION = 'take a chance';
-	let nextNumber = 0;
 
 	interface Split {
 		action: string;

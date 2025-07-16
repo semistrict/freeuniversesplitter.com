@@ -3,8 +3,6 @@
 
 	let showSignalLost = false;
 	let signalLostInterval;
-	let showScreenFutz = false;
-	let screenFutzInterval;
 
 	// Listen for universe splitting events
 	onMount(() => {
@@ -59,41 +57,6 @@
 			signalLostInterval = null;
 		}
 		showSignalLost = false;
-	}
-
-	function startScreenFutzEffects() {
-		// Deterministic pattern for screen futz
-		const futzPattern = [300, 150, 450, 100, 200, 350]; // milliseconds between effects
-		let futzIndex = 0;
-		let nextFutzTimeout;
-
-		function scheduleNextFutz() {
-			nextFutzTimeout = setTimeout(() => {
-				showScreenFutz = true;
-				setTimeout(() => {
-					showScreenFutz = false;
-					futzIndex = (futzIndex + 1) % futzPattern.length;
-					scheduleNextFutz();
-				}, 80); // Fixed 80ms duration for quick futz
-			}, futzPattern[futzIndex]);
-		}
-
-		scheduleNextFutz();
-
-		// Store timeout reference for cleanup
-		screenFutzInterval = { clear: () => clearTimeout(nextFutzTimeout) };
-	}
-
-	function stopScreenFutzEffects() {
-		if (screenFutzInterval) {
-			if (screenFutzInterval.clear) {
-				screenFutzInterval.clear();
-			} else {
-				clearInterval(screenFutzInterval);
-			}
-			screenFutzInterval = null;
-		}
-		showScreenFutz = false;
 	}
 </script>
 

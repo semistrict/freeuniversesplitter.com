@@ -6,7 +6,7 @@
 	export let isSpinning = false;
 
 	let displayChar = 'Ψ';
-	let corruptionInterval: NodeJS.Timeout | undefined;
+	let corruptionInterval: ReturnType<typeof setInterval> | undefined;
 
 	// Spinner corruption characters
 	const corruptChars = [

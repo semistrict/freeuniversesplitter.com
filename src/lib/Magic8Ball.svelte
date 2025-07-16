@@ -9,7 +9,7 @@
 
 	let universeWasSplitDialog: HTMLDialogElement;
 	let isSpinning = false;
-	let teletypeRef: any;
+	let teletypeRef: TeletypeText;
 	let processingMessage = '';
 	let currentResult: string | undefined;
 

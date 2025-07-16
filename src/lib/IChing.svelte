@@ -10,7 +10,7 @@
 
 	let universeWasSplitDialog: HTMLDialogElement;
 	let isSpinning = false;
-	let teletypeRef: any;
+	let teletypeRef: TeletypeText;
 	let processingMessage = '';
 	let currentResult: Hexagram | undefined;
 	let textPhase = false;
