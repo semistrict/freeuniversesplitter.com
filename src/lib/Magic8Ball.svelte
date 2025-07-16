@@ -2,6 +2,8 @@
     import { getRand } from "../random";
     import TeletypeText from "$lib/TeletypeText.svelte";
     import { setUrlState, getUrlState, type Magic8BallState } from "$lib/urlState";
+    import ResultDialogButtons from "$lib/ResultDialogButtons.svelte";
+    import BackButton from "$lib/BackButton.svelte";
     import { onMount } from "svelte";
 
     let universeWasSplitDialog: HTMLDialogElement;
@@ -100,6 +102,7 @@
             teletypeRef.reset();
         }
     }
+    
 </script>
 
 <style>
@@ -192,12 +195,6 @@
         100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
-    button {
-        font-size: 16pt;
-        color: #41FF00;
-        background-color: black;
-        border-color: #41FF00;
-    }
 </style>
 
 <svelte:head>
@@ -205,9 +202,7 @@
     <meta property="og:description" content="Quantum Magic 8 Ball: Let the Multiverse Answer Your Questions!" />
 </svelte:head>
 
-<div style="text-align: left; padding: 10px 0 0 20px;">
-    <a href="/">← Back</a>
-</div>
+<BackButton />
 
 <div class="magic8ball-container">
     <div class="instruction">
@@ -243,9 +238,10 @@
             <TeletypeText bind:this={teletypeRef} text={currentResult} speed={30} delay={500} />
         {/if}
     </div>
-    <div style="text-align: center; width: 100%; text-decoration: underline">FreeUniverseSplitter.com</div>
-    <div style="text-align: right; width: 100%">
-        <button on:click={() => universeWasSplitDialog.close()}>OK</button>
-    </div>
+    <ResultDialogButtons 
+        shareTitle="Magic 8 Ball Result"
+        shareText={currentResult ? `The quantum magic 8 ball says: "${currentResult}"` : ""}
+        onClose={() => universeWasSplitDialog.close()}
+    />
 </dialog>
 

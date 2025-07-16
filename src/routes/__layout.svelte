@@ -36,6 +36,13 @@
         overflow-x: hidden;
     }
     
+    :global(button) {
+        font-size: 16pt;
+        color: #41FF00;
+        background-color: black;
+        border-color: #41FF00;
+    }
+    
     main {
         position: relative;
         z-index: 1;

@@ -2,6 +2,8 @@
     import TeletypeText from "$lib/TeletypeText.svelte";
     import { generateHexagram, type Hexagram } from "$lib/ichingLib";
     import { setUrlState, getUrlState, type IChingState } from "$lib/urlState";
+    import ResultDialogButtons from "$lib/ResultDialogButtons.svelte";
+    import BackButton from "$lib/BackButton.svelte";
     import { onMount } from "svelte";
 
     let universeWasSplitDialog: HTMLDialogElement;
@@ -114,15 +116,10 @@
             teletypeRef.reset();
         }
     }
+    
 </script>
 
 <style>
-    .back-link {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 10;
-    }
     
     .text-container {
         display: flex;
@@ -251,12 +248,6 @@
         100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
     
-    button {
-        font-size: 16pt;
-        color: #41FF00;
-        background-color: black;
-        border-color: #41FF00;
-    }
     
     .hexagram-display {
         font-size: 64pt;
@@ -277,9 +268,7 @@
     <meta property="og:description" content="Quantum I Ching: Ancient Wisdom Through the Multiverse!" />
 </svelte:head>
 
-<div class="back-link">
-    <a href="/">← Back</a>
-</div>
+<BackButton />
 
 {#if textPhase}
     <div class="text-container">
@@ -331,8 +320,9 @@
         </div>
     {/if}
     
-    <div style="text-align: center; width: 100%; text-decoration: underline">FreeUniverseSplitter.com</div>
-    <div style="text-align: right; width: 100%">
-        <button on:click={() => universeWasSplitDialog.close()}>OK</button>
-    </div>
+    <ResultDialogButtons 
+        shareTitle="I Ching Reading"
+        shareText={currentResult ? `The ancient oracle speaks: #${currentResult.number} - ${currentResult.name}: ${currentResult.reading}` : ""}
+        onClose={() => universeWasSplitDialog.close()}
+    />
 </dialog>

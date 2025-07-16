@@ -83,6 +83,30 @@ export function clearUrlState() {
     }
 }
 
+export async function shareResult(title: string, text: string, url?: string) {
+    if (typeof window !== 'undefined') {
+        const shareData = {
+            title: title,
+            text: text,
+            url: url || window.location.href
+        };
+        
+        // Try native share (iOS share sheet)
+        if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+            try {
+                await navigator.share(shareData);
+                return true;
+            } catch (error) {
+                // User cancelled or error occurred
+                if (error.name !== 'AbortError') {
+                    console.error('Share failed:', error);
+                }
+            }
+        }
+    }
+    return false;
+}
+
 // Types for different modes
 export interface Magic8BallState {
     type: 'magic8ball';

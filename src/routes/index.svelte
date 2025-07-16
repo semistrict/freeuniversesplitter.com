@@ -2,6 +2,7 @@
     import {getRand} from "../random"
     import TeletypeText from "$lib/TeletypeText.svelte"
     import { setUrlState, getUrlState, type UniverseState } from "$lib/urlState"
+    import ResultDialogButtons from "$lib/ResultDialogButtons.svelte"
     import { onMount } from "svelte"
 
     let currentResult: SplitResult | undefined
@@ -170,6 +171,7 @@
             return DEFAULT_ACTION
         }
     }
+    
 </script>
 
 <style>
@@ -243,12 +245,6 @@
         min-height: 0;
         overflow: hidden;
         padding-top: 20px;
-    }
-    button {
-        font-size: 16pt;
-        color: #41FF00;
-        background-color: black;
-        border-color: #41FF00;
     }
     .bottom {
         position: fixed;
@@ -334,8 +330,11 @@
         {/if}
     </div>
     -->
-    <div style="text-align: center; width: 100%; text-decoration: underline">FreeUniverseSplitter.com</div>
-    <div style="text-align: right; width: 100%"><button on:click={() => universeWasSplitDialog.close()}>OK</button></div>
+    <ResultDialogButtons 
+        shareTitle="Universe Splitter Result"
+        shareText={currentResult ? `The universe has decided: ${currentResult.selected.action}` : ""}
+        onClose={() => universeWasSplitDialog.close()}
+    />
 </dialog>
 
 <dialog bind:this={confirmDialog}>

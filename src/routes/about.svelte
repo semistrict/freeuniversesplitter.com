@@ -1,11 +1,13 @@
 <script lang="ts">
+	import BackButton from "$lib/BackButton.svelte";
+	
 	function showDebugInfo() {
 		var ua = navigator.userAgent || navigator.vendor;
 		window.alert(`UserAgent: ${ua}`);
 	}
 </script>
 
-<a href="/">&lt; Back</a>
+<BackButton />
 
 <h1>Disclaimer</h1>
 
@@ -199,4 +201,4 @@
 	<li><a href="https://laemeur.sdf.org/fonts/">Less Perfect DOS VGA font</a></li>
 </ul>
 
-<a href="/">&lt; Back</a>
+<BackButton />
