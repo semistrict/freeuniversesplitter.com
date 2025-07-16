@@ -22,7 +22,8 @@
         "seek guidance from the ancient oracle."
     ];
     
-    let visibleSentences = new Array(sentences.length).fill(false);
+    let currentSentenceIndex = -1;
+    let sentenceVisible = false;
 
     // Spinner corruption characters
     const corruptChars = ['Ω', 'Φ', 'Θ', 'Λ', 'Π', 'Σ', 'Δ', '█', '▓', '▒', '░', '╬', '※', '◊', '●', '◢', '◤'];
@@ -51,23 +52,35 @@
         
         // Normal animation sequence
         textPhase = true;
-        // Show each sentence with 2-second intervals
+        // Show each sentence with 2-second intervals, replacing the previous one
         sentences.forEach((_, index) => {
             setTimeout(() => {
-                visibleSentences[index] = true;
-                visibleSentences = [...visibleSentences]; // Trigger reactivity
+                // Fade out current sentence
+                if (index > 0) {
+                    sentenceVisible = false;
+                    setTimeout(() => {
+                        currentSentenceIndex = index;
+                        sentenceVisible = true;
+                    }, 500); // Half second fade out, then change and fade in
+                } else {
+                    currentSentenceIndex = index;
+                    sentenceVisible = true;
+                }
             }, 500 + index * 2000);
         });
         
         // Fade out all text after all sentences have appeared
         const fadeOutDelay = 500 + sentences.length * 2000 + 2000;
         setTimeout(() => {
-            visibleSentences = new Array(sentences.length).fill(false);
-            // End text phase and start tablet phase
+            sentenceVisible = false;
             setTimeout(() => {
-                textPhase = false;
-                tabletPhase = true;
-            }, 1000);
+                currentSentenceIndex = -1;
+                // End text phase and start tablet phase
+                setTimeout(() => {
+                    textPhase = false;
+                    tabletPhase = true;
+                }, 500);
+            }, 500);
         }, fadeOutDelay);
     });
     
@@ -126,8 +139,8 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100%;
-        padding: 80px 40px 40px 40px;
+        height: calc(100vh - 80px);
+        padding: 40px;
         box-sizing: border-box;
     }
     
@@ -180,11 +193,11 @@
     
     .sentence {
         opacity: 0;
-        transition: opacity 1s ease-in-out;
+        transition: opacity 0.5s ease-in-out;
         margin-bottom: 8px;
     }
     
-    .sentence.show {
+    .sentence.visible {
         opacity: 0.9;
     }
     
@@ -273,9 +286,9 @@
 {#if textPhase}
     <div class="text-container">
         <div class="instruction">
-            {#each sentences as sentence, index}
-                <div class="sentence" class:show={visibleSentences[index]}>{sentence}</div>
-            {/each}
+            {#if currentSentenceIndex >= 0}
+                <div class="sentence" class:visible={sentenceVisible}>{sentences[currentSentenceIndex]}</div>
+            {/if}
         </div>
     </div>
 {/if}

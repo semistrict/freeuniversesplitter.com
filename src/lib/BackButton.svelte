@@ -8,9 +8,7 @@
 
 <style>
     .back-link {
-        position: absolute;
-        top: 20px;
-        left: 20px;
-        z-index: 10;
+        display: block;
+        padding: 20px 0 0 20px;
     }
 </style>
