@@ -137,6 +137,7 @@
 		justify-content: center;
 		padding: 20px;
 		box-sizing: border-box;
+		background: radial-gradient(circle at center, #1a1a1a 0%, #0f0f0f 70%, #000000 100%);
 	}
 
 	.crt-bezel {
@@ -403,11 +404,21 @@
 
 	@media (max-width: 768px) {
 		.crt-screen {
-			padding: 1vh 1vw;
+			padding: 0;
+			background: none;
+		}
+
+		.crt-bezel {
+			width: 100vw;
+			height: 100vh;
+			max-width: none;
+			max-height: none;
+			border-radius: 0;
+			padding: 0;
 		}
 
 		.crt-content {
-			border-radius: 20px;
+			border-radius: 0;
 		}
 
 		.signal-lost-text {
