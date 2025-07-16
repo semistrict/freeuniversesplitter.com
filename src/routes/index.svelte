@@ -1,10 +1,12 @@
 <script lang="ts">
     import {getRand} from "../random"
+    import TeletypeText from "$lib/TeletypeText.svelte"
 
     let currentResult: SplitResult | undefined
     let universeWasSplitDialog: HTMLDialogElement
     let confirmDialog: HTMLDialogElement
     let isSpinning = false
+    let teletypeRef: any
 
     const DEFAULT_ACTION = "take a chance"
     let nextNumber = 0
@@ -77,7 +79,12 @@
             branches: totalWeight
         }
         confirmDialog.close();
-        universeWasSplitDialog.showModal()
+        universeWasSplitDialog.showModal();
+        
+        // Reset the teletype component for the new result
+        if (teletypeRef) {
+            teletypeRef.reset();
+        }
     }
 
     let contentDiv: Element
@@ -104,14 +111,49 @@
     }
     .content {
         display: grid;
-        grid-template-columns: 80% 20%;
+        grid-template-columns: 1fr auto;
         grid-column-gap: 10px;
         grid-row-gap: 10px;
+        width: 100%;
+        max-width: 100%;
     }
     input {
         font-size: 16pt;
         color: #41FF00;
         background-color: black;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        border: none;
+        border-bottom: 1px solid #41FF00;
+        outline: none;
+    }
+    
+    input[type="number"] {
+        width: 80px;
+        max-width: 80px;
+        min-width: 60px;
+    }
+    
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        max-height: 100%;
+    }
+    
+    .intro-section {
+        flex-shrink: 0;
+    }
+    
+    .main-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        min-height: 0;
+        overflow: hidden;
+        padding-top: 20px;
     }
     button {
         font-size: 16pt;
@@ -156,10 +198,12 @@
 
 <h1>FreeUniverseSplitter.com</h1>
 
-<div>
+<div class="page-container">
+<div class="intro-section">
 <p>Enter two alternatives below. Universe will be split.</p>
 <p>Which universe you find yourself in is random, depending on the weights you enter.</p>
 <p><a href="about">More info</a></p>
+</div>
 
 <dialog bind:this={universeWasSplitDialog}>
     <div>
@@ -175,7 +219,9 @@
         in which you should:
     </div>
     <div style="font-size: 36pt; text-align: center; padding-top:20px;">
-        {currentResult?.selected.action}
+        {#if currentResult?.selected.action}
+            <TeletypeText bind:this={teletypeRef} text={currentResult.selected.action} speed={30} delay={500} />
+        {/if}
     </div>
     <!--
     <div style="text-align: center; padding-bottom:20px; font-style:italic">
@@ -198,7 +244,7 @@
     {#if isSpinning}
         <div style="text-align: center; padding: 20px; font-size: 18pt;">
             Splitting...
-            <span class="spinner">╬</span>
+            <span class="spinner">Ψ</span>
         </div>
     {:else}
         <div style="text-align: right; width: 100%">
@@ -208,21 +254,22 @@
     {/if}
 </dialog>
 
-<div class="content" bind:this={contentDiv}>
-    <div>
+<div class="main-content">
+    <div class="content" bind:this={contentDiv}>
+        <div></div>
+        <div>Weight</div>
+        {#each splits as split, i}
+            <input type=text autocapitalize=none enterkeyhint=next
+                placeholder={placeholderText(splits, i)}
+                bind:value={split.action}
+                on:click={(e) => e.target?.select() }
+            />
+            <input type=number min=1 bind:value={split.weight} on:click={(e) => e.target?.select() } />
+        {/each}
     </div>
-    <div>Weight</div>
-    {#each splits as split, i}
-        <input type=text autocapitalize=none enterkeyhint=next
-            placeholder={placeholderText(splits, i)}
-            bind:value={split.action}
-            on:click={(e) => e.target?.select() }
-        />
-        <input type=number min=1 bind:value={split.weight} on:click={(e) => e.target?.select() } />
-    {/each}
-</div>
 
-<div style="text-align: center; padding-top: 10px">
-    <button class="splitButton" on:click={() => confirmDialog.showModal()}>Next</button>
+    <div style="text-align: center; padding-top: 10px">
+        <button class="splitButton" on:click={() => confirmDialog.showModal()}>Next</button>
+    </div>
 </div>
 </div>
