@@ -1,6 +1,8 @@
 <script lang="ts">
     import TeletypeText from "$lib/TeletypeText.svelte";
     import { generateHexagram, type Hexagram } from "$lib/ichingLib";
+    import { setUrlState, getUrlState, type IChingState } from "$lib/urlState";
+    import { onMount } from "svelte";
 
     let universeWasSplitDialog: HTMLDialogElement;
     let isSpinning = false;
@@ -24,10 +26,28 @@
     const corruptChars = ['Ω', 'Φ', 'Θ', 'Λ', 'Π', 'Σ', 'Δ', '█', '▓', '▒', '░', '╬', '※', '◊', '●', '◢', '◤'];
     
     // Fade in animation sequence
-    import { onMount } from 'svelte';
-    
     onMount(() => {
-        // Start text phase
+        // Check for shared state first
+        const sharedState = getUrlState<IChingState>();
+        if (sharedState && sharedState.type === 'iching') {
+            // Look up hexagram data by number
+            import("$lib/hexagrams.json").then(hexagramsData => {
+                const hexData = hexagramsData.hexagrams[sharedState.hexagramNumber.toString()];
+                if (hexData) {
+                    currentResult = {
+                        number: sharedState.hexagramNumber,
+                        name: hexData.name,
+                        reading: hexData.reading,
+                        symbol: hexData.symbol,
+                        lines: [] // We don't store lines for sharing, just the result
+                    };
+                    universeWasSplitDialog.showModal();
+                }
+            });
+            return;
+        }
+        
+        // Normal animation sequence
         textPhase = true;
         // Show each sentence with 2-second intervals
         sentences.forEach((_, index) => {
@@ -78,6 +98,14 @@
         // Generate hexagram using proper yarrow stick method
         currentResult = await generateHexagram();
         isSpinning = false;
+        
+        // Save state to URL
+        const state: IChingState = {
+            type: 'iching',
+            hexagramNumber: currentResult.number,
+            timestamp: Date.now()
+        };
+        setUrlState(state);
         
         universeWasSplitDialog.showModal();
         

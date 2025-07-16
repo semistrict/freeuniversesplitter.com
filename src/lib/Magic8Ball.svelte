@@ -1,6 +1,8 @@
 <script lang="ts">
     import { getRand } from "../random";
     import TeletypeText from "$lib/TeletypeText.svelte";
+    import { setUrlState, getUrlState, type Magic8BallState } from "$lib/urlState";
+    import { onMount } from "svelte";
 
     let universeWasSplitDialog: HTMLDialogElement;
     let isSpinning = false;
@@ -35,6 +37,15 @@
 
     // Spinner corruption characters
     const corruptChars = ['Ω', 'Φ', 'Θ', 'Λ', 'Π', 'Σ', 'Δ', '█', '▓', '▒', '░', '╬', '※', '◊', '●', '◢', '◤'];
+    
+    // Check for shared state on mount
+    onMount(() => {
+        const sharedState = getUrlState<Magic8BallState>();
+        if (sharedState && sharedState.type === 'magic8ball') {
+            currentResult = sharedState.response;
+            universeWasSplitDialog.showModal();
+        }
+    });
     
     function startSpinnerEffects() {
         // Start with processing message
@@ -73,6 +84,14 @@
 
         // Select random response
         currentResult = magic8BallResponses[randomNum % magic8BallResponses.length];
+        
+        // Save state to URL
+        const state: Magic8BallState = {
+            type: 'magic8ball',
+            response: currentResult,
+            timestamp: Date.now()
+        };
+        setUrlState(state);
         
         universeWasSplitDialog.showModal();
         

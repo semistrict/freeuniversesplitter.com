@@ -1,6 +1,8 @@
 <script lang="ts">
     import {getRand} from "../random"
     import TeletypeText from "$lib/TeletypeText.svelte"
+    import { setUrlState, getUrlState, type UniverseState } from "$lib/urlState"
+    import { onMount } from "svelte"
 
     let currentResult: SplitResult | undefined
     let universeWasSplitDialog: HTMLDialogElement
@@ -33,6 +35,28 @@
             weight: 1,
         }
     ];
+
+    // Check for shared state on mount
+    onMount(() => {
+        const sharedState = getUrlState<UniverseState>();
+        if (sharedState && sharedState.type === 'universe') {
+            // Restore the alternatives and weights
+            splits = [
+                { action: sharedState.alternatives[0], weight: sharedState.weights[0] },
+                { action: sharedState.alternatives[1], weight: sharedState.weights[1] }
+            ];
+            
+            // Set the result - find the correct weight for the selected action
+            const selectedWeight = sharedState.alternatives[0] === sharedState.result ? 
+                sharedState.weights[0] : sharedState.weights[1];
+            currentResult = {
+                selected: { action: sharedState.result, weight: selectedWeight },
+                branches: sharedState.weights[0] + sharedState.weights[1]
+            };
+            
+            universeWasSplitDialog.showModal();
+        }
+    });
 
     function pValue(splits: Split[], weight: number) {
         let totalWeight = splits.reduce((total, s) => total + s.weight, 0)
@@ -113,6 +137,17 @@
             selected: selected,
             branches: totalWeight
         }
+        
+        // Save state to URL
+        const state: UniverseState = {
+            type: 'universe',
+            alternatives: [splits[0].action, splits[1].action],
+            weights: [splits[0].weight, splits[1].weight],
+            result: selected.action,
+            timestamp: Date.now()
+        };
+        setUrlState(state);
+        
         confirmDialog.close();
         universeWasSplitDialog.showModal();
         
