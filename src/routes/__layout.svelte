@@ -146,8 +146,4 @@
 		white-space: nowrap;
 		padding: 10px 20px;
 	}
-
-	header {
-		text-align: center;
-	}
 </style>

@@ -272,31 +272,6 @@
 </div>
 
 <style>
-	h1 {
-		color: black;
-		background-color: #41ff00;
-		text-align: center;
-		font-size: 20pt;
-		word-wrap: break-word;
-		overflow-wrap: break-word;
-		hyphens: auto;
-		max-width: 100%;
-		box-sizing: border-box;
-		text-shadow: 0 0 2px black;
-		box-shadow: 0 0 5px #41ff00;
-	}
-
-	@media (max-width: 768px) {
-		h1 {
-			font-size: 16pt;
-		}
-	}
-
-	@media (max-width: 480px) {
-		h1 {
-			font-size: 14pt;
-		}
-	}
 	.content {
 		display: grid;
 		grid-template-columns: 1fr auto;
