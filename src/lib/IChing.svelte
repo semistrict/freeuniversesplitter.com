@@ -1,14 +1,15 @@
 <script lang="ts">
 	import TeletypeText from '$lib/TeletypeText.svelte';
 	import Spinner from '$lib/Spinner.svelte';
+	import Modal from '$lib/Modal.svelte';
 	import { generateHexagram, type Hexagram } from '$lib/ichingLib';
-	import { setUrlState, getUrlState, type IChingState } from '$lib/urlState';
+	import { setUrlState, getUrlState, clearUrlState, type IChingState } from '$lib/urlState';
 	import ResultDialogButtons from '$lib/ResultDialogButtons.svelte';
 	import BackButton from '$lib/BackButton.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 
-	let universeWasSplitDialog: HTMLDialogElement;
+	let showModal = false;
 	let isSpinning = false;
 	let teletypeRef: TeletypeText;
 	let processingMessage = '';
@@ -48,7 +49,10 @@
 		if (sharedState && sharedState.type === 'iching') {
 			// Look up hexagram data by number
 			import('$lib/hexagrams.json').then((hexagramsData) => {
-				const hexData = hexagramsData.hexagrams[sharedState.hexagramNumber.toString()];
+				const hexData =
+					hexagramsData.hexagrams[
+						sharedState.hexagramNumber.toString() as keyof typeof hexagramsData.hexagrams
+					];
 				if (hexData) {
 					currentResult = {
 						number: sharedState.hexagramNumber,
@@ -57,7 +61,7 @@
 						symbol: hexData.symbol,
 						lines: [] // We don't store lines for sharing, just the result
 					};
-					universeWasSplitDialog.showModal();
+					showModal = true;
 				}
 			});
 			return;
@@ -79,7 +83,7 @@
 					currentSentenceIndex = index;
 					sentenceVisible = true;
 				}
-			}, 500 + index * 2000);
+			}, 500 + index * 2000) as unknown as number;
 			instructionTimeouts.push(timeout);
 		});
 
@@ -95,7 +99,7 @@
 					tabletPhase = true;
 				}, 500);
 			}, 500);
-		}, fadeOutDelay);
+		}, fadeOutDelay) as unknown as number;
 		instructionTimeouts.push(finalTimeout);
 	});
 
@@ -114,9 +118,9 @@
 			hexagramNumber: currentResult.number,
 			timestamp: Date.now()
 		};
-		setUrlState(state);
+		setUrlState(state as unknown as Record<string, unknown>);
 
-		universeWasSplitDialog.showModal();
+		showModal = true;
 
 		// Reset the teletype component for the new result
 		if (teletypeRef) {
@@ -182,28 +186,37 @@
 	</div>
 {/if}
 
-<dialog bind:this={universeWasSplitDialog}>
-	<div>The ancient oracle speaks:</div>
-
-	{#if currentResult}
-		<div class="hexagram-display">{currentResult.symbol}</div>
-		<div class="hexagram-name">#{currentResult.number} - {currentResult.name}</div>
-		<div style="font-size: 18pt; text-align: center; padding: 20px;">
-			<TeletypeText bind:this={teletypeRef} text={currentResult.reading} speed={30} delay={500} />
-		</div>
-	{/if}
-
-	<ResultDialogButtons
-		shareTitle="I Ching Reading"
-		shareText={currentResult
-			? `The ancient oracle speaks: #${currentResult.number} - ${currentResult.name}: ${currentResult.reading}`
-			: ''}
+{#if showModal}
+	<Modal
+		isOpen={showModal}
 		onClose={() => {
-			universeWasSplitDialog.close();
+			showModal = false;
 			goto('/');
 		}}
-	/>
-</dialog>
+	>
+		<div>The ancient oracle speaks:</div>
+
+		{#if currentResult}
+			<div class="hexagram-display">{currentResult.symbol}</div>
+			<div class="hexagram-name">#{currentResult.number} - {currentResult.name}</div>
+			<div style="font-size: 18pt; text-align: center; padding: 20px;">
+				<TeletypeText bind:this={teletypeRef} text={currentResult.reading} speed={30} delay={500} />
+			</div>
+		{/if}
+
+		<ResultDialogButtons
+			shareTitle="I Ching Reading"
+			shareText={currentResult
+				? `The ancient oracle speaks: #${currentResult.number} - ${currentResult.name}: ${currentResult.reading}`
+				: ''}
+			onClose={() => {
+				clearUrlState();
+				showModal = false;
+				goto('/');
+			}}
+		/>
+	</Modal>
+{/if}
 
 <style>
 	.text-container {

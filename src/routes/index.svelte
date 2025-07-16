@@ -2,13 +2,14 @@
 	import { getRand } from '../random';
 	import TeletypeText from '$lib/TeletypeText.svelte';
 	import Spinner from '$lib/Spinner.svelte';
-	import { setUrlState, getUrlState, type UniverseState } from '$lib/urlState';
+	import { setUrlState, getUrlState, clearUrlState, type UniverseState } from '$lib/urlState';
 	import ResultDialogButtons from '$lib/ResultDialogButtons.svelte';
+	import Modal from '$lib/Modal.svelte';
 	import { onMount } from 'svelte';
 
 	let currentResult: SplitResult | undefined;
-	let universeWasSplitDialog: HTMLDialogElement;
-	let confirmDialog: HTMLDialogElement;
+	let showResultModal = false;
+	let showConfirmModal = false;
 	let isSpinning = false;
 	let teletypeRef: TeletypeText;
 	let processingMessage = '';
@@ -23,6 +24,11 @@
 	interface SplitResult {
 		branches: number;
 		selected: Split;
+	}
+
+	function handleInputClick(e: Event) {
+		const target = e.target as HTMLInputElement;
+		target?.select();
 	}
 
 	let splits: Split[] = [
@@ -56,7 +62,7 @@
 				branches: sharedState.weights[0] + sharedState.weights[1]
 			};
 
-			universeWasSplitDialog.showModal();
+			showResultModal = true;
 		}
 	});
 
@@ -128,10 +134,10 @@
 			result: selected.action,
 			timestamp: Date.now()
 		};
-		setUrlState(state);
+		setUrlState(state as unknown as Record<string, unknown>);
 
-		confirmDialog.close();
-		universeWasSplitDialog.showModal();
+		showConfirmModal = false;
+		showResultModal = true;
 
 		// Reset the teletype component for the new result
 		if (teletypeRef) {
@@ -172,66 +178,77 @@
 		</p>
 	</div>
 
-	<dialog bind:this={universeWasSplitDialog}>
-		<div>
-			Universe was split into {currentResult?.branches} branch universes.
-		</div>
-		<div>
-			You are in
-			{#if currentResult?.selected.weight == 1}
-				the universe
-			{:else}
-				one of the {currentResult?.selected.weight} universes
-			{/if}
-			in which you should:
-		</div>
-		<div style="font-size: 36pt; text-align: center; padding-top:20px;">
-			{#if currentResult?.selected.action}
-				<TeletypeText
-					bind:this={teletypeRef}
-					text={currentResult.selected.action}
-					speed={30}
-					delay={500}
-				/>
-			{/if}
-		</div>
-		<!--
-    <div style="text-align: center; padding-bottom:20px; font-style:italic">
-        {#if currentResult}
-        p={pValue(splits, currentResult.selected.weight)}
-        {/if}
-    </div>
-    -->
-		<ResultDialogButtons
-			shareTitle="Universe Splitter Result"
-			shareText={currentResult ? `The universe has decided: ${currentResult.selected.action}` : ''}
-			onClose={() => universeWasSplitDialog.close()}
-		/>
-	</dialog>
+	{#if showResultModal}
+		<Modal isOpen={showResultModal} onClose={() => (showResultModal = false)}>
+			<div>
+				Universe was split into {currentResult?.branches} branch universes.
+			</div>
+			<div>
+				You are in
+				{#if currentResult?.selected.weight == 1}
+					the universe
+				{:else}
+					one of the {currentResult?.selected.weight} universes
+				{/if}
+				in which you should:
+			</div>
+			<div style="font-size: 36pt; text-align: center; padding-top:20px;">
+				{#if currentResult?.selected.action}
+					<TeletypeText
+						bind:this={teletypeRef}
+						text={currentResult.selected.action}
+						speed={30}
+						delay={500}
+					/>
+				{/if}
+			</div>
+			<!--
+	    <div style="text-align: center; padding-bottom:20px; font-style:italic">
+	        {#if currentResult}
+	        p={pValue(splits, currentResult.selected.weight)}
+	        {/if}
+	    </div>
+	    -->
+			<ResultDialogButtons
+				shareTitle="Universe Splitter Result"
+				shareText={currentResult
+					? `The universe has decided: ${currentResult.selected.action}`
+					: ''}
+				onClose={() => {
+					clearUrlState();
+					showResultModal = false;
+				}}
+			/>
+		</Modal>
+	{/if}
 
-	<dialog bind:this={confirmDialog}>
-		<div>Selected splits:</div>
-		<div style="padding-top:20px; padding-bottom:20px">
-			{#each splits as split}
-				<div>
-					<span style="text-decoration: underline">{split.action}</span> - {probability(
-						splits,
-						split.weight
-					)} of universes
+	{#if showConfirmModal}
+		<Modal isOpen={showConfirmModal} onClose={() => (showConfirmModal = false)}>
+			<div>Selected splits:</div>
+			<div style="padding-top:20px; padding-bottom:20px">
+				{#each splits as split}
+					<div>
+						<span style="text-decoration: underline">{split.action}</span> - {probability(
+							splits,
+							split.weight
+						)} of universes
+					</div>
+				{/each}
+			</div>
+			{#if isSpinning}
+				<div style="text-align: center; padding: 20px;">
+					<Spinner {processingMessage} {isSpinning} />
 				</div>
-			{/each}
-		</div>
-		{#if isSpinning}
-			<div style="text-align: center; padding: 20px;">
-				<Spinner {processingMessage} {isSpinning} />
-			</div>
-		{:else}
-			<div style="text-align: right; width: 100%">
-				<button class="split-button" on:click={() => splitUniverse(splits)}>Split Universe!</button>
-				<button on:click={() => confirmDialog.close()}>Cancel</button>
-			</div>
-		{/if}
-	</dialog>
+			{:else}
+				<div style="text-align: right; width: 100%">
+					<button class="split-button" on:click={() => splitUniverse(splits)}
+						>Split Universe!</button
+					>
+					<button on:click={() => (showConfirmModal = false)}>Cancel</button>
+				</div>
+			{/if}
+		</Modal>
+	{/if}
 
 	<div class="main-content">
 		<div class="content" bind:this={contentDiv}>
@@ -244,19 +261,14 @@
 					enterkeyhint="next"
 					placeholder={placeholderText(splits, i)}
 					bind:value={split.action}
-					on:click={(e) => e.target?.select()}
+					on:click={handleInputClick}
 				/>
-				<input
-					type="number"
-					min="1"
-					bind:value={split.weight}
-					on:click={(e) => e.target?.select()}
-				/>
+				<input type="number" min="1" bind:value={split.weight} on:click={handleInputClick} />
 			{/each}
 		</div>
 
 		<div style="text-align: center; padding-top: 10px">
-			<button class="splitButton" on:click={() => confirmDialog.showModal()}>Next</button>
+			<button class="splitButton" on:click={() => (showConfirmModal = true)}>Next</button>
 		</div>
 	</div>
 </div>

@@ -2,12 +2,14 @@
 	import { getRand } from '../random';
 	import TeletypeText from '$lib/TeletypeText.svelte';
 	import Spinner from '$lib/Spinner.svelte';
-	import { setUrlState, getUrlState, type Magic8BallState } from '$lib/urlState';
+	import { setUrlState, getUrlState, clearUrlState, type Magic8BallState } from '$lib/urlState';
 	import ResultDialogButtons from '$lib/ResultDialogButtons.svelte';
 	import BackButton from '$lib/BackButton.svelte';
+	import Modal from '$lib/Modal.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
-	let universeWasSplitDialog: HTMLDialogElement;
+	let showModal = false;
 	let isSpinning = false;
 	let teletypeRef: TeletypeText;
 	let processingMessage = '';
@@ -42,7 +44,7 @@
 		const sharedState = getUrlState<Magic8BallState>();
 		if (sharedState && sharedState.type === 'magic8ball') {
 			currentResult = sharedState.response;
-			universeWasSplitDialog.showModal();
+			showModal = true;
 		}
 	});
 
@@ -69,9 +71,9 @@
 			response: currentResult,
 			timestamp: Date.now()
 		};
-		setUrlState(state);
+		setUrlState(state as unknown as Record<string, unknown>);
 
-		universeWasSplitDialog.showModal();
+		showModal = true;
 
 		// Reset the teletype component for the new result
 		if (teletypeRef) {
@@ -110,19 +112,25 @@
 	</div>
 </div>
 
-<dialog bind:this={universeWasSplitDialog}>
-	<div>The quantum magic 8 ball reveals:</div>
-	<div style="font-size: 36pt; text-align: center; padding: 20px;">
-		{#if currentResult}
-			<TeletypeText bind:this={teletypeRef} text={currentResult} speed={30} delay={500} />
-		{/if}
-	</div>
-	<ResultDialogButtons
-		shareTitle="Magic 8 Ball Result"
-		shareText={currentResult ? `The quantum magic 8 ball says: "${currentResult}"` : ''}
-		onClose={() => universeWasSplitDialog.close()}
-	/>
-</dialog>
+{#if showModal}
+	<Modal isOpen={showModal} onClose={() => (showModal = false)}>
+		<div>The quantum magic 8 ball reveals:</div>
+		<div style="font-size: 36pt; text-align: center; padding: 20px;">
+			{#if currentResult}
+				<TeletypeText bind:this={teletypeRef} text={currentResult} speed={30} delay={500} />
+			{/if}
+		</div>
+		<ResultDialogButtons
+			shareTitle="Magic 8 Ball Result"
+			shareText={currentResult ? `The quantum magic 8 ball says: "${currentResult}"` : ''}
+			onClose={() => {
+				clearUrlState();
+				showModal = false;
+				goto('/');
+			}}
+		/>
+	</Modal>
+{/if}
 
 <style>
 	.magic8ball-container {

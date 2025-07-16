@@ -48,6 +48,52 @@
 		color: #41ff00;
 		border: 2px solid #41ff00;
 		border-radius: 8px;
+		position: relative;
+	}
+
+	:global(dialog::after) {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: repeating-linear-gradient(
+			0deg,
+			transparent 0px,
+			transparent 3px,
+			rgba(0, 0, 0, 0.4) 3px,
+			rgba(0, 0, 0, 0.4) 4px
+		);
+		pointer-events: none;
+		z-index: 1;
+		animation: scanline-flicker 6s infinite linear;
+	}
+
+	:global(dialog > *) {
+		position: relative;
+		z-index: 2;
+	}
+
+	@keyframes scanline-flicker {
+		0% {
+			opacity: 0.7;
+		}
+		25% {
+			opacity: 0.9;
+		}
+		50% {
+			opacity: 0.8;
+		}
+		75% {
+			opacity: 1;
+		}
+		100% {
+			opacity: 0.7;
+		}
+	}
+
+	:global(dialog) {
 		padding: 20px;
 		max-width: 90%;
 		max-height: 80%;
