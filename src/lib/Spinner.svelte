@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 
 	export let processingMessage = '';
-	export let fontSize = '18pt';
+	export let fontSize = '32pt';
 	export let isSpinning = false;
 
 	let displayChar = 'Ψ';

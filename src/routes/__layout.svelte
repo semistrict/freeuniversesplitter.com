@@ -10,10 +10,6 @@
 	<meta name="application-name" content="Universe Splitter" />
 	<meta name="mobile-web-app-capable" content="yes" />
 
-	<meta
-		name="viewport"
-		content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
-	/>
 	<meta name="apple-mobile-web-app-title" content="Univese Splitter" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
@@ -104,6 +100,18 @@
 		margin: 0;
 		padding: 0;
 		overflow-x: hidden;
+		touch-action: pan-x pan-y;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	:global(html) {
+		touch-action: pan-x pan-y;
+		-webkit-touch-callout: none;
 	}
 
 	:global(button) {
@@ -134,7 +142,7 @@
 		box-sizing: border-box;
 		text-shadow: 0 0 2px black;
 		box-shadow: 0 0 5px #41ff00;
-		margin-top: 20px;
+		margin-top: max(20px, env(safe-area-inset-top));
 		white-space: nowrap;
 		padding: 10px 20px;
 	}
