@@ -141,8 +141,8 @@
 	}
 
 	.crt-bezel {
-		width: min(90vw, 80vh * 4/3);
-		height: min(90vw * 3/4, 80vh);
+		width: min(100vw, (100vh - 40px) * 4/3, 1200px);
+		height: calc(min(100vw, (100vh - 40px) * 4/3, 1200px) * 3 / 4);
 		max-width: 1200px;
 		max-height: 900px;
 		background: linear-gradient(45deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
@@ -151,17 +151,6 @@
 		box-sizing: border-box;
 		position: relative;
 		box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.8), 0 0 100px rgba(0, 0, 0, 0.5);
-	}
-
-	@media (max-width: 768px) {
-		.crt-bezel {
-			width: 95vw;
-			height: 85vh;
-			max-width: none;
-			max-height: none;
-			border-radius: 30px;
-			padding: 20px;
-		}
 	}
 
 	.crt-content {
@@ -316,25 +305,25 @@
 				ellipse at center,
 				transparent 0%,
 				transparent 15%,
-				rgba(0, 0, 0, 0.2) 35%,
-				rgba(0, 0, 0, 0.5) 55%,
-				rgba(0, 0, 0, 0.8) 75%,
-				rgba(0, 0, 0, 0.95) 90%,
-				rgba(0, 0, 0, 1) 100%
+				rgba(0, 0, 0, 0.15) 35%,
+				rgba(0, 0, 0, 0.375) 55%,
+				rgba(0, 0, 0, 0.6) 75%,
+				rgba(0, 0, 0, 0.725) 90%,
+				rgba(0, 0, 0, 0.75) 100%
 			),
 			linear-gradient(
 				to right,
-				rgba(0, 0, 0, 0.4) 0%,
+				rgba(0, 0, 0, 0.3) 0%,
 				transparent 15%,
 				transparent 85%,
-				rgba(0, 0, 0, 0.4) 100%
+				rgba(0, 0, 0, 0.3) 100%
 			),
 			linear-gradient(
 				to bottom,
-				rgba(0, 0, 0, 0.4) 0%,
+				rgba(0, 0, 0, 0.3) 0%,
 				transparent 15%,
 				transparent 85%,
-				rgba(0, 0, 0, 0.4) 100%
+				rgba(0, 0, 0, 0.3) 100%
 			);
 		pointer-events: none;
 		z-index: 12;
