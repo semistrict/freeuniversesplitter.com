@@ -17,13 +17,13 @@
 				console.log('Signal disruption: ALWAYS triggering (dev mode)');
 				runSignalDisruption();
 			} else {
-				// PRODUCTION: Use quantum randomness to decide if signal disruption should happen (1/π probability)
+				// PRODUCTION: Use quantum randomness to decide if signal disruption should happen ((1/π)² probability)
 				const quantumRandom = await getRand();
-				const probability = 1 / Math.PI; // approximately 0.318 or 31.8%
+				const probability = Math.pow(1 / Math.PI, 2); // approximately 0.101 or 10.1%
 
 				// Use modulo to get a value between 0-999, then check if it's < probability * 1000
 				const normalizedRandom = quantumRandom % 1000;
-				const threshold = probability * 1000; // approximately 318
+				const threshold = probability * 1000; // approximately 101
 				const shouldDisrupt = normalizedRandom < threshold;
 
 				console.log('Signal disruption check:', {

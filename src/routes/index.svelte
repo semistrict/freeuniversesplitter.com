@@ -166,8 +166,6 @@
 	<meta property="og:image" content="https://freeuniversesplitter.com/icon_og.png" />
 </svelte:head>
 
-<h1>FreeUniverseSplitter.com</h1>
-
 <div class="page-container">
 	<div class="intro-section">
 		<p>Enter two alternatives below. Universe will be split.</p>
