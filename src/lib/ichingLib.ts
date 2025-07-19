@@ -75,7 +75,8 @@ export function yarrow(rng: SeededRNG): Line {
 	const DivideStalks = function (YarrowStalks: number) {
 		// Divide 49 stalks into eastpile westpile
 		// Subtract one from westpile put in handpile
-		WestPile = rng.range(0, YarrowStalks + 1);
+		// Ensure we get at least 1 for WestPile so it doesn't become negative after subtraction
+		WestPile = rng.range(1, YarrowStalks + 1);
 		EastPile = YarrowStalks - WestPile;
 		WestPile = WestPile - 1;
 		HandPile = 1;
