@@ -47,12 +47,12 @@ export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const router = Router();
 		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
-		router.options('*', handleOptions);
-		router.get('/updateKV', (request) => handleRandRequest(qrng, request, env));
-		router.get('/', (request) => handleGetRequest(request));
-		router.get('/rndnum', () => handleGetRandNum());
-		return router.handle(request);
-	},
+                router.options('*', handleOptions);
+                router.get('/updateKV', (request) => handleRandRequest(qrng, request, env));
+                router.get('/', (request) => handleGetRequest(request, env));
+                router.get('/rndnum', () => handleGetRandNum(env));
+                return router.handle(request);
+        },
 
 	async scheduled(request: Request, env: Env, ctx: ExecutionContext) {
 		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
@@ -60,8 +60,8 @@ export default {
 	},
 };
 
-async function handleGetRandom() {
-	const genRand = await env.batchQRandmoness.get('qRandomness');
+async function handleGetRandom(env: Env) {
+        const genRand = await env.batchQRandmoness.get('qRandomness');
 	if (genRand === null) {
 		return new Response('Value not found', { status: 404 });
 	}
@@ -104,8 +104,8 @@ const cyrb53 = function (str: string, seed = 0): number {
 	return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
-async function handleGetRandNum(): Promise<Response> {
-	const R = await handleGetRandom();
+async function handleGetRandNum(env: Env): Promise<Response> {
+        const R = await handleGetRandom(env);
 
 	const responseHeaders = new Headers();
 	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
@@ -117,7 +117,7 @@ async function handleGetRandNum(): Promise<Response> {
 	});
 }
 
-async function handleGetRequest(request: Request): Promise<Response> {
+async function handleGetRequest(request: Request, env: Env): Promise<Response> {
 	const { searchParams } = new URL(request.url);
 	let outcomes = searchParams.getAll('outcome');
 	const max = Number(searchParams.get('max'));
@@ -130,7 +130,7 @@ async function handleGetRequest(request: Request): Promise<Response> {
 		outcomes = defaultOutcomes;
 	}
 
-	const R = await handleGetRandom();
+        const R = await handleGetRandom(env);
 
 	const selectedOutcome = outcomes[R % outcomes.length];
 	const responseHeaders = new Headers();
