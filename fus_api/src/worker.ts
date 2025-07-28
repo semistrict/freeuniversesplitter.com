@@ -100,16 +100,17 @@ async function handleGetRandom(env: Env): Promise<number> {
 }
 
 async function handleUpdateKV(request: Request, env: Env): Promise<Response> {
-	// Check for secret parameter
-	const url = new URL(request.url);
-	const providedSecret = url.searchParams.get('secret');
+	// Check for Bearer token in Authorization header
+	const authHeader = request.headers.get('Authorization');
+	const providedSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
 
 	if (!providedSecret || providedSecret !== env.UPDATE_KV_SECRET) {
 		return new Response('Unauthorized', {
 			status: 401,
 			headers: {
 				'Access-Control-Allow-Origin': allowedOrigin,
-				'Content-Type': 'text/plain'
+				'Content-Type': 'text/plain',
+				'WWW-Authenticate': 'Bearer'
 			}
 		});
 	}
