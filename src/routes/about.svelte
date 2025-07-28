@@ -28,12 +28,26 @@
 	</p>
 
 	<p>
-		Basically I just periodically retrieve a chunk of randomness from the <a
-			href="https://qrng.anu.edu.au/"
-			>quantum random number generator provided by Australian National University</a
-		>
-		and then use that to select one of the outcomes in proportion to the number of universes you chose
-		for that outcome.
+		Basically I just periodically retrieve quantum randomness from multiple sources and combine them
+		to maximize entropy and reliability. These sources include:
+	</p>
+	<ul>
+		<li>
+			<a href="https://qrng.anu.edu.au/">Australian National University</a> - quantum vacuum fluctuations
+		</li>
+		<li>
+			<a href="https://random.colorado.edu/">NIST CURBy Beacon</a> - quantum entanglement measurements
+		</li>
+		<li>
+			<a href="https://beacon.inmetro.gov.br/">Brazilian INMETRO Beacon</a> - cryptographically signed quantum pulses
+		</li>
+		<li>
+			<a href="https://lfdr.de/QRNG/">German LfD Laboratory</a> - ID Quantique hardware quantum generator
+		</li>
+	</ul>
+	<p>
+		I then use this combined quantum randomness to select one of the outcomes in proportion to the
+		number of universes you chose for that outcome.
 	</p>
 	<p>
 		My understanding is that the quantum randomness will effectively be different in different
@@ -167,8 +181,9 @@
 	<p>
 		No. Quantum random numbers are pretty easy to generate with the right hardware because the world
 		around us is quantum at a fundamental level so you just need to be able to measure these
-		miniscule fluctuations. Most computers do not have hardware to do this, so we rely on an
-		randomness provided by ANU here: https://qrng.anu.edu.au/
+		miniscule fluctuations. Most computers do not have hardware to do this, so we rely on quantum
+		randomness from multiple research institutions worldwide that provide public quantum random number
+		generation services.
 	</p>
 
 	<h2>Is there a native iPhone/Android app?</h2>

@@ -1,6 +1,8 @@
 import { Router } from 'itty-router';
 import { ANUGenerator } from './qrng';
 import { CURByGenerator } from './curby';
+import { INMETROGenerator } from './inmetro';
+import { LfDGenerator } from './lfd';
 
 export interface Env {
 	QUANTUM_NUMBERS_API_KEY: string;
@@ -49,6 +51,8 @@ export default {
 		const router = Router();
 		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
 		const curby = new CURByGenerator();
+		const inmetro = new INMETROGenerator();
+		const lfd = new LfDGenerator();
 		router.options('*', handleOptions);
 		router.get('/updateKV', (request) => handleCombinedRandRequest(request, env));
 		router.get('/', (request) => handleGetRequest(request, env));
@@ -75,7 +79,7 @@ async function handleGetRandom(env: Env): Promise<number> {
 }
 
 //? fetch and store randomness for kv store
-async function handleRandRequest(generator: ANUGenerator | CURByGenerator, request: Request, env: Env): Promise<Response> {
+async function handleRandRequest(generator: ANUGenerator | CURByGenerator | INMETROGenerator | LfDGenerator, request: Request, env: Env): Promise<Response> {
 	// Generate randomness using generator module making call to API, return string of data array
 	const genRand = await generator.generate();
 
@@ -94,7 +98,9 @@ async function handleRandRequest(generator: ANUGenerator | CURByGenerator, reque
 async function handleCombinedRandRequest(request: Request, env: Env): Promise<Response> {
 	const generators = [
 		{ name: 'ANU', generator: new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY) },
-		{ name: 'CURBy', generator: new CURByGenerator() }
+		{ name: 'CURBy', generator: new CURByGenerator() },
+		{ name: 'INMETRO', generator: new INMETROGenerator() },
+		{ name: 'LfD', generator: new LfDGenerator() }
 	];
 
 	const results: string[] = [];
