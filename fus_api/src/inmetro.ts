@@ -14,7 +14,7 @@ export class INMETROGenerator {
 
 			const data = await response.json();
 			const outputValue = data?.pulse?.outputValue;
-			
+
 			if (!outputValue || typeof outputValue !== 'string') {
 				throw new Error('Invalid response format from INMETRO beacon');
 			}

@@ -10,14 +10,14 @@ export class LfDGenerator {
 			// Request 128 bytes (1024 bits) of quantum random data in hex format
 			const url = `${this.baseUrl}?length=128&format=HEX`;
 			const response = await fetch(url);
-			
+
 			if (!response.ok) {
 				throw new Error(`LfD QRNG returned ${response.status}: ${response.statusText}`);
 			}
 
 			const data = await response.json();
 			const qrn = data?.qrn;
-			
+
 			if (!qrn || typeof qrn !== 'string') {
 				throw new Error('Invalid response format from LfD QRNG');
 			}

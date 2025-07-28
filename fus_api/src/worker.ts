@@ -9,6 +9,7 @@ import { CloudflareGenerator } from './cloudflare';
 
 export interface Env {
 	QUANTUM_NUMBERS_API_KEY: string;
+	UPDATE_KV_SECRET: string;
 	batchQRandmoness: KVNamespace;
 }
 
@@ -72,7 +73,7 @@ export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const router = Router();
 		router.options('*', handleOptions);
-		router.get('/updateKV', (request) => handleCombinedRandRequest(request, env));
+		router.get('/updateKV', (request) => handleUpdateKV(request, env));
 		router.get('/test', (request) => handleTestGenerators(request, env));
 		router.get('/status', () => handleGetStatus(env));
 		router.get('/', (request) => handleGetRequest(request, env));
@@ -98,6 +99,23 @@ async function handleGetRandom(env: Env): Promise<number> {
 	return R;
 }
 
+async function handleUpdateKV(request: Request, env: Env): Promise<Response> {
+	// Check for secret parameter
+	const url = new URL(request.url);
+	const providedSecret = url.searchParams.get('secret');
+
+	if (!providedSecret || providedSecret !== env.UPDATE_KV_SECRET) {
+		return new Response('Unauthorized', {
+			status: 401,
+			headers: {
+				'Access-Control-Allow-Origin': allowedOrigin,
+				'Content-Type': 'text/plain'
+			}
+		});
+	}
+
+	return handleCombinedRandRequest(request, env);
+}
 
 async function handleCombinedRandRequest(request: Request, env: Env): Promise<Response> {
 	const generators = QUANTUM_GENERATORS;
@@ -247,7 +265,7 @@ async function combineRandomnessSources(sources: string[]): Promise<string> {
 	if (sources.length === 0) {
 		throw new Error('No sources to combine');
 	}
-	
+
 	if (sources.length === 1) {
 		return sources[0];
 	}
@@ -261,19 +279,19 @@ async function combineRandomnessSources(sources: string[]): Promise<string> {
 
 	// Concatenate all sources with separators for domain separation
 	const combinedInput = sources.join('|');
-	
+
 	// Add timestamp and source count for additional entropy
 	const timestamp = Date.now().toString(16);
 	const finalInput = `${combinedInput}|${timestamp}|${sources.length}`;
-	
+
 	// Convert to Uint8Array for Web Crypto API
 	const encoder = new TextEncoder();
 	const data = encoder.encode(finalInput);
-	
+
 	// Use SHA-256 to combine securely
 	const hashBuffer = await crypto.subtle.digest('SHA-256', data);
 	const hashArray = new Uint8Array(hashBuffer);
-	
+
 	// Convert to hex string
 	return Array.from(hashArray)
 		.map(b => b.toString(16).padStart(2, '0'))
