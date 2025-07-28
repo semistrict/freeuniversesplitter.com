@@ -133,9 +133,9 @@ export function yarrow(rng: SeededRNG): Line {
 	return LineCast();
 }
 
-export async function generateHexagram(): Promise<Hexagram> {
+export async function generateHexagram(randomGetter: () => Promise<number> = getRand): Promise<Hexagram> {
 	// Get quantum random seed
-	const quantumSeed = await getRand();
+	const quantumSeed = await randomGetter();
 	const rng = new SeededRNG(quantumSeed);
 
 	const lines: Line[] = [];
