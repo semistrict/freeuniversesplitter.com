@@ -3,11 +3,33 @@ import { ANUGenerator } from './qrng';
 import { CURByGenerator } from './curby';
 import { INMETROGenerator } from './inmetro';
 import { LfDGenerator } from './lfd';
+import { NISTGenerator } from './nist';
+import { RandomOrgGenerator } from './randomorg';
+import { CloudflareGenerator } from './cloudflare';
 
 export interface Env {
 	QUANTUM_NUMBERS_API_KEY: string;
 	batchQRandmoness: KVNamespace;
 }
+
+interface GeneratorStatus {
+	name: string;
+	success: boolean;
+	timestamp: string;
+	duration: string;
+	dataLength?: number;
+	error?: string;
+}
+
+const QUANTUM_GENERATORS = [
+	{ name: 'ANU', generator: (env: Env) => new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY) },
+	{ name: 'CURBy', generator: (_env: Env) => new CURByGenerator() },
+	{ name: 'INMETRO', generator: (_env: Env) => new INMETROGenerator() },
+	{ name: 'LfD', generator: (_env: Env) => new LfDGenerator() },
+	{ name: 'NIST', generator: (_env: Env) => new NISTGenerator() },
+	{ name: 'Random.org', generator: (_env: Env) => new RandomOrgGenerator() },
+	{ name: 'Cloudflare', generator: (_env: Env) => new CloudflareGenerator() }
+];
 
 const allowedOrigin = '*';
 
@@ -49,12 +71,10 @@ Very doubtful.
 export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const router = Router();
-		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
-		const curby = new CURByGenerator();
-		const inmetro = new INMETROGenerator();
-		const lfd = new LfDGenerator();
 		router.options('*', handleOptions);
 		router.get('/updateKV', (request) => handleCombinedRandRequest(request, env));
+		router.get('/test', (request) => handleTestGenerators(request, env));
+		router.get('/status', () => handleGetStatus(env));
 		router.get('/', (request) => handleGetRequest(request, env));
 		router.get('/rndnum', () => handleGetRandNum(env));
 		return router.handle(request);
@@ -78,40 +98,40 @@ async function handleGetRandom(env: Env): Promise<number> {
 	return R;
 }
 
-//? fetch and store randomness for kv store
-async function handleRandRequest(generator: ANUGenerator | CURByGenerator | INMETROGenerator | LfDGenerator, request: Request, env: Env): Promise<Response> {
-	// Generate randomness using generator module making call to API, return string of data array
-	const genRand = await generator.generate();
-
-	//? Write to KV store key "qRandomness"
-	await env.batchQRandmoness.put('qRandomness', genRand);
-	const responseHeaders = new Headers();
-	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
-	responseHeaders.set('Content-Type', 'text/plain');
-
-	return new Response(`${genRand}`, {
-		headers: responseHeaders,
-		status: 200,
-	});
-}
 
 async function handleCombinedRandRequest(request: Request, env: Env): Promise<Response> {
-	const generators = [
-		{ name: 'ANU', generator: new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY) },
-		{ name: 'CURBy', generator: new CURByGenerator() },
-		{ name: 'INMETRO', generator: new INMETROGenerator() },
-		{ name: 'LfD', generator: new LfDGenerator() }
-	];
+	const generators = QUANTUM_GENERATORS;
+	const timestamp = new Date().toISOString();
 
 	const results: string[] = [];
 	const errors: string[] = [];
+	const statusReport: GeneratorStatus[] = [];
 
 	// Try all generators in parallel
 	const promises = generators.map(async ({ name, generator }) => {
+		const startTime = Date.now();
 		try {
-			const randomness = await generator.generate();
+			const randomness = await generator(env).generate();
+			const duration = Date.now() - startTime;
+			const status = {
+				name,
+				success: true,
+				timestamp,
+				duration: `${duration}ms`,
+				dataLength: randomness.length
+			};
+			statusReport.push(status);
 			return { success: true as const, name, data: randomness };
 		} catch (error) {
+			const duration = Date.now() - startTime;
+			const status = {
+				name,
+				success: false,
+				timestamp,
+				duration: `${duration}ms`,
+				error: error instanceof Error ? error.message : 'Unknown error'
+			};
+			statusReport.push(status);
 			return { success: false as const, name, error: error instanceof Error ? error.message : 'Unknown error' };
 		}
 	});
@@ -127,6 +147,9 @@ async function handleCombinedRandRequest(request: Request, env: Env): Promise<Re
 		}
 	}
 
+	// Save status report to KV
+	await env.batchQRandmoness.put('generatorStatus', JSON.stringify(statusReport));
+
 	// Must have at least one successful source
 	if (results.length === 0) {
 		return new Response(`All sources failed: ${errors.join(', ')}`, {
@@ -135,9 +158,9 @@ async function handleCombinedRandRequest(request: Request, env: Env): Promise<Re
 	}
 
 	// Combine all successful sources
-	const combined = combineRandomnessSources(results);
+	const combined = await combineRandomnessSources(results);
 
-	// Write to KV store
+	// Write combined randomness to KV store
 	await env.batchQRandmoness.put('qRandomness', combined);
 	const responseHeaders = new Headers();
 	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
@@ -149,27 +172,112 @@ async function handleCombinedRandRequest(request: Request, env: Env): Promise<Re
 	});
 }
 
-function combineRandomnessSources(sources: string[]): string {
+async function handleTestGenerators(request: Request, env: Env): Promise<Response> {
+	const generators = QUANTUM_GENERATORS;
+
+	// Try all generators in parallel
+	const promises = generators.map(async ({ name, generator }) => {
+		const startTime = Date.now();
+		try {
+			const randomness = await generator(env).generate();
+			const duration = Date.now() - startTime;
+			return {
+				name,
+				success: true,
+				data: randomness.substring(0, 32) + '...', // Show first 32 chars
+				length: randomness.length,
+				duration: `${duration}ms`
+			};
+		} catch (error) {
+			const duration = Date.now() - startTime;
+			return {
+				name,
+				success: false,
+				error: error instanceof Error ? error.message : 'Unknown error',
+				duration: `${duration}ms`
+			};
+		}
+	});
+
+	const outcomes = await Promise.all(promises);
+
+	const responseHeaders = new Headers();
+	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+	responseHeaders.set('Content-Type', 'application/json');
+
+	return new Response(JSON.stringify(outcomes, null, 2), {
+		headers: responseHeaders,
+		status: 200,
+	});
+}
+
+async function handleGetStatus(env: Env): Promise<Response> {
+	try {
+		const status = await env.batchQRandmoness.get('generatorStatus');
+
+		const responseHeaders = new Headers();
+		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+		responseHeaders.set('Content-Type', 'application/json');
+
+		if (!status) {
+			return new Response(JSON.stringify({ error: 'No status data available - run /updateKV first' }, null, 2), {
+				headers: responseHeaders,
+				status: 404,
+			});
+		}
+
+		const statusData = JSON.parse(status);
+		return new Response(JSON.stringify(statusData, null, 2), {
+			headers: responseHeaders,
+			status: 200,
+		});
+	} catch (error) {
+		const responseHeaders = new Headers();
+		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+		responseHeaders.set('Content-Type', 'application/json');
+
+		return new Response(JSON.stringify({ error: `Status error: ${error instanceof Error ? error.message : 'Unknown error'}` }, null, 2), {
+			headers: responseHeaders,
+			status: 500,
+		});
+	}
+}
+
+async function combineRandomnessSources(sources: string[]): Promise<string> {
+	if (sources.length === 0) {
+		throw new Error('No sources to combine');
+	}
+	
 	if (sources.length === 1) {
 		return sources[0];
 	}
 
-	// XOR all sources together byte by byte
-	const maxLength = Math.max(...sources.map(s => s.length));
-	let combined = '';
-	
-	for (let i = 0; i < maxLength; i += 2) {
-		let xorByte = 0;
-		
-		for (const source of sources) {
-			const byte = parseInt(source.substring(i, i + 2) || '00', 16);
-			xorByte ^= byte;
+	// Validate all sources are valid hex strings
+	for (const source of sources) {
+		if (!/^[0-9a-fA-F]*$/.test(source) || source.length % 2 !== 0) {
+			throw new Error(`Invalid hex string: ${source.substring(0, 20)}...`);
 		}
-		
-		combined += xorByte.toString(16).padStart(2, '0');
 	}
+
+	// Concatenate all sources with separators for domain separation
+	const combinedInput = sources.join('|');
 	
-	return combined;
+	// Add timestamp and source count for additional entropy
+	const timestamp = Date.now().toString(16);
+	const finalInput = `${combinedInput}|${timestamp}|${sources.length}`;
+	
+	// Convert to Uint8Array for Web Crypto API
+	const encoder = new TextEncoder();
+	const data = encoder.encode(finalInput);
+	
+	// Use SHA-256 to combine securely
+	const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+	const hashArray = new Uint8Array(hashBuffer);
+	
+	// Convert to hex string
+	return Array.from(hashArray)
+		.map(b => b.toString(16).padStart(2, '0'))
+		.join('');
 }
 
 // adapted from: https://github.com/bryc/code/blob/master/jshash/experimental/cyrb53.js

@@ -14,6 +14,7 @@
 	},
 	"dependencies": {
 		"@buff-beacon-project/curby-client": "^1.2.0",
-		"itty-router": "^4.0.17"
+		"itty-router": "^4.0.17",
+		"nist-randomness-beacon": "^2.0.4"
 	}
 }
