@@ -1,5 +1,6 @@
 import { Router } from 'itty-router';
 import { ANUGenerator } from './qrng';
+import { CURByGenerator } from './curby';
 
 export interface Env {
 	QUANTUM_NUMBERS_API_KEY: string;
@@ -47,23 +48,23 @@ export default {
 	async fetch(request: Request, env: Env): Promise<Response> {
 		const router = Router();
 		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
+		const curby = new CURByGenerator();
 		router.options('*', handleOptions);
-		router.get('/updateKV', (request) => handleRandRequest(qrng, request, env));
-		router.get('/', (request) => handleGetRequest(request));
-		router.get('/rndnum', () => handleGetRandNum());
+		router.get('/updateKV', (request) => handleCombinedRandRequest(request, env));
+		router.get('/', (request) => handleGetRequest(request, env));
+		router.get('/rndnum', () => handleGetRandNum(env));
 		return router.handle(request);
 	},
 
 	async scheduled(request: Request, env: Env, ctx: ExecutionContext) {
-		const qrng = new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY);
-		ctx.waitUntil(handleRandRequest(qrng, request, env));
+		ctx.waitUntil(handleCombinedRandRequest(request, env));
 	},
 };
 
-async function handleGetRandom() {
+async function handleGetRandom(env: Env): Promise<number> {
 	const genRand = await env.batchQRandmoness.get('qRandomness');
 	if (genRand === null) {
-		return new Response('Value not found', { status: 404 });
+		throw new Error('No randomness available - call /updateKV first');
 	}
 
 	const IBMQ_RAND = `3152447550`;
@@ -74,9 +75,9 @@ async function handleGetRandom() {
 }
 
 //? fetch and store randomness for kv store
-async function handleRandRequest(qrng: ANUGenerator, request: Request, env: Env): Promise<Response> {
-	// Generate randomness using qrng module making call to qr API, return string of data array
-	const genRand = await qrng.generate();
+async function handleRandRequest(generator: ANUGenerator | CURByGenerator, request: Request, env: Env): Promise<Response> {
+	// Generate randomness using generator module making call to API, return string of data array
+	const genRand = await generator.generate();
 
 	//? Write to KV store key "qRandomness"
 	await env.batchQRandmoness.put('qRandomness', genRand);
@@ -88,6 +89,81 @@ async function handleRandRequest(qrng: ANUGenerator, request: Request, env: Env)
 		headers: responseHeaders,
 		status: 200,
 	});
+}
+
+async function handleCombinedRandRequest(request: Request, env: Env): Promise<Response> {
+	const generators = [
+		{ name: 'ANU', generator: new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY) },
+		{ name: 'CURBy', generator: new CURByGenerator() }
+	];
+
+	const results: string[] = [];
+	const errors: string[] = [];
+
+	// Try all generators in parallel
+	const promises = generators.map(async ({ name, generator }) => {
+		try {
+			const randomness = await generator.generate();
+			return { success: true as const, name, data: randomness };
+		} catch (error) {
+			return { success: false as const, name, error: error instanceof Error ? error.message : 'Unknown error' };
+		}
+	});
+
+	const outcomes = await Promise.all(promises);
+
+	// Collect results and errors
+	for (const outcome of outcomes) {
+		if (outcome.success) {
+			results.push(outcome.data);
+		} else {
+			errors.push(`${outcome.name}: ${outcome.error}`);
+		}
+	}
+
+	// Must have at least one successful source
+	if (results.length === 0) {
+		return new Response(`All sources failed: ${errors.join(', ')}`, {
+			status: 500,
+		});
+	}
+
+	// Combine all successful sources
+	const combined = combineRandomnessSources(results);
+
+	// Write to KV store
+	await env.batchQRandmoness.put('qRandomness', combined);
+	const responseHeaders = new Headers();
+	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+	responseHeaders.set('Content-Type', 'text/plain');
+
+	return new Response(`${combined}`, {
+		headers: responseHeaders,
+		status: 200,
+	});
+}
+
+function combineRandomnessSources(sources: string[]): string {
+	if (sources.length === 1) {
+		return sources[0];
+	}
+
+	// XOR all sources together byte by byte
+	const maxLength = Math.max(...sources.map(s => s.length));
+	let combined = '';
+	
+	for (let i = 0; i < maxLength; i += 2) {
+		let xorByte = 0;
+		
+		for (const source of sources) {
+			const byte = parseInt(source.substring(i, i + 2) || '00', 16);
+			xorByte ^= byte;
+		}
+		
+		combined += xorByte.toString(16).padStart(2, '0');
+	}
+	
+	return combined;
 }
 
 // adapted from: https://github.com/bryc/code/blob/master/jshash/experimental/cyrb53.js
@@ -104,20 +180,26 @@ const cyrb53 = function (str: string, seed = 0): number {
 	return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
-async function handleGetRandNum(): Promise<Response> {
-	const R = await handleGetRandom();
+async function handleGetRandNum(env: Env): Promise<Response> {
+	try {
+		const R = await handleGetRandom(env);
 
-	const responseHeaders = new Headers();
-	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
-	responseHeaders.set('Content-Type', 'text/plain');
+		const responseHeaders = new Headers();
+		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+		responseHeaders.set('Content-Type', 'text/plain');
 
-	return new Response(`${R}`, {
-		headers: responseHeaders,
-		status: 200,
-	});
+		return new Response(`${R}`, {
+			headers: responseHeaders,
+			status: 200,
+		});
+	} catch (error) {
+		return new Response(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`, {
+			status: 404,
+		});
+	}
 }
 
-async function handleGetRequest(request: Request): Promise<Response> {
+async function handleGetRequest(request: Request, env: Env): Promise<Response> {
 	const { searchParams } = new URL(request.url);
 	let outcomes = searchParams.getAll('outcome');
 	const max = Number(searchParams.get('max'));
@@ -130,17 +212,23 @@ async function handleGetRequest(request: Request): Promise<Response> {
 		outcomes = defaultOutcomes;
 	}
 
-	const R = await handleGetRandom();
+	try {
+		const R = await handleGetRandom(env);
 
-	const selectedOutcome = outcomes[R % outcomes.length];
-	const responseHeaders = new Headers();
-	responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
-	responseHeaders.set('Content-Type', 'text/plain');
-	return new Response(`${selectedOutcome}`, {
-		headers: responseHeaders,
-		status: 200,
-		statusText: selectedOutcome,
-	});
+		const selectedOutcome = outcomes[R % outcomes.length];
+		const responseHeaders = new Headers();
+		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+		responseHeaders.set('Content-Type', 'text/plain');
+		return new Response(`${selectedOutcome}`, {
+			headers: responseHeaders,
+			status: 200,
+			statusText: selectedOutcome,
+		});
+	} catch (error) {
+		return new Response(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`, {
+			status: 404,
+		});
+	}
 }
 
 function handleOptions(): Response {
