@@ -10,6 +10,10 @@
 <div class="about-content">
 	<BackButton />
 
+	<p>
+		<a href="/mcp">MCP Server</a> | <a href="/api">Quantum Randomness API</a>
+	</p>
+
 	<h1>Disclaimer</h1>
 
 	<p>
@@ -43,6 +47,15 @@
 		</li>
 		<li>
 			<a href="https://lfdr.de/QRNG/">German LfD Laboratory</a> - ID Quantique hardware quantum generator
+		</li>
+		<li>
+			<a href="https://beacon.nist.gov/">NIST Randomness Beacon</a> - government-grade quantum randomness
+		</li>
+		<li>
+			<a href="https://www.random.org/">Random.org</a> - atmospheric noise quantum randomness
+		</li>
+		<li>
+			<a href="https://developers.cloudflare.com/workers/runtime-apis/web-crypto/">Cloudflare Web Crypto</a> - cryptographically secure randomness
 		</li>
 	</ul>
 	<p>

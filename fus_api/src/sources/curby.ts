@@ -1,6 +1,8 @@
 import { Client } from '@buff-beacon-project/curby-client';
 
-export class CURByGenerator {
+import { RandomnessSource } from './types';
+
+export class CURByGenerator implements RandomnessSource {
 	private client: Client;
 
 	constructor() {

@@ -1,4 +1,6 @@
-export class ANUGenerator {
+import { RandomnessSource } from './types';
+
+export class ANUGenerator implements RandomnessSource {
 	constructor(private apiKey: string) {}
 
 	async generate(): Promise<string> {
@@ -7,7 +9,7 @@ export class ANUGenerator {
 				'x-api-key': this.apiKey,
 			},
 		});
-		if (qrngResult.status != 200) {
+		if (!qrngResult.ok) {
 			throw new Error(`QRNG returned ${qrngResult.status}: ${qrngResult.statusText}`);
 		}
 		const json: { data: string[] } = await qrngResult.json();

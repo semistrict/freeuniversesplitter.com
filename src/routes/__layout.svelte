@@ -35,6 +35,7 @@
 	}
 
 	:global(body) {
+		font-size: 18px;
 		margin: 0;
 		padding: 0;
 		overflow-x: hidden;
@@ -53,10 +54,20 @@
 	}
 
 	:global(button) {
-		font-size: 16pt;
+		font-size: 20px;
 		color: #41ff00;
 		background-color: black;
-		border-color: #41ff00;
+		border: 1px solid #41ff00;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		min-width: 100px;
+		padding: 8px 12px;
+		box-sizing: border-box;
+	}
+
+	:global(button:hover) {
+		color: black;
+		background-color: #41ff00;
 	}
 
 	main {

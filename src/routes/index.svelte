@@ -239,10 +239,10 @@
 				</div>
 			{:else}
 				<div style="text-align: right; width: 100%">
+					<button on:click={() => (showConfirmModal = false)}>Cancel</button>
 					<button class="split-button" on:click={() => splitUniverse(splits)}
 						>Split Universe!</button
 					>
-					<button on:click={() => (showConfirmModal = false)}>Cancel</button>
 				</div>
 			{/if}
 		</Modal>
@@ -265,7 +265,7 @@
 			{/each}
 		</div>
 
-		<div style="text-align: center; padding-top: 10px">
+		<div style="text-align: right; padding-top: 10px">
 			<button class="splitButton" on:click={() => (showConfirmModal = true)}>Next</button>
 		</div>
 	</div>

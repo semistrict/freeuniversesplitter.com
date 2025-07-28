@@ -1,36 +1,6 @@
 import { Router } from 'itty-router';
-import { ANUGenerator } from './qrng';
-import { CURByGenerator } from './curby';
-import { INMETROGenerator } from './inmetro';
-import { LfDGenerator } from './lfd';
-import { NISTGenerator } from './nist';
-import { RandomOrgGenerator } from './randomorg';
-import { CloudflareGenerator } from './cloudflare';
-
-export interface Env {
-	QUANTUM_NUMBERS_API_KEY: string;
-	UPDATE_KV_SECRET: string;
-	batchQRandmoness: KVNamespace;
-}
-
-interface GeneratorStatus {
-	name: string;
-	success: boolean;
-	timestamp: string;
-	duration: string;
-	dataLength?: number;
-	error?: string;
-}
-
-const QUANTUM_GENERATORS = [
-	{ name: 'ANU', generator: (env: Env) => new ANUGenerator(env.QUANTUM_NUMBERS_API_KEY) },
-	{ name: 'CURBy', generator: (_env: Env) => new CURByGenerator() },
-	{ name: 'INMETRO', generator: (_env: Env) => new INMETROGenerator() },
-	{ name: 'LfD', generator: (_env: Env) => new LfDGenerator() },
-	{ name: 'NIST', generator: (_env: Env) => new NISTGenerator() },
-	{ name: 'Random.org', generator: (_env: Env) => new RandomOrgGenerator() },
-	{ name: 'Cloudflare', generator: (_env: Env) => new CloudflareGenerator() }
-];
+import { env } from 'cloudflare:workers';
+import { QUANTUM_GENERATORS, GeneratorStatus } from './sources';
 
 const allowedOrigin = '*';
 
@@ -70,23 +40,23 @@ Very doubtful.
 	.filter((s) => s.length > 0);
 
 export default {
-	async fetch(request: Request, env: Env): Promise<Response> {
+	async fetch(request: Request): Promise<Response> {
 		const router = Router();
 		router.options('*', handleOptions);
-		router.get('/updateKV', (request) => handleUpdateKV(request, env));
-		router.get('/test', (request) => handleTestGenerators(request, env));
-		router.get('/status', () => handleGetStatus(env));
-		router.get('/', (request) => handleGetRequest(request, env));
-		router.get('/rndnum', () => handleGetRandNum(env));
+		router.get('/updateKV', internal(() => handleUpdateKV()));
+		router.get('/test', internal(() => handleTestGenerators()));
+		router.get('/status', () => handleGetStatus());
+		router.get('/', (request) => handleGetRequest(request));
+		router.get('/rndnum', () => handleGetRandNum());
 		return router.handle(request);
 	},
 
-	async scheduled(request: Request, env: Env, ctx: ExecutionContext) {
-		ctx.waitUntil(handleCombinedRandRequest(request, env));
+	async scheduled(request: Request, _env: Env, ctx: ExecutionContext) {
+		ctx.waitUntil(handleCombinedRandRequest());
 	},
 };
 
-async function handleGetRandom(env: Env): Promise<number> {
+async function handleGetRandom(): Promise<number> {
 	const genRand = await env.batchQRandmoness.get('qRandomness');
 	if (genRand === null) {
 		throw new Error('No randomness available - call /updateKV first');
@@ -99,26 +69,32 @@ async function handleGetRandom(env: Env): Promise<number> {
 	return R;
 }
 
-async function handleUpdateKV(request: Request, env: Env): Promise<Response> {
-	// Check for Bearer token in Authorization header
-	const authHeader = request.headers.get('Authorization');
-	const providedSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
-
-	if (!providedSecret || providedSecret !== env.UPDATE_KV_SECRET) {
-		return new Response('Unauthorized', {
-			status: 401,
-			headers: {
-				'Access-Control-Allow-Origin': allowedOrigin,
-				'Content-Type': 'text/plain',
-				'WWW-Authenticate': 'Bearer'
-			}
-		});
-	}
-
-	return handleCombinedRandRequest(request, env);
+async function handleUpdateKV(): Promise<Response> {
+	return handleCombinedRandRequest();
 }
 
-async function handleCombinedRandRequest(request: Request, env: Env): Promise<Response> {
+function internal(handler: (request: Request) => Promise<Response>) {
+	return async (request: Request): Promise<Response> => {
+		// Check for Bearer token in Authorization header
+		const authHeader = request.headers.get('Authorization');
+		const providedSecret = authHeader?.startsWith('Bearer ') ? authHeader.slice(7) : null;
+
+		if (!providedSecret || providedSecret !== env.UPDATE_KV_SECRET) {
+			return new Response('Unauthorized', {
+				status: 401,
+				headers: {
+					'Access-Control-Allow-Origin': allowedOrigin,
+					'Content-Type': 'text/plain',
+					'WWW-Authenticate': 'Bearer'
+				}
+			});
+		}
+
+		return handler(request);
+	};
+}
+
+async function handleCombinedRandRequest(): Promise<Response> {
 	const generators = QUANTUM_GENERATORS;
 	const timestamp = new Date().toISOString();
 
@@ -130,7 +106,7 @@ async function handleCombinedRandRequest(request: Request, env: Env): Promise<Re
 	const promises = generators.map(async ({ name, generator }) => {
 		const startTime = Date.now();
 		try {
-			const randomness = await generator(env).generate();
+			const randomness = await generator().generate();
 			const duration = Date.now() - startTime;
 			const status = {
 				name,
@@ -191,14 +167,14 @@ async function handleCombinedRandRequest(request: Request, env: Env): Promise<Re
 	});
 }
 
-async function handleTestGenerators(request: Request, env: Env): Promise<Response> {
+async function handleTestGenerators(): Promise<Response> {
 	const generators = QUANTUM_GENERATORS;
 
 	// Try all generators in parallel
 	const promises = generators.map(async ({ name, generator }) => {
 		const startTime = Date.now();
 		try {
-			const randomness = await generator(env).generate();
+			const randomness = await generator().generate();
 			const duration = Date.now() - startTime;
 			return {
 				name,
@@ -230,7 +206,7 @@ async function handleTestGenerators(request: Request, env: Env): Promise<Respons
 	});
 }
 
-async function handleGetStatus(env: Env): Promise<Response> {
+async function handleGetStatus(): Promise<Response> {
 	try {
 		const status = await env.batchQRandmoness.get('generatorStatus');
 
@@ -313,9 +289,9 @@ const cyrb53 = function (str: string, seed = 0): number {
 	return 4294967296 * (2097151 & h2) + (h1 >>> 0);
 };
 
-async function handleGetRandNum(env: Env): Promise<Response> {
+async function handleGetRandNum(): Promise<Response> {
 	try {
-		const R = await handleGetRandom(env);
+		const R = await handleGetRandom();
 
 		const responseHeaders = new Headers();
 		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
@@ -332,7 +308,7 @@ async function handleGetRandNum(env: Env): Promise<Response> {
 	}
 }
 
-async function handleGetRequest(request: Request, env: Env): Promise<Response> {
+async function handleGetRequest(request: Request): Promise<Response> {
 	const { searchParams } = new URL(request.url);
 	let outcomes = searchParams.getAll('outcome');
 	const max = Number(searchParams.get('max'));
@@ -346,7 +322,7 @@ async function handleGetRequest(request: Request, env: Env): Promise<Response> {
 	}
 
 	try {
-		const R = await handleGetRandom(env);
+		const R = await handleGetRandom();
 
 		const selectedOutcome = outcomes[R % outcomes.length];
 		const responseHeaders = new Headers();

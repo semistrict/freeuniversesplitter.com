@@ -12,12 +12,18 @@ routes = [
 # [vars]
 # MY_VARIABLE = "production_value"
 
+[vars]
+QUANTUM_NUMBERS_API_KEY = "placeholder"
+
 # Bind a KV Namespace. Use KV as persistent storage for small key-value pairs.
 # Docs: https://developers.cloudflare.com/workers/runtime-apis/kv
 # [[kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
 # id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-kv_namespaces = [ { binding = "batchQRandmoness", id = "ed2ae70e50734bd7ac66923357758671", preview_id = "2ab1b4269bac4e7381df3724dd4c01d6" } ]
+[[kv_namespaces]]
+binding = "batchQRandmoness"
+id = "ed2ae70e50734bd7ac66923357758671"
+preview_id = "2ab1b4269bac4e7381df3724dd4c01d6"
 
 
 # Bind an R2 Bucket. Use R2 to store arbitrarily large blobs of data, such as files.
