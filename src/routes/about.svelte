@@ -11,7 +11,7 @@
 	<BackButton />
 
 	<p>
-		<a href="/mcp">MCP Server</a> | <a href="/api">Quantum Randomness API</a>
+		<a href="/about-mcp">MCP Server</a> | <a href="/about-api">Quantum Randomness API</a>
 	</p>
 
 	<h1>Disclaimer</h1>
