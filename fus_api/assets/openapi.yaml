@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.1.1
 info:
   title: Free Universe Splitter Quantum API
   description: |
@@ -8,12 +8,16 @@ info:
   contact:
     name: Free Universe Splitter
     url: https://freeuniversesplitter.com
+  license:
+    name: MIT
+security: []
 servers:
-  - url: https://fus-api.ramon.workers.dev
+  - url: https://api.freeuniversesplitter.com
     description: Production server
 paths:
   /:
     get:
+      operationId: getQuantumOutcome
       summary: Get quantum random outcome
       description: |
         Returns a quantum-random selection from provided outcomes or default Magic 8-Ball responses.
@@ -67,6 +71,7 @@ paths:
                 type: string
                 example: "Error: No randomness available"
     options:
+      operationId: handleCors
       summary: CORS preflight
       description: Handles CORS preflight requests
       responses:
@@ -87,6 +92,7 @@ paths:
                 example: "86400"
   /rndnum:
     get:
+      operationId: getQuantumNumber
       summary: Get quantum random number
       description: Returns a raw quantum-derived random number
       responses:
@@ -112,6 +118,7 @@ paths:
                 example: "Error: No randomness available"
   /status:
     get:
+      operationId: getGeneratorStatus
       summary: Get quantum generators status
       description: Returns the status of all quantum randomness sources from the last update
       responses:
@@ -161,6 +168,7 @@ paths:
                     example: "Status error: Failed to parse status data"
   /quantum-choice:
     get:
+      operationId: makeQuantumChoice
       summary: Make quantum choice between options
       description: |
         Select from multiple custom options using true quantum randomness.
@@ -212,6 +220,7 @@ paths:
                 example: "Error: No randomness available"
   /magic-8-ball:
     get:
+      operationId: getMagic8Ball
       summary: Quantum Magic 8-Ball
       description: Get a quantum Magic 8-Ball response using true quantum randomness from multiple sources
       parameters:
@@ -242,6 +251,7 @@ paths:
                 example: "Error: No randomness available"
   /quantum-number:
     get:
+      operationId: generateQuantumNumber
       summary: Generate quantum random number
       description: Generate a truly random number within a specified range using quantum sources
       parameters:
@@ -287,6 +297,7 @@ paths:
                 example: "Error: No randomness available"
   /coin-flip:
     get:
+      operationId: flipQuantumCoin
       summary: Quantum coin flip
       description: Flip a quantum coin with true randomness from quantum measurements, splitting the universe into two branches
       responses:
@@ -310,6 +321,7 @@ paths:
                 example: "Error: No randomness available"
   /quantum-iching:
     get:
+      operationId: getQuantumIChing
       summary: Quantum I Ching reading
       description: |
         Generate a quantum I Ching hexagram reading using true quantum randomness.
