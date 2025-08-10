@@ -67,3 +67,9 @@ preview_id = "2ab1b4269bac4e7381df3724dd4c01d6"
 # Sets Cron Triggers based on setting array, this specifies on 0 minute of every hour.
 [triggers]
 crons = ["0 * * * *"]
+
+# Assets - Static files to be served
+# Docs: https://developers.cloudflare.com/workers/static-assets
+[assets]
+directory = "assets"
+serve_single_page_app = false

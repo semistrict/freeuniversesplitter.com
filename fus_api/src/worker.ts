@@ -1,6 +1,7 @@
 import { Router } from 'itty-router';
 import { env } from 'cloudflare:workers';
 import { QUANTUM_GENERATORS, GeneratorStatus } from './sources';
+import { handleQuantumChoice, handleMagic8Ball, handleQuantumNumber, handleCoinFlip, handleQuantumIChing } from './quantum-endpoints';
 
 const allowedOrigin = '*';
 
@@ -48,6 +49,15 @@ export default {
 		router.get('/status', () => handleGetStatus());
 		router.get('/', (request) => handleGetRequest(request));
 		router.get('/rndnum', () => handleGetRandNum());
+		router.get('/quantum-choice', (request) => handleQuantumChoice(request));
+		router.get('/magic-8-ball', (request) => handleMagic8Ball(request));
+		router.get('/quantum-number', (request) => handleQuantumNumber(request));
+		router.get('/coin-flip', () => handleCoinFlip());
+		router.get('/quantum-iching', (request) => handleQuantumIChing(request));
+		router.all('*', () => new Response('Not Found', {
+			status: 404,
+			headers: corsHeaders
+		}));
 		return router.handle(request);
 	},
 

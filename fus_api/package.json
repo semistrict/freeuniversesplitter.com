@@ -8,8 +8,8 @@
 		"start": "wrangler dev",
 		"generate-types": "wrangler types",
 		"type-check": "npm run generate-types && tsc --noEmit",
-		"lint": "eslint src/**/*.ts",
-		"lint:fix": "eslint src/**/*.ts --fix"
+		"lint": "eslint \"src/**/*.ts\" && (grep -r -n '[[:space:]]$' assets/ && echo 'Found trailing whitespace in assets/' && exit 1 || echo 'No trailing whitespace in assets/')",
+		"lint:fix": "eslint \"src/**/*.ts\" --fix && sed -i '' 's/[[:space:]]*$//' assets/*.yaml"
 	},
 	"devDependencies": {
 		"@types/node": "^24.1.0",
