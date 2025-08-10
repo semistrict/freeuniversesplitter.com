@@ -12,6 +12,11 @@
 		To use this MCP server in Claude Desktop, follow the <a href="https://modelcontextprotocol.io/docs/tutorials/use-remote-mcp-server" target="_blank">remote MCP server setup guide</a> using the URL: <code>https://freeuniversesplitter.com/mcp</code>
 	</p>
 
+	<h2>ChatGPT Integration</h2>
+	<p>
+		You can also use the quantum decision-making tools in ChatGPT through our custom GPT: <a href="https://chatgpt.com/g/g-6897ec0e2de88191a2d4a7e744d9d428-freeuniversesplitter-com-gpt" target="_blank">FreeUniverseSplitter.com GPT</a>
+	</p>
+
 	<h2>About</h2>
 	<p>
 		The Free Universe Splitter provides a Model Context Protocol (MCP) server that integrates quantum decision-making tools directly into Claude Code and other MCP-compatible applications.
