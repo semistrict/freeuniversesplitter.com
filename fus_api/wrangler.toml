@@ -72,4 +72,3 @@ crons = ["0 * * * *"]
 # Docs: https://developers.cloudflare.com/workers/static-assets
 [assets]
 directory = "assets"
-serve_single_page_app = false
