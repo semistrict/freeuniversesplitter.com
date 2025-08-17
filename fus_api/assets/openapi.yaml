@@ -355,11 +355,11 @@ paths:
   /tarot-spread:
     get:
       operationId: getTarotSpread
-      summary: Quantum Tarot 5-Card Classic Spread
+      summary: Quantum Tarot Reading
       description: |
-        Get a quantum tarot reading using a 5-card classic spread with true quantum randomness.
+        Get a quantum tarot reading with true quantum randomness.
         Each card is selected from a complete 78-card deck using multiple quantum sources.
-        Positions: Past, Present, Hidden Influences, Advice, Likely Outcome.
+        Supports single card draws or 5-card classic spreads.
       parameters:
         - name: question
           in: query
@@ -367,6 +367,14 @@ paths:
           required: false
           schema:
             type: string
+        - name: draw_type
+          in: query
+          description: Type of tarot draw to perform
+          required: false
+          schema:
+            type: string
+            enum: ["5_card_spread", "single_card"]
+            default: "5_card_spread"
       responses:
         '200':
           description: Tarot spread reading

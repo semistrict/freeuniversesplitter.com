@@ -235,6 +235,7 @@ export async function handleTarotSpread(request: Request): Promise<Response> {
 	try {
 		const { searchParams } = new URL(request.url);
 		const question = searchParams.get('question');
+		const drawType = searchParams.get('draw_type') || '5_card_spread';
 
 		// Create deck of all 78 cards
 		const allCards = [
@@ -245,7 +246,36 @@ export async function handleTarotSpread(request: Request): Promise<Response> {
 			...tarotCards.minorArcana.pentacles
 		];
 
-		// Generate 5 unique quantum random numbers for the spread
+		if (drawType === 'single_card') {
+			// Single card draw
+			const randomNum = await getQuantumRandom();
+			const cardIndex = Math.abs(randomNum) % allCards.length;
+			const card = allCards[cardIndex];
+
+			// Determine if card is reversed (50% chance)
+			const reversalNum = await getQuantumRandom();
+			const isReversed = Math.abs(reversalNum) % 2 === 0;
+
+			const response = {
+				card: {
+					...card,
+					meaning: isReversed ? card.reversedMeaning : card.uprightMeaning,
+					orientation: isReversed ? 'reversed' : 'upright'
+				},
+				question: question || undefined,
+				type: 'Single Card Draw',
+				message: `${question ? `Question: "${question}"\n\n` : ''}Your quantum tarot card: ${card.name} (${isReversed ? 'reversed' : 'upright'})\n\n${isReversed ? card.reversedMeaning : card.uprightMeaning}\n\nThis card was selected using true quantum randomness from multiple sources, ensuring the universe has split to provide your guidance.`
+			};
+
+			return new Response(JSON.stringify(response), {
+				headers: {
+					...corsHeaders,
+					'Content-Type': 'application/json'
+				}
+			});
+		}
+
+		// Default: 5-card spread
 		const drawnIndexes: number[] = [];
 		const reversals: boolean[] = [];
 

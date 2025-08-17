@@ -533,8 +533,8 @@
     "/tarot-spread": {
       "get": {
         "operationId": "getTarotSpread",
-        "summary": "Quantum Tarot 5-Card Classic Spread",
-        "description": "Get a quantum tarot reading using a 5-card classic spread with true quantum randomness.\nEach card is selected from a complete 78-card deck using multiple quantum sources.\nPositions: Past, Present, Hidden Influences, Advice, Likely Outcome.\n",
+        "summary": "Quantum Tarot Reading",
+        "description": "Get a quantum tarot reading with true quantum randomness.\nEach card is selected from a complete 78-card deck using multiple quantum sources.\nSupports single card draws or 5-card classic spreads.\n",
         "parameters": [
           {
             "name": "question",
@@ -543,6 +543,17 @@
             "required": false,
             "schema": {
               "type": "string"
+            }
+          },
+          {
+            "name": "draw_type",
+            "in": "query",
+            "description": "Type of tarot draw to perform",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["5_card_spread", "single_card"],
+              "default": "5_card_spread"
             }
           }
         ],
