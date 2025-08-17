@@ -54,6 +54,7 @@ export default {
 		router.get('/quantum-number', (request) => handleQuantumNumber(request));
 		router.get('/coin-flip', () => handleCoinFlip());
 		router.get('/quantum-iching', (request) => handleQuantumIChing(request));
+		router.get('/openapi.json', () => handleOpenAPI());
 		router.all('*', () => new Response('Not Found', {
 			status: 404,
 			headers: corsHeaders
@@ -346,6 +347,32 @@ async function handleGetRequest(request: Request): Promise<Response> {
 	} catch (error) {
 		return new Response(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`, {
 			status: 404,
+		});
+	}
+}
+
+async function handleOpenAPI(): Promise<Response> {
+	try {
+		// Read the OpenAPI JSON from assets
+		const openApiContent = await env.ASSETS.fetch(new Request('https://example.com/openapi.json'));
+		const openApiJson = await openApiContent.text();
+
+		const responseHeaders = new Headers();
+		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+		responseHeaders.set('Content-Type', 'application/json');
+
+		return new Response(openApiJson, {
+			headers: responseHeaders,
+			status: 200,
+		});
+	} catch {
+		const responseHeaders = new Headers();
+		responseHeaders.set('Access-Control-Allow-Origin', allowedOrigin);
+		responseHeaders.set('Content-Type', 'application/json');
+
+		return new Response(JSON.stringify({ error: 'OpenAPI schema not available' }), {
+			headers: responseHeaders,
+			status: 500,
 		});
 	}
 }
