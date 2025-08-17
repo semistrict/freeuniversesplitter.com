@@ -1,0 +1,801 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Free Universe Splitter Quantum API",
+    "description": "Quantum decision-making API that aggregates true quantum randomness from multiple international sources\n(ANU, NIST CURBy, INMETRO, LfD) to provide quantum-random outcomes based on the Many Worlds interpretation.\n",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Free Universe Splitter",
+      "url": "https://freeuniversesplitter.com"
+    },
+    "license": {
+      "name": "MIT"
+    }
+  },
+  "security": [],
+  "servers": [
+    {
+      "url": "https://api.freeuniversesplitter.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "getQuantumOutcome",
+        "summary": "Get quantum random outcome",
+        "description": "Returns a quantum-random selection from provided outcomes or default Magic 8-Ball responses.\nUses true quantum randomness aggregated from multiple international sources.\n",
+        "parameters": [
+          {
+            "name": "outcome",
+            "in": "query",
+            "description": "Custom outcomes to choose from (can be specified multiple times)",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "description": "Generate numbered outcomes from 1 to max (alternative to custom outcomes)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantum random outcome selected",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {
+                  "magic_8_ball": {
+                    "summary": "Default Magic 8-Ball response",
+                    "value": "It is certain."
+                  },
+                  "custom_outcome": {
+                    "summary": "Custom outcome selection",
+                    "value": "Option A"
+                  },
+                  "numbered_outcome": {
+                    "summary": "Numbered outcome",
+                    "value": "3"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      },
+      "options": {
+        "operationId": "handleCors",
+        "summary": "CORS preflight",
+        "description": "Handles CORS preflight requests",
+        "responses": {
+          "200": {
+            "description": "CORS headers",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              },
+              "Access-Control-Allow-Methods": {
+                "schema": {
+                  "type": "string",
+                  "example": "GET,HEAD,POST,OPTIONS"
+                }
+              },
+              "Access-Control-Max-Age": {
+                "schema": {
+                  "type": "string",
+                  "example": "86400"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rndnum": {
+      "get": {
+        "operationId": "getQuantumNumber",
+        "summary": "Get quantum random number",
+        "description": "Returns a raw quantum-derived random number",
+        "responses": {
+          "200": {
+            "description": "Quantum random number",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "example": 1234567890.123456
+              }
+            }
+          },
+          "404": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/status": {
+      "get": {
+        "operationId": "getGeneratorStatus",
+        "summary": "Get quantum generators status",
+        "description": "Returns the status of all quantum randomness sources from the last update",
+        "responses": {
+          "200": {
+            "description": "Status of quantum generators",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GeneratorStatus"
+                  }
+                },
+                "example": [
+                  {
+                    "name": "ANU",
+                    "success": true,
+                    "timestamp": "2025-01-10T12:00:00.000Z",
+                    "duration": "234ms",
+                    "dataLength": 1024
+                  },
+                  {
+                    "name": "NIST",
+                    "success": false,
+                    "timestamp": "2025-01-10T12:00:00.000Z",
+                    "duration": "5000ms",
+                    "error": "Timeout after 5000ms"
+                  }
+                ]
+              }
+            }
+          },
+          "404": {
+            "description": "No status data available",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "No status data available"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Status retrieval error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "example": "Status error: Failed to parse status data"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quantum-choice": {
+      "get": {
+        "operationId": "makeQuantumChoice",
+        "summary": "Make quantum choice between options",
+        "description": "Select from multiple custom options using true quantum randomness.\nBased on the Many Worlds interpretation - the universe splits for your decision.\n",
+        "parameters": [
+          {
+            "name": "option",
+            "in": "query",
+            "description": "Options to choose from (specify multiple times for each option)",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 2,
+              "maxItems": 20
+            },
+            "style": "form",
+            "explode": true
+          },
+          {
+            "name": "description",
+            "in": "query",
+            "description": "Optional description of the decision being made",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantum choice made",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuantumChoiceResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Options must be between 2 and 20 items"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/magic-8-ball": {
+      "get": {
+        "operationId": "getMagic8Ball",
+        "summary": "Quantum Magic 8-Ball",
+        "description": "Get a quantum Magic 8-Ball response using true quantum randomness from multiple sources",
+        "parameters": [
+          {
+            "name": "question",
+            "in": "query",
+            "description": "Optional question to ask the Magic 8-Ball",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Magic 8-Ball response",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Magic8BallResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quantum-number": {
+      "get": {
+        "operationId": "generateQuantumNumber",
+        "summary": "Generate quantum random number",
+        "description": "Generate a truly random number within a specified range using quantum sources",
+        "parameters": [
+          {
+            "name": "min",
+            "in": "query",
+            "description": "Minimum value (inclusive)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "max",
+            "in": "query",
+            "description": "Maximum value (inclusive)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Quantum random number generated",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuantumNumberResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid parameters",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Min must be less than max"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/coin-flip": {
+      "get": {
+        "operationId": "flipQuantumCoin",
+        "summary": "Quantum coin flip",
+        "description": "Flip a quantum coin with true randomness from quantum measurements, splitting the universe into two branches",
+        "responses": {
+          "200": {
+            "description": "Quantum coin flip result",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CoinFlipResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/quantum-iching": {
+      "get": {
+        "operationId": "getQuantumIChing",
+        "summary": "Quantum I Ching reading",
+        "description": "Generate a quantum I Ching hexagram reading using true quantum randomness.\nUses the traditional yarrow stalk method with quantum sources for maximum authenticity.\n",
+        "parameters": [
+          {
+            "name": "question",
+            "in": "query",
+            "description": "Optional question for the I Ching reading",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "I Ching hexagram reading",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string",
+                  "example": "*"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuantumIChingResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error retrieving quantum randomness",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "example": "Error: No randomness available"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GeneratorStatus": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the quantum generator",
+            "example": "ANU"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "Whether the generator succeeded"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "ISO timestamp of the generation attempt"
+          },
+          "duration": {
+            "type": "string",
+            "description": "Duration of the generation attempt",
+            "example": "234ms"
+          },
+          "dataLength": {
+            "type": "integer",
+            "description": "Length of generated data (only present on success)",
+            "example": 1024
+          },
+          "error": {
+            "type": "string",
+            "description": "Error message (only present on failure)",
+            "example": "Connection timeout"
+          }
+        },
+        "required": [
+          "name",
+          "success",
+          "timestamp",
+          "duration"
+        ]
+      },
+      "QuantumChoiceResponse": {
+        "type": "object",
+        "properties": {
+          "selectedOption": {
+            "type": "string",
+            "description": "The quantum-selected option",
+            "example": "Option A"
+          },
+          "selectedIndex": {
+            "type": "integer",
+            "description": "Index of the selected option",
+            "example": 0
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "All available options",
+            "example": [
+              "Option A",
+              "Option B",
+              "Option C"
+            ]
+          },
+          "description": {
+            "type": "string",
+            "description": "Optional description of the decision",
+            "example": "What should I have for lunch?"
+          },
+          "message": {
+            "type": "string",
+            "description": "Descriptive message about the quantum choice",
+            "example": "Quantum decision: Option A. The universe has split and in this branch you chose: Option A"
+          }
+        },
+        "required": [
+          "selectedOption",
+          "selectedIndex",
+          "options",
+          "message"
+        ]
+      },
+      "Magic8BallResponse": {
+        "type": "object",
+        "properties": {
+          "outcome": {
+            "type": "string",
+            "description": "The Magic 8-Ball response",
+            "example": "It is certain."
+          },
+          "question": {
+            "type": "string",
+            "description": "The question that was asked",
+            "example": "Will it rain tomorrow?"
+          },
+          "message": {
+            "type": "string",
+            "description": "Formatted response with context",
+            "example": "Question: \"Will it rain tomorrow?\"\nQuantum Magic 8-Ball says: It is certain.\n\nThis answer comes from true quantum randomness across multiple sources."
+          }
+        },
+        "required": [
+          "outcome",
+          "message"
+        ]
+      },
+      "QuantumNumberResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "integer",
+            "description": "The quantum random number",
+            "example": 42
+          },
+          "min": {
+            "type": "integer",
+            "description": "Minimum value of the range",
+            "example": 1
+          },
+          "max": {
+            "type": "integer",
+            "description": "Maximum value of the range",
+            "example": 100
+          },
+          "message": {
+            "type": "string",
+            "description": "Descriptive message about the quantum number",
+            "example": "Quantum random number: 42 (range: 1-100)\n\nGenerated using quad-source quantum randomness from ANU, CURBy, INMETRO, and LfD."
+          }
+        },
+        "required": [
+          "result",
+          "min",
+          "max",
+          "message"
+        ]
+      },
+      "CoinFlipResponse": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "enum": [
+              "Heads",
+              "Tails"
+            ],
+            "description": "The coin flip result",
+            "example": "Heads"
+          },
+          "value": {
+            "type": "integer",
+            "enum": [
+              0,
+              1
+            ],
+            "description": "Numeric value (0 for Heads, 1 for Tails)",
+            "example": 0
+          },
+          "message": {
+            "type": "string",
+            "description": "Descriptive message about the quantum coin flip",
+            "example": "Quantum coin flip: Heads\n\nThis result comes from true quantum measurements, splitting the universe into two branches."
+          }
+        },
+        "required": [
+          "result",
+          "value",
+          "message"
+        ]
+      },
+      "QuantumIChingResponse": {
+        "type": "object",
+        "properties": {
+          "hexagram": {
+            "$ref": "#/components/schemas/Hexagram"
+          },
+          "question": {
+            "type": "string",
+            "description": "The question for the I Ching reading",
+            "example": "What should I focus on this week?"
+          },
+          "linesDisplay": {
+            "type": "string",
+            "description": "Formatted display of the hexagram lines",
+            "example": "Line 1: ━━━━━━\nLine 2: ━━  ━━\nLine 3: ━━━━━━ (changing)\nLine 4: ━━  ━━\nLine 5: ━━━━━━\nLine 6: ━━  ━━"
+          },
+          "message": {
+            "type": "string",
+            "description": "Complete formatted I Ching reading",
+            "example": "☰ The Creative (Hexagram 1)\n\nReading: Great success through perseverance...\n\nThis reading was generated using true quantum randomness from multiple sources."
+          }
+        },
+        "required": [
+          "hexagram",
+          "linesDisplay",
+          "message"
+        ]
+      },
+      "Hexagram": {
+        "type": "object",
+        "properties": {
+          "number": {
+            "type": "integer",
+            "description": "Hexagram number (1-64)",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the hexagram",
+            "example": "The Creative"
+          },
+          "reading": {
+            "type": "string",
+            "description": "Interpretation of the hexagram",
+            "example": "Great success through perseverance and correct action."
+          },
+          "symbol": {
+            "type": "string",
+            "description": "Unicode symbol for the hexagram",
+            "example": "☰"
+          },
+          "lines": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/HexagramLine"
+            },
+            "description": "The six lines of the hexagram (bottom to top)",
+            "minItems": 6,
+            "maxItems": 6
+          }
+        },
+        "required": [
+          "number",
+          "name",
+          "reading",
+          "symbol",
+          "lines"
+        ]
+      },
+      "HexagramLine": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "strong",
+              "weak"
+            ],
+            "description": "Type of line (yang or yin)",
+            "example": "strong"
+          },
+          "changing": {
+            "type": "boolean",
+            "description": "Whether this line is changing",
+            "example": false
+          }
+        },
+        "required": [
+          "type",
+          "changing"
+        ]
+      }
+    }
+  }
+}
