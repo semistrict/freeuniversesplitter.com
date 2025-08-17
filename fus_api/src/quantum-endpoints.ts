@@ -1,6 +1,7 @@
 // Quantum tool endpoints - API equivalents of MCP tools
 import { generateHexagram } from '../../src/lib/ichingLib.js';
 import { env } from 'cloudflare:workers';
+import tarotCards from './tarot-cards.json';
 
 const allowedOrigin = '*';
 
@@ -214,6 +215,78 @@ export async function handleQuantumIChing(request: Request): Promise<Response> {
 			question: question || undefined,
 			linesDisplay,
 			message: `${hexagram.symbol} ${hexagram.name} (Hexagram ${hexagram.number})${question ? `\n\nQuestion: "${question}"` : ''}\n\nReading: ${hexagram.reading}\n\nLines (bottom to top):\n${linesDisplay}\n\nThis reading was generated using true quantum randomness from multiple sources, ensuring the universe has truly split to provide your answer.`
+		};
+
+		return new Response(JSON.stringify(response), {
+			headers: {
+				...corsHeaders,
+				'Content-Type': 'application/json'
+			}
+		});
+	} catch (error) {
+		return new Response(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`, {
+			status: 500,
+			headers: corsHeaders
+		});
+	}
+}
+
+export async function handleTarotSpread(request: Request): Promise<Response> {
+	try {
+		const { searchParams } = new URL(request.url);
+		const question = searchParams.get('question');
+
+		// Create deck of all 78 cards
+		const allCards = [
+			...tarotCards.majorArcana,
+			...tarotCards.minorArcana.wands,
+			...tarotCards.minorArcana.cups,
+			...tarotCards.minorArcana.swords,
+			...tarotCards.minorArcana.pentacles
+		];
+
+		// Generate 5 unique quantum random numbers for the spread
+		const drawnIndexes: number[] = [];
+		const reversals: boolean[] = [];
+
+		for (let i = 0; i < 5; i++) {
+			let cardIndex: number;
+			// Ensure unique cards
+			do {
+				const randomNum = await getQuantumRandom();
+				cardIndex = Math.abs(randomNum) % allCards.length;
+			} while (drawnIndexes.includes(cardIndex));
+
+			drawnIndexes.push(cardIndex);
+
+			// Determine if card is reversed (50% chance)
+			const reversalNum = await getQuantumRandom();
+			reversals.push(Math.abs(reversalNum) % 2 === 0);
+		}
+
+		// Create the 5-card spread
+		const spread = drawnIndexes.map((index, position) => {
+			const card = allCards[index];
+			const isReversed = reversals[position];
+			const positions = ['Past', 'Present', 'Hidden Influences', 'Advice', 'Likely Outcome'];
+
+			return {
+				position: positions[position],
+				positionIndex: position + 1,
+				card: {
+					...card,
+					meaning: isReversed ? card.reversedMeaning : card.uprightMeaning,
+					orientation: isReversed ? 'reversed' : 'upright'
+				}
+			};
+		});
+
+		const response = {
+			spread,
+			question: question || undefined,
+			type: '5-Card Classic Spread',
+			description: 'Past - Present - Hidden Influences - Advice - Likely Outcome',
+			message: `${question ? `Question: "${question}"\n\n` : ''}Your quantum tarot reading reveals the cosmic threads woven by true quantum randomness. Each card was selected through measurements from multiple quantum sources, ensuring the universe has truly split to provide your guidance.\n\n${spread.map((s, i) => `${i + 1}. ${s.position}: ${s.card.name} (${s.card.orientation})\n   ${s.card.meaning}`).join('\n\n')}`
 		};
 
 		return new Response(JSON.stringify(response), {

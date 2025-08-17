@@ -352,6 +352,51 @@ paths:
               schema:
                 type: string
                 example: "Error: No randomness available"
+  /tarot-spread:
+    get:
+      operationId: getTarotSpread
+      summary: Quantum Tarot 5-Card Classic Spread
+      description: |
+        Get a quantum tarot reading using a 5-card classic spread with true quantum randomness.
+        Each card is selected from a complete 78-card deck using multiple quantum sources.
+        Positions: Past, Present, Hidden Influences, Advice, Likely Outcome.
+      parameters:
+        - name: question
+          in: query
+          description: Optional question for the tarot reading
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tarot spread reading
+          headers:
+            Access-Control-Allow-Origin:
+              schema:
+                type: string
+                example: "*"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  spread:
+                    type: array
+                    items:
+                      type: object
+                  question:
+                    type: string
+                  type:
+                    type: string
+                  message:
+                    type: string
+        '500':
+          description: Error retrieving quantum randomness
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: "Error: No randomness available"
 components:
   schemas:
     GeneratorStatus:
